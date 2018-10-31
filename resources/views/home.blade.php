@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <!-- About section -->
+    <!-- About section  -- 3 Rnd Services Card-->
     <div class="about-section">
       <div class="overlay"></div>
       <!-- card section -->
@@ -30,22 +30,13 @@
               <div class="lab-card">
                 <div class="icon">
                   <i class="flaticon-023-flask"></i>
+                  <i class="flaticon-011-compass"></i>
                 </div>
                 <h2>Get in the lab</h2>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla..</p>
               </div>
             </div>
-            <!-- single card -->
-            <div class="col-md-4 col-sm-6">
-              <div class="lab-card">
-                <div class="icon">
-                  <i class="flaticon-011-compass"></i>
-                </div>
-                <h2>Projects online</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla..</p>
-              </div>
-            </div>
-            <!-- single card -->
+            <!-- single card  --col-sm-12-->
             <div class="col-md-4 col-sm-12">
               <div class="lab-card">
                 <div class="icon">
@@ -76,12 +67,12 @@
             </div>
           </div>
           <div class="text-center mt60">
-            <a href="" class="site-btn">Browse</a>
+          <a href="{{Route('blog')}}" class="site-btn">Browse</a>
           </div>
           <!-- popup video -->
           <div class="intro-video">
             <div class="row">
-              <div class="col-md-8 col-md-offset-2">
+              <div class="col-md-8 offset-2">
                 <img src="storage/img/video.jpg" alt="">
                 <a href="https://www.youtube.com/watch?v=JgHfx2v9zOU" class="video-popup">
                   <i class="fa fa-play"></i>
@@ -100,7 +91,7 @@
       <div class="test-overlay"></div>
       <div class="container">
         <div class="row">
-          <div class="col-md-8 col-md-offset-4">
+          <div class="col-md-8 offset-4">
             <div class="section-title left">
               <h2>What our clients say</h2>
             </div>
@@ -249,7 +240,7 @@
           </div>
           <div class="col-md-3">
             <div class="promo-btn-area">
-              <a href="" class="site-btn btn-2">Browse</a>
+            <a href="{{Route('services')}}" class="site-btn btn-2">Browse</a>
             </div>
           </div>
         </div>

@@ -5,10 +5,18 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use SoftDeletes;
+    /**
+    * @var array
+    */
+
+    protected $dates = ['deleted_at'];
+
+  use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -27,4 +35,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function role(){
+
+      return $this->belongsTo('App\Role', 'roles_id', 'id');
+
+    }
+    public function articles()
+    {
+        return $this->hasMany('App\Article','users_id','id');
+    }
+    
 }

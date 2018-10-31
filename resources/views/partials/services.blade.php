@@ -114,7 +114,7 @@
         </div>
       </div>
       <div class="text-center">
-        <a href="" class="site-btn">Browse</a>
+        <a href="{{Route('services')}}" class="site-btn">Browse</a>
       </div>
     </div>
   </div>

@@ -1,5 +1,6 @@
 @extends('layouts/app')
 
+@include('partials/pageheader')
 
 @section('content')
 
