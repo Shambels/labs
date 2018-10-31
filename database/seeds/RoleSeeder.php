@@ -19,8 +19,8 @@ class RoleSeeder extends Seeder
             'name' => 'Editor',
             'slug' => 'editor'
           ],[
-            'name' => 'User',
-            'slug' => 'user'
+            'name' => 'Reader',
+            'slug' => 'reader'
           ]
         ]);
     }
