@@ -10,7 +10,10 @@ class PagesController extends Controller
       return view ('home');
     }
     public function services(){
-      return view ('services');
+      $services = Service::paginate(9);
+      $lphoneservices = Service::get()->random(3);
+      $rphoneservices = Service::get()->random(3);
+      return view ('services', compact('services,lphoneservice,rphoneservices'));
     } 
     public function blog(){
       return view ('blog');

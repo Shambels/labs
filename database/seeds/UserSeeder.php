@@ -30,6 +30,18 @@ class UserSeeder extends Seeder
             'roles_id' => '3'
           ]
         ]);
+        factory(App\User::class, 5)->create()
+        ->each(function($user){
+            for($i = 0; $i < rand(2,4); $i++){
 
+              $user->articles()->save(factory(App\Article::class)->make());
+            }
+        });;
+        $articles = App\Article::all();
+        $articles->each(function($article){
+            $tagsNum = App\Tag::all()->count();
+            $article->tags()->attach(rand(1,$tagsNum/2));
+            $article->tags()->attach(rand(($tagsNum/2)+1,$tagsNum));
+        });
     }
 }

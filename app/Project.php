@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Client extends Model
+class Project extends Model
 {
   use SoftDeletes;
 
@@ -15,8 +15,4 @@ class Client extends Model
   * @var array
   */
  protected $dates = ['deleted_at'];
-
- public function testimonials(){
-   return $this->hasMany('App\Testimonial', 'clients_id', 'id');
- }
 }

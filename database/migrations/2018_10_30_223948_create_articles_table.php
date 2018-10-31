@@ -20,7 +20,7 @@ class CreateArticlesTable extends Migration
             $table->string('preview');
             $table->text('content');
             
-
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -21,10 +21,10 @@ class Article extends Model
  }
  
  public function categories(){
-   return $this->belongsToMany('App\Category', 'categories_has_articles','articles_id','categories_id');
+   return $this->belongsToMany('App\Category', 'articles_categories','articles_id','categories_id');
  }
  public function tags(){
-  return $this->belongsToMany('App\Tag', 'tags_has_articles','articles_id','tags_id');
+  return $this->belongsToMany('App\Tag', 'articles_tags','articles_id','tags_id');
  }
  public function comments(){
    return $this->hasMany('App\Comment','articles_id','id');

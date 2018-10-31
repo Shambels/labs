@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTestimonialsTable extends Migration
+class AddIconsIdToServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateTestimonialsTable extends Migration
      */
     public function up()
     {
-        Schema::create('testimonials', function (Blueprint $table) {
-            $table->increments('id');
-            $table->boolean('valid')->nullable();
-            $table->string('message');
-            $table->softDeletes();
-            $table->timestamps();
+        Schema::table('services', function (Blueprint $table) {
+        
+          $table->unsignedInteger('icons_id');
+          $table->foreign('icons_id')->references('id')->on('icons');            
+
         });
     }
 
@@ -29,6 +28,8 @@ class CreateTestimonialsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('testimonials');
+        Schema::table('services', function (Blueprint $table) {
+            //
+        });
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTestimonialsTable extends Migration
+class AddUsersIdToArticlesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateTestimonialsTable extends Migration
      */
     public function up()
     {
-        Schema::create('testimonials', function (Blueprint $table) {
-            $table->increments('id');
-            $table->boolean('valid')->nullable();
-            $table->string('message');
-            $table->softDeletes();
-            $table->timestamps();
+        Schema::table('articles', function (Blueprint $table) {
+            $table->unsignedInteger('users_id');
+            $table->foreign('users_id')->references('id')->on('users');
         });
     }
 
@@ -29,6 +26,8 @@ class CreateTestimonialsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('testimonials');
+        Schema::table('articles', function (Blueprint $table) {
+            //
+        });
     }
 }
