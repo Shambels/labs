@@ -33,7 +33,7 @@ class AuthServiceProvider extends ServiceProvider
           }
         });
         Gate::define('is-editor', function($user) {
-          if($user->roles_id == 2){
+          if($user->roles_id <= 2){
             return true;
           } else {
             return false;

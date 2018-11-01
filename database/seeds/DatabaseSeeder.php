@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ClientSeeder::class);
         $this->call(CommentSeeder::class);
         $this->call(NewsmailSeeder::class);
-        // Texts
+        $this->call(TextSeeder::class);
         $this->call(ProjectSeeder::class);
 
         $this->call(IconSeeder::class);

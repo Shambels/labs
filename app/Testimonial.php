@@ -16,7 +16,7 @@ class Testimonial extends Model
   */
  protected $dates = ['deleted_at'];
 
- public function client(){
+ public function clients(){
    return $this->belongsTo('App\Client');
  }
 }

@@ -17,17 +17,20 @@ class UserSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@test.com',
             'password' => bcrypt('123456'),
-            'roles_id' => '1'
+            'roles_id' => '1',
+            'image' => 'ceo.jpg'
           ],[
             'name' => 'editor',
             'email' => 'editor@test.com',
             'password' => bcrypt('123456'),
-            'roles_id' => '2'
+            'roles_id' => '2',
+            
           ],[
             'name' => 'reader',
             'email' => 'reader@test.com',
             'password' => bcrypt('123456'),
-            'roles_id' => '3'
+            'roles_id' => '3',
+          
           ]
         ]);
         factory(App\User::class, 5)->create()

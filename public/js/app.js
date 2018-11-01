@@ -13689,7 +13689,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(11);
-module.exports = __webpack_require__(38);
+module.exports = __webpack_require__(40);
 
 
 /***/ }),
@@ -13705,10 +13705,10 @@ module.exports = __webpack_require__(38);
 
 __webpack_require__(12);
 __webpack_require__(36);
-__webpack_require__(65);
-__webpack_require__(64);
+__webpack_require__(37);
+__webpack_require__(38);
 // require('../../node_modules/owl.carousel/dist/owl.carousel');
-__webpack_require__(63);
+__webpack_require__(39);
 
 // window.Vue = require('vue');
 
@@ -37825,388 +37825,7 @@ $.magnificPopup.registerModule(RETINA_NS, {
  _checkInstance(); }));
 
 /***/ }),
-/* 37 */,
-/* 38 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */,
-/* 47 */,
-/* 48 */,
-/* 49 */,
-/* 50 */,
-/* 51 */,
-/* 52 */,
-/* 53 */,
-/* 54 */,
-/* 55 */,
-/* 56 */,
-/* 57 */,
-/* 58 */,
-/* 59 */,
-/* 60 */,
-/* 61 */,
-/* 62 */,
-/* 63 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* =================================
-------------------------------------
-	Labs - Design Studio
-	Version: 1.0
- ------------------------------------ 
- ====================================*/
-
-
-
-/*------------------
-  Preloder
---------------------*/
-
-function loader() {
-  $(window).on('load', function () {
-    $(".loader").fadeOut();
-    $("#preloder").delay(400).fadeOut("slow");
-  });
-}
-
-/*------------------
-  Navigation
---------------------*/
-function responsive() {
-  // Responsive 
-  $('.responsive').on('click', function (event) {
-    $('.menu-list').slideToggle(400);
-    event.preventDefault();
-  });
-}
-
-/*------------------
-  Hero Section
---------------------*/
-function heroSection() {
-  //Slide item bg image.
-  $('.hero-item').each(function () {
-    var image = $(this).data('bg');
-    $(this).css({
-      'background-image': 'url(' + image + ')',
-      'background-size': 'cover',
-      'background-repeat': 'no-repeat',
-      'background-position': 'center bottom'
-    });
-  });
-  //slider auto height 
-  var iit = setInterval(slide_item, 1);
-
-  function slide_item() {
-    var bh = $('body').height();
-    $('.hero-item').height(bh);
-  }
-  slide_item();
-
-  var time = 7;
-  var $progressBar, $bar, $elem, isPause, tick, percentTime;
-
-  // Init the carousel
-  $('#hero-slider').owlCarousel({
-    loop: true,
-    nav: true,
-    items: 1,
-    autoHeight: true,
-    animateOut: 'fadeOut',
-    animateIn: 'fadeIn',
-    navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-    onInitialized: progressBar,
-    onTranslated: moved,
-    onDrag: pauseOnDragging
-  });
-
-  // Init progressBar where elem is $("#owl-demo")
-  function progressBar() {
-    // build progress bar elements
-    buildProgressBar();
-
-    // start counting
-    start();
-  }
-
-  // create div#progressBar and div#bar then prepend to $("#owl-demo")
-  function buildProgressBar() {
-    $progressBar = $("<div>", {
-      id: "progressBar"
-    });
-    $bar = $("<div>", {
-      id: "bar"
-    });
-    $progressBar.append($bar).prependTo($("#hero-slider"));
-  }
-
-  function start() {
-    // reset timer
-    percentTime = 0;
-    isPause = false;
-    // run interval every 0.01 second
-    tick = setInterval(interval, 10);
-  };
-
-  function interval() {
-    if (isPause === false) {
-      percentTime += 1 / time;
-
-      $bar.css({
-        width: percentTime + "%"
-      });
-
-      // if percentTime is equal or greater than 100
-      if (percentTime >= 100) {
-        // slide to next item 
-        $("#hero-slider").trigger("next.owl.carousel");
-        percentTime = 0; // give the carousel at least the animation time ;)
-      }
-    }
-  }
-
-  // pause while dragging 
-  function pauseOnDragging() {
-    isPause = true;
-  }
-
-  // moved callback
-  function moved() {
-    // clear interval
-    clearTimeout(tick);
-    // start again
-    start();
-  }
-}
-
-/*------------------
-  Video Popup
---------------------*/
-function videoPopup() {
-  $('.video-popup').magnificPopup({
-    type: 'iframe',
-    autoplay: true
-  });
-}
-
-/*------------------
-  Testimonial
---------------------*/
-function testimonial() {
-  // testimonial Carousel 
-  $('#testimonial-slide').owlCarousel({
-    loop: true,
-    autoplay: true,
-    margin: 30,
-    nav: false,
-    dots: true,
-    responsive: {
-      0: {
-        items: 1
-      },
-      600: {
-        items: 2
-      },
-      800: {
-        items: 2
-      },
-      1000: {
-        items: 2
-      }
-    }
-  });
-}
-
-/*------------------
-  Progress bar
---------------------*/
-function progressbar() {
-
-  $('.progress-bar-style').each(function () {
-    var progress = $(this).data("progress");
-    var prog_width = progress + '%';
-    if (progress <= 100) {
-      $(this).append('<div class="bar-inner" style="width:' + prog_width + '"><span>' + prog_width + '</span></div>');
-    } else {
-      $(this).append('<div class="bar-inner" style="width:100%"><span>' + prog_width + '</span></div>');
-    }
-  });
-}
-
-/*------------------
-  Accordions
---------------------*/
-function accordions() {
-  $('.panel').on('click', function (e) {
-    $('.panel').removeClass('active');
-    var $this = $(this);
-    if (!$this.hasClass('active')) {
-      $this.addClass('active');
-    }
-    e.preventDefault();
-  });
-}
-
-/*------------------
-  Progress Circle
---------------------*/
-function progressCircle() {
-  //Set progress circle 1
-  $("#progress1").circleProgress({
-    value: 0.75,
-    size: 175,
-    thickness: 5,
-    fill: "#2be6ab",
-    emptyFill: "rgba(0, 0, 0, 0)"
-  });
-  //Set progress circle 2
-  $("#progress2").circleProgress({
-    value: 0.83,
-    size: 175,
-    thickness: 5,
-    fill: "#2be6ab",
-    emptyFill: "rgba(0, 0, 0, 0)"
-  });
-  //Set progress circle 3
-  $("#progress3").circleProgress({
-    value: 0.25,
-    size: 175,
-    thickness: 5,
-    fill: "#2be6ab",
-    emptyFill: "rgba(0, 0, 0, 0)"
-  });
-  //Set progress circle 4
-  $("#progress4").circleProgress({
-    value: 0.95,
-    size: 175,
-    thickness: 5,
-    fill: "#2be6ab",
-    emptyFill: "rgba(0, 0, 0, 0)"
-  });
-}
-
-(function ($) {
-  // Call all functions
-  loader();
-  responsive();
-  heroSection();
-  testimonial();
-  progressbar();
-  videoPopup();
-  accordions();
-  progressCircle();
-})(jQuery);
-
-/***/ }),
-/* 64 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-/**
- * jquery-circle-progress - jQuery Plugin to draw animated circular progress bars:
- * {@link http://kottenator.github.io/jquery-circle-progress/}
- *
- * @author Rostyslav Bryzgunov <kottenator@gmail.com>
- * @version 1.2.2
- * @licence MIT
- * @preserve
- */
-!function (i) {
-  if (true) !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(1)], __WEBPACK_AMD_DEFINE_FACTORY__ = (i),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));else if ("object" == (typeof module === "undefined" ? "undefined" : _typeof(module)) && module.exports) {
-    var t = require("jquery");i(t), module.exports = t;
-  } else i(jQuery);
-}(function (i) {
-  function t(i) {
-    this.init(i);
-  }t.prototype = { value: 0, size: 100, startAngle: -Math.PI, thickness: "auto", fill: { gradient: ["#3aeabb", "#fdd250"] }, emptyFill: "rgba(0, 0, 0, .1)", animation: { duration: 1200, easing: "circleProgressEasing" }, animationStartValue: 0, reverse: !1, lineCap: "butt", insertMode: "prepend", constructor: t, el: null, canvas: null, ctx: null, radius: 0, arcFill: null, lastFrameValue: 0, init: function init(t) {
-      i.extend(this, t), this.radius = this.size / 2, this.initWidget(), this.initFill(), this.draw(), this.el.trigger("circle-inited");
-    }, initWidget: function initWidget() {
-      this.canvas || (this.canvas = i("<canvas>")["prepend" == this.insertMode ? "prependTo" : "appendTo"](this.el)[0]);var t = this.canvas;if (t.width = this.size, t.height = this.size, this.ctx = t.getContext("2d"), window.devicePixelRatio > 1) {
-        var e = window.devicePixelRatio;t.style.width = t.style.height = this.size + "px", t.width = t.height = this.size * e, this.ctx.scale(e, e);
-      }
-    }, initFill: function initFill() {
-      function t() {
-        var t = i("<canvas>")[0];t.width = e.size, t.height = e.size, t.getContext("2d").drawImage(g, 0, 0, r, r), e.arcFill = e.ctx.createPattern(t, "no-repeat"), e.drawFrame(e.lastFrameValue);
-      }var e = this,
-          a = this.fill,
-          n = this.ctx,
-          r = this.size;if (!a) throw Error("The fill is not specified!");if ("string" == typeof a && (a = { color: a }), a.color && (this.arcFill = a.color), a.gradient) {
-        var s = a.gradient;if (1 == s.length) this.arcFill = s[0];else if (s.length > 1) {
-          for (var l = a.gradientAngle || 0, o = a.gradientDirection || [r / 2 * (1 - Math.cos(l)), r / 2 * (1 + Math.sin(l)), r / 2 * (1 + Math.cos(l)), r / 2 * (1 - Math.sin(l))], h = n.createLinearGradient.apply(n, o), c = 0; c < s.length; c++) {
-            var d = s[c],
-                u = c / (s.length - 1);i.isArray(d) && (u = d[1], d = d[0]), h.addColorStop(u, d);
-          }this.arcFill = h;
-        }
-      }if (a.image) {
-        var g;a.image instanceof Image ? g = a.image : (g = new Image(), g.src = a.image), g.complete ? t() : g.onload = t;
-      }
-    }, draw: function draw() {
-      this.animation ? this.drawAnimated(this.value) : this.drawFrame(this.value);
-    }, drawFrame: function drawFrame(i) {
-      this.lastFrameValue = i, this.ctx.clearRect(0, 0, this.size, this.size), this.drawEmptyArc(i), this.drawArc(i);
-    }, drawArc: function drawArc(i) {
-      if (0 !== i) {
-        var t = this.ctx,
-            e = this.radius,
-            a = this.getThickness(),
-            n = this.startAngle;t.save(), t.beginPath(), this.reverse ? t.arc(e, e, e - a / 2, n - 2 * Math.PI * i, n) : t.arc(e, e, e - a / 2, n, n + 2 * Math.PI * i), t.lineWidth = a, t.lineCap = this.lineCap, t.strokeStyle = this.arcFill, t.stroke(), t.restore();
-      }
-    }, drawEmptyArc: function drawEmptyArc(i) {
-      var t = this.ctx,
-          e = this.radius,
-          a = this.getThickness(),
-          n = this.startAngle;i < 1 && (t.save(), t.beginPath(), i <= 0 ? t.arc(e, e, e - a / 2, 0, 2 * Math.PI) : this.reverse ? t.arc(e, e, e - a / 2, n, n - 2 * Math.PI * i) : t.arc(e, e, e - a / 2, n + 2 * Math.PI * i, n), t.lineWidth = a, t.strokeStyle = this.emptyFill, t.stroke(), t.restore());
-    }, drawAnimated: function drawAnimated(t) {
-      var e = this,
-          a = this.el,
-          n = i(this.canvas);n.stop(!0, !1), a.trigger("circle-animation-start"), n.css({ animationProgress: 0 }).animate({ animationProgress: 1 }, i.extend({}, this.animation, { step: function step(i) {
-          var n = e.animationStartValue * (1 - i) + t * i;e.drawFrame(n), a.trigger("circle-animation-progress", [i, n]);
-        } })).promise().always(function () {
-        a.trigger("circle-animation-end");
-      });
-    }, getThickness: function getThickness() {
-      return i.isNumeric(this.thickness) ? this.thickness : this.size / 14;
-    }, getValue: function getValue() {
-      return this.value;
-    }, setValue: function setValue(i) {
-      this.animation && (this.animationStartValue = this.lastFrameValue), this.value = i, this.draw();
-    } }, i.circleProgress = { defaults: t.prototype }, i.easing.circleProgressEasing = function (i) {
-    return i < .5 ? (i = 2 * i, .5 * i * i * i) : (i = 2 - 2 * i, 1 - .5 * i * i * i);
-  }, i.fn.circleProgress = function (e, a) {
-    var n = "circle-progress",
-        r = this.data(n);if ("widget" == e) {
-      if (!r) throw Error('Calling "widget" method on not initialized instance is forbidden');return r.canvas;
-    }if ("value" == e) {
-      if (!r) throw Error('Calling "value" method on not initialized instance is forbidden');if ("undefined" == typeof a) return r.getValue();var s = arguments[1];return this.each(function () {
-        i(this).data(n).setValue(s);
-      });
-    }return this.each(function () {
-      var a = i(this),
-          r = a.data(n),
-          s = i.isPlainObject(e) ? e : {};if (r) r.init(s);else {
-        var l = i.extend({}, a.data());"string" == typeof l.fill && (l.fill = JSON.parse(l.fill)), "string" == typeof l.animation && (l.animation = JSON.parse(l.animation)), s = i.extend(l, s), s.el = a, r = new t(s), a.data(n, r);
-      }
-    });
-  };
-});
-
-/***/ }),
-/* 65 */
+/* 37 */
 /***/ (function(module, exports) {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -38809,6 +38428,362 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       return !!e("animation");
     } };j.csstransitions() && (a.support.transition = new String(f("transition")), a.support.transition.end = i.transition.end[a.support.transition]), j.cssanimations() && (a.support.animation = new String(f("animation")), a.support.animation.end = i.animation.end[a.support.animation]), j.csstransforms() && (a.support.transform = new String(f("transform")), a.support.transform3d = j.csstransforms3d());
 }(window.Zepto || window.jQuery, window, document);
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * jquery-circle-progress - jQuery Plugin to draw animated circular progress bars:
+ * {@link http://kottenator.github.io/jquery-circle-progress/}
+ *
+ * @author Rostyslav Bryzgunov <kottenator@gmail.com>
+ * @version 1.2.2
+ * @licence MIT
+ * @preserve
+ */
+!function (i) {
+  if (true) !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(1)], __WEBPACK_AMD_DEFINE_FACTORY__ = (i),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));else if ("object" == (typeof module === "undefined" ? "undefined" : _typeof(module)) && module.exports) {
+    var t = require("jquery");i(t), module.exports = t;
+  } else i(jQuery);
+}(function (i) {
+  function t(i) {
+    this.init(i);
+  }t.prototype = { value: 0, size: 100, startAngle: -Math.PI, thickness: "auto", fill: { gradient: ["#3aeabb", "#fdd250"] }, emptyFill: "rgba(0, 0, 0, .1)", animation: { duration: 1200, easing: "circleProgressEasing" }, animationStartValue: 0, reverse: !1, lineCap: "butt", insertMode: "prepend", constructor: t, el: null, canvas: null, ctx: null, radius: 0, arcFill: null, lastFrameValue: 0, init: function init(t) {
+      i.extend(this, t), this.radius = this.size / 2, this.initWidget(), this.initFill(), this.draw(), this.el.trigger("circle-inited");
+    }, initWidget: function initWidget() {
+      this.canvas || (this.canvas = i("<canvas>")["prepend" == this.insertMode ? "prependTo" : "appendTo"](this.el)[0]);var t = this.canvas;if (t.width = this.size, t.height = this.size, this.ctx = t.getContext("2d"), window.devicePixelRatio > 1) {
+        var e = window.devicePixelRatio;t.style.width = t.style.height = this.size + "px", t.width = t.height = this.size * e, this.ctx.scale(e, e);
+      }
+    }, initFill: function initFill() {
+      function t() {
+        var t = i("<canvas>")[0];t.width = e.size, t.height = e.size, t.getContext("2d").drawImage(g, 0, 0, r, r), e.arcFill = e.ctx.createPattern(t, "no-repeat"), e.drawFrame(e.lastFrameValue);
+      }var e = this,
+          a = this.fill,
+          n = this.ctx,
+          r = this.size;if (!a) throw Error("The fill is not specified!");if ("string" == typeof a && (a = { color: a }), a.color && (this.arcFill = a.color), a.gradient) {
+        var s = a.gradient;if (1 == s.length) this.arcFill = s[0];else if (s.length > 1) {
+          for (var l = a.gradientAngle || 0, o = a.gradientDirection || [r / 2 * (1 - Math.cos(l)), r / 2 * (1 + Math.sin(l)), r / 2 * (1 + Math.cos(l)), r / 2 * (1 - Math.sin(l))], h = n.createLinearGradient.apply(n, o), c = 0; c < s.length; c++) {
+            var d = s[c],
+                u = c / (s.length - 1);i.isArray(d) && (u = d[1], d = d[0]), h.addColorStop(u, d);
+          }this.arcFill = h;
+        }
+      }if (a.image) {
+        var g;a.image instanceof Image ? g = a.image : (g = new Image(), g.src = a.image), g.complete ? t() : g.onload = t;
+      }
+    }, draw: function draw() {
+      this.animation ? this.drawAnimated(this.value) : this.drawFrame(this.value);
+    }, drawFrame: function drawFrame(i) {
+      this.lastFrameValue = i, this.ctx.clearRect(0, 0, this.size, this.size), this.drawEmptyArc(i), this.drawArc(i);
+    }, drawArc: function drawArc(i) {
+      if (0 !== i) {
+        var t = this.ctx,
+            e = this.radius,
+            a = this.getThickness(),
+            n = this.startAngle;t.save(), t.beginPath(), this.reverse ? t.arc(e, e, e - a / 2, n - 2 * Math.PI * i, n) : t.arc(e, e, e - a / 2, n, n + 2 * Math.PI * i), t.lineWidth = a, t.lineCap = this.lineCap, t.strokeStyle = this.arcFill, t.stroke(), t.restore();
+      }
+    }, drawEmptyArc: function drawEmptyArc(i) {
+      var t = this.ctx,
+          e = this.radius,
+          a = this.getThickness(),
+          n = this.startAngle;i < 1 && (t.save(), t.beginPath(), i <= 0 ? t.arc(e, e, e - a / 2, 0, 2 * Math.PI) : this.reverse ? t.arc(e, e, e - a / 2, n, n - 2 * Math.PI * i) : t.arc(e, e, e - a / 2, n + 2 * Math.PI * i, n), t.lineWidth = a, t.strokeStyle = this.emptyFill, t.stroke(), t.restore());
+    }, drawAnimated: function drawAnimated(t) {
+      var e = this,
+          a = this.el,
+          n = i(this.canvas);n.stop(!0, !1), a.trigger("circle-animation-start"), n.css({ animationProgress: 0 }).animate({ animationProgress: 1 }, i.extend({}, this.animation, { step: function step(i) {
+          var n = e.animationStartValue * (1 - i) + t * i;e.drawFrame(n), a.trigger("circle-animation-progress", [i, n]);
+        } })).promise().always(function () {
+        a.trigger("circle-animation-end");
+      });
+    }, getThickness: function getThickness() {
+      return i.isNumeric(this.thickness) ? this.thickness : this.size / 14;
+    }, getValue: function getValue() {
+      return this.value;
+    }, setValue: function setValue(i) {
+      this.animation && (this.animationStartValue = this.lastFrameValue), this.value = i, this.draw();
+    } }, i.circleProgress = { defaults: t.prototype }, i.easing.circleProgressEasing = function (i) {
+    return i < .5 ? (i = 2 * i, .5 * i * i * i) : (i = 2 - 2 * i, 1 - .5 * i * i * i);
+  }, i.fn.circleProgress = function (e, a) {
+    var n = "circle-progress",
+        r = this.data(n);if ("widget" == e) {
+      if (!r) throw Error('Calling "widget" method on not initialized instance is forbidden');return r.canvas;
+    }if ("value" == e) {
+      if (!r) throw Error('Calling "value" method on not initialized instance is forbidden');if ("undefined" == typeof a) return r.getValue();var s = arguments[1];return this.each(function () {
+        i(this).data(n).setValue(s);
+      });
+    }return this.each(function () {
+      var a = i(this),
+          r = a.data(n),
+          s = i.isPlainObject(e) ? e : {};if (r) r.init(s);else {
+        var l = i.extend({}, a.data());"string" == typeof l.fill && (l.fill = JSON.parse(l.fill)), "string" == typeof l.animation && (l.animation = JSON.parse(l.animation)), s = i.extend(l, s), s.el = a, r = new t(s), a.data(n, r);
+      }
+    });
+  };
+});
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* =================================
+------------------------------------
+	Labs - Design Studio
+	Version: 1.0
+ ------------------------------------ 
+ ====================================*/
+
+
+
+/*------------------
+  Preloder
+--------------------*/
+
+function loader() {
+  $(window).on('load', function () {
+    $(".loader").fadeOut();
+    $("#preloder").delay(400).fadeOut("slow");
+  });
+}
+
+/*------------------
+  Navigation
+--------------------*/
+function responsive() {
+  // Responsive 
+  $('.responsive').on('click', function (event) {
+    $('.menu-list').slideToggle(400);
+    event.preventDefault();
+  });
+}
+
+/*------------------
+  Hero Section
+--------------------*/
+function heroSection() {
+  //Slide item bg image.
+  $('.hero-item').each(function () {
+    var image = $(this).data('bg');
+    $(this).css({
+      'background-image': 'url(' + image + ')',
+      'background-size': 'cover',
+      'background-repeat': 'no-repeat',
+      'background-position': 'center bottom'
+    });
+  });
+  //slider auto height 
+  var iit = setInterval(slide_item, 1);
+
+  function slide_item() {
+    var bh = $('body').height();
+    $('.hero-item').height(bh);
+  }
+  slide_item();
+
+  var time = 7;
+  var $progressBar, $bar, $elem, isPause, tick, percentTime;
+
+  // Init the carousel
+  $('#hero-slider').owlCarousel({
+    loop: true,
+    nav: true,
+    items: 1,
+    autoHeight: true,
+    animateOut: 'fadeOut',
+    animateIn: 'fadeIn',
+    navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+    onInitialized: progressBar,
+    onTranslated: moved,
+    onDrag: pauseOnDragging
+  });
+
+  // Init progressBar where elem is $("#owl-demo")
+  function progressBar() {
+    // build progress bar elements
+    buildProgressBar();
+
+    // start counting
+    start();
+  }
+
+  // create div#progressBar and div#bar then prepend to $("#owl-demo")
+  function buildProgressBar() {
+    $progressBar = $("<div>", {
+      id: "progressBar"
+    });
+    $bar = $("<div>", {
+      id: "bar"
+    });
+    $progressBar.append($bar).prependTo($("#hero-slider"));
+  }
+
+  function start() {
+    // reset timer
+    percentTime = 0;
+    isPause = false;
+    // run interval every 0.01 second
+    tick = setInterval(interval, 10);
+  };
+
+  function interval() {
+    if (isPause === false) {
+      percentTime += 1 / time;
+
+      $bar.css({
+        width: percentTime + "%"
+      });
+
+      // if percentTime is equal or greater than 100
+      if (percentTime >= 100) {
+        // slide to next item 
+        $("#hero-slider").trigger("next.owl.carousel");
+        percentTime = 0; // give the carousel at least the animation time ;)
+      }
+    }
+  }
+
+  // pause while dragging 
+  function pauseOnDragging() {
+    isPause = true;
+  }
+
+  // moved callback
+  function moved() {
+    // clear interval
+    clearTimeout(tick);
+    // start again
+    start();
+  }
+}
+
+/*------------------
+  Video Popup
+--------------------*/
+function videoPopup() {
+  $('.video-popup').magnificPopup({
+    type: 'iframe',
+    autoplay: true
+  });
+}
+
+/*------------------
+  Testimonial
+--------------------*/
+function testimonial() {
+  // testimonial Carousel 
+  $('#testimonial-slide').owlCarousel({
+    loop: true,
+    autoplay: true,
+    margin: 30,
+    nav: false,
+    dots: true,
+    responsive: {
+      0: {
+        items: 1
+      },
+      600: {
+        items: 2
+      },
+      800: {
+        items: 2
+      },
+      1000: {
+        items: 2
+      }
+    }
+  });
+}
+
+/*------------------
+  Progress bar
+--------------------*/
+function progressbar() {
+
+  $('.progress-bar-style').each(function () {
+    var progress = $(this).data("progress");
+    var prog_width = progress + '%';
+    if (progress <= 100) {
+      $(this).append('<div class="bar-inner" style="width:' + prog_width + '"><span>' + prog_width + '</span></div>');
+    } else {
+      $(this).append('<div class="bar-inner" style="width:100%"><span>' + prog_width + '</span></div>');
+    }
+  });
+}
+
+/*------------------
+  Accordions
+--------------------*/
+function accordions() {
+  $('.panel').on('click', function (e) {
+    $('.panel').removeClass('active');
+    var $this = $(this);
+    if (!$this.hasClass('active')) {
+      $this.addClass('active');
+    }
+    e.preventDefault();
+  });
+}
+
+/*------------------
+  Progress Circle
+--------------------*/
+function progressCircle() {
+  //Set progress circle 1
+  $("#progress1").circleProgress({
+    value: 0.75,
+    size: 175,
+    thickness: 5,
+    fill: "#2be6ab",
+    emptyFill: "rgba(0, 0, 0, 0)"
+  });
+  //Set progress circle 2
+  $("#progress2").circleProgress({
+    value: 0.83,
+    size: 175,
+    thickness: 5,
+    fill: "#2be6ab",
+    emptyFill: "rgba(0, 0, 0, 0)"
+  });
+  //Set progress circle 3
+  $("#progress3").circleProgress({
+    value: 0.25,
+    size: 175,
+    thickness: 5,
+    fill: "#2be6ab",
+    emptyFill: "rgba(0, 0, 0, 0)"
+  });
+  //Set progress circle 4
+  $("#progress4").circleProgress({
+    value: 0.95,
+    size: 175,
+    thickness: 5,
+    fill: "#2be6ab",
+    emptyFill: "rgba(0, 0, 0, 0)"
+  });
+}
+
+(function ($) {
+  // Call all functions
+  loader();
+  responsive();
+  heroSection();
+  testimonial();
+  progressbar();
+  videoPopup();
+  accordions();
+  progressCircle();
+})(jQuery);
+
+/***/ }),
+/* 40 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

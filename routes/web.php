@@ -23,12 +23,10 @@ Route::get('/contact','PagesController@contact')->name('contact');
 Route::post('/newsletter', 'PagesController@newsletter')->name('newsletter');
 
 
-
 Route::middleware('can:is-editor')->group(function() {
-
+  // Route::get('', '')->name('editorhome');
 });
 
 Route::middleware('can:is-admin')->group(function() {
   Route::get('/admin/home', 'HomeController@index')->name('adminhome');
-
 });

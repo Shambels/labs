@@ -15,6 +15,42 @@ class CreateTextsTable extends Migration
     {
         Schema::create('texts', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('carouseltext');
+            $table->string('discovertitle');
+            $table->mediumText('discoverleft');
+            $table->mediumText('discoverright');
+            $table->string('browseblog');
+            $table->string('browseservices');
+            $table->string('browsestandout');
+            $table->string('browseprojects');
+            $table->string('newstitle');
+            $table->string('newsplaceholder');
+            $table->string('newsbtn');
+            $table->string('video');
+            $table->string('testimonial');
+            $table->string('services');
+            $table->string('team');
+            $table->string('standouttitle');
+            $table->string('standouttext');
+            $table->string('services2');
+            $table->string('categories');
+            $table->string('instagram');
+            $table->string('tags');
+            $table->string('quote');
+            $table->string('ad');
+            $table->string('contacttitle');
+            $table->mediumText('contacttext');
+            $table->string('contactoffice');
+            $table->string('contactaddress');
+            $table->string('contacttown');
+            $table->string('contactphone');
+            $table->string('contactemail');
+            $table->string('copyright');
+            $table->string('copyrightlink');
+            $table->string('copyrighturl');
+            $table->softDeletes();
+
+
             $table->timestamps();
         });
     }

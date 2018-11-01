@@ -19,6 +19,8 @@ class CreateClientsTable extends Migration
             $table->string('name');
             $table->string('title');
             $table->string('company');
+            $table->string('image');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

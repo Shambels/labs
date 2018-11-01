@@ -7,6 +7,7 @@ $factory->define(App\Client::class, function (Faker $faker) {
         'name'=>$faker->name,
         'title'=>$faker->title,
         'company'=>$faker->company,
+        'image' =>$faker->imageUrl($width = 60, $height=60),
         'valid'=>null
     ];
 });

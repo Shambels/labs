@@ -16,7 +16,7 @@ class Service extends Model
   */
  protected $dates = ['deleted_at'];
 
- public function icon(){
+ public function icons(){
    return $this->belongsTo('App\Icon');
  }
 }
