@@ -22,7 +22,7 @@ class CreateTextsTable extends Migration
             $table->string('browseblog');
             $table->string('browseservices');
             $table->string('browsestandout');
-            $table->string('browseprojects');
+            $table->string('browseservices2');
             $table->string('newstitle');
             $table->string('newsplaceholder');
             $table->string('newsbtn');

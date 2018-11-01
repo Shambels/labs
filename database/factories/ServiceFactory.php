@@ -7,7 +7,7 @@ $factory->define(App\Service::class, function (Faker $faker) {
         'name'=> $faker->bs,
         'content'=> $faker->sentence($nbWords = 17, $variableNbWords = false),
         'valid'=>null,
-        'icons_id'=>mt_rand(1, 40)
+        'icons_id'=>mt_rand(1, 49)
 
     ];
 });

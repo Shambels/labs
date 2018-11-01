@@ -14,7 +14,7 @@
       </div>
       <!-- slider -->
       <div id="hero-slider" class="owl-carousel">
-        <div class="item  hero-item" data-bg="storage/img/01.jpg"></div>
+        <div class="item  hero-item" data-bg="{{Storage::url('')}}"></div>
         <div class="item  hero-item" data-bg="storage/img/02.jpg"></div>
       </div>
     </div>
@@ -90,7 +90,6 @@
     </div>
     <!-- About section end -->
   
-  
     <!-- Testimonial section -->
     <div class="testimonial-section pb100">
       <div class="test-overlay"></div>
@@ -124,41 +123,40 @@
     </div>
     <!-- Testimonial section end-->
   
-  
     <!-- Services section -->
     @include('partials/services')
-  
   
     <!-- Team Section -->
     <div class="team-section spad">
       <div class="overlay"></div>
       <div class="container">
         <div class="section-title">
-          <h2>{{$text->team}}</h2>
+          <h2>{!!$text->team!!}</h2>
         </div>
         <div class="row">
           <!-- single member -->
+          
           <div class="col-sm-4">
             <div class="member">
-              <img src="storage/img/team/1.jpg" alt="">
-              <h2>Christinne Williams</h2>
-              <h3>Project Manager</h3>
+              <img src="{{$teammembers[0]->image}}" alt="">
+              <h2>{{$teammembers[0]->name}}</h2>
+              <h3>{{$teammembers[0]->title}}</h3>
             </div>
           </div>
           <!-- single member -->
           <div class="col-sm-4">
             <div class="member">
-              <img src="storage/img/team/2.jpg" alt="">
-              <h2>Christinne Williams</h2>
-              <h3>Junior developer</h3>
+            <img src="storage/img/originals/{{$teamleader->image}}" alt="">
+              <h2>{{$teamleader->name}}</h2>
+            <h3>{{$teamleader->title}}</h3>
             </div>
           </div>
           <!-- single member -->
           <div class="col-sm-4">
             <div class="member">
-              <img src="storage/img/team/3.jpg" alt="">
-              <h2>Christinne Williams</h2>
-              <h3>Digital designer</h3>
+                <img src="{{$teammembers[1]->image}}" alt="">
+                <h2>{{$teammembers[1]->name}}</h2>
+                <h3>{{$teammembers[1]->title}}</h3>
             </div>
           </div>
         </div>
@@ -172,12 +170,12 @@
       <div class="container">
         <div class="row">
           <div class="col-md-9">
-            <h2>Are you ready to stand out?</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est.</p>
+            <h2>{{$text->standouttitle}}</h2>
+            <p>{{$text->standouttext}}</p>
           </div>
           <div class="col-md-3">
             <div class="promo-btn-area">
-            <a href="{{Route('services')}}" class="site-btn btn-2">Browse</a>
+            <a href="{{Route('services')}}" class="site-btn btn-2">{{$text->browsestandout}}</a>
             </div>
           </div>
         </div>

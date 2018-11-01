@@ -14,22 +14,27 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
           [
 
-            'name' => 'admin',
+            'name' => 'Admin',
             'email' => 'admin@test.com',
             'password' => bcrypt('123456'),
             'roles_id' => '1',
-            'image' => 'ceo.jpg'
+            'image' => 'ceo.jpg',
+            'title' => 'Labs Administrator'
           ],[
-            'name' => 'editor',
+            'name' => 'Editor',
             'email' => 'editor@test.com',
             'password' => bcrypt('123456'),
             'roles_id' => '2',
+            'image' => 'storage/img/team/1.jpg',
+            'title' => 'Labs Editor'
             
           ],[
-            'name' => 'reader',
+            'name' => 'Reader',
             'email' => 'reader@test.com',
             'password' => bcrypt('123456'),
             'roles_id' => '3',
+            'image' => 'storage/img/team/2.jpg',
+            'title' => 'Labs Reader'
           
           ]
         ]);

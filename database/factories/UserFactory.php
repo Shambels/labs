@@ -21,6 +21,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'password' => bcrypt('123456'),
         'remember_token' => str_random(10),
         'roles_id' => '2',
-        'image' =>imageUrl($width = 640, $height = 480)
+        'title' => $faker->jobTitle,
+        'image' => $faker->imageUrl($width = 350, $height = 435)
     ];
 });
