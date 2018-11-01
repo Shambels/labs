@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3">
-                <h2>Newsletter</h2>
+                <h2>{{$text->newstitle}}</h2>
             </div>
             <div class="col-md-9">
                 <!-- newsletter form -->
@@ -19,8 +19,8 @@
                         </ul>
                     </div>
                     @endif  
-                    <input type="text" placeholder="Your e-mail here" name="newsemail">
-                    <button type="submit" class="site-btn btn-2">Newsletter</button>
+                    <input type="text" placeholder="{{$text->newsplaceholder}}" name="newsemail">
+                    <button type="submit" class="site-btn btn-2">{{$text->newsbtn}}</button>
                 </form>
             </div>
         </div>

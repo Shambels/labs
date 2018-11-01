@@ -14,8 +14,9 @@
       </div>
       <!-- slider -->
       <div id="hero-slider" class="owl-carousel">
-        <div class="item  hero-item" data-bg="{{Storage::url('')}}"></div>
-        <div class="item  hero-item" data-bg="storage/img/02.jpg"></div>
+        @foreach ($carouselImages as $image)
+          <div class="item  hero-item" data-bg="{{Storage::url('img/'.$image->name)}}"></div>
+        @endforeach
       </div>
     </div>
 
@@ -78,7 +79,7 @@
           <div class="intro-video">
             <div class="row">
               <div class="col-md-8 offset-2">
-                <img src="storage/img/video.jpg" alt="">
+                <img src="{{Storage::url('img/'.$YTimage->name)}}" alt="">
                 <a href="{{$text->video}}" class="video-popup">
                   <i class="fa fa-play"></i>
                 </a>

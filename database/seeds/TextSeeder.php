@@ -42,6 +42,7 @@ class TextSeeder extends Seeder
           'contacttown' => '05200 Arévalo',
           'contactphone' => '0034 37483 2445 322',
           'contactemail' => 'hello@company.com',
+          'contactformbtn' => 'send',
           'copyright' => '2017 All rights reserved. Designed by',
           'copyrightlink' => 'Colorlib',
           'copyrighturl' => 'https://colorlib.com/'

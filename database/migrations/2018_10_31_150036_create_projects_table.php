@@ -18,6 +18,7 @@ class CreateProjectsTable extends Migration
             $table->boolean('valid')->nullable();
             $table->string('name');
             $table->string('content');
+            $table->string('image');
             $table->softDeletes();
             $table->timestamps();
         });

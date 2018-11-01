@@ -45,6 +45,7 @@ class CreateTextsTable extends Migration
             $table->string('contacttown');
             $table->string('contactphone');
             $table->string('contactemail');
+            $table->string('contactformbtn');
             $table->string('copyright');
             $table->string('copyrightlink');
             $table->string('copyrighturl');
