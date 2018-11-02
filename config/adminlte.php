@@ -153,6 +153,19 @@ return [
           'icon' => 'eye',
           'url' => 'admin/previews'
         ],
+        'CONTACT',
+        [
+            'text' => 'Inbox',
+            'url'  => 'admin/inbox',
+            'icon' => 'envelope',
+        ],
+        [
+            'text' => 'Newsletter',
+            'url'  => 'admin/settings',
+            'icon' => 'envelope-square',
+        ],
+        
+      
         
         'ACCOUNT SETTINGS',
         [
@@ -164,6 +177,13 @@ return [
             'text' => 'Change Password',
             'url'  => 'admin/settings',
             'icon' => 'lock',
+        ],
+
+        'MISC',
+        [
+            'text' => 'Users',
+            'url'  => 'admin/userlist',
+            'icon' => 'user',
         ],
     ],
 

@@ -30,5 +30,6 @@ Route::middleware('can:is-editor')->group(function() {
 
 Route::middleware('can:is-admin')->group(function() {
   Route::get('/admin/home', 'HomeController@index')->name('adminhome');
+  Route::get('/admin/edit/homepage', 'AdminpageController@home')->name('edithome');
 });
 
