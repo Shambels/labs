@@ -22,6 +22,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
         'roles_id' => '2',
         'title' => $faker->jobTitle,
-        'image' => $faker->imageUrl($width = 350, $height = 435)
+        'image' => $faker->imageUrl($width = 350, $height = 435),
+        'bio' => $faker->realText($maxNbChars = 150, $indexSize = 2)
     ];
 });

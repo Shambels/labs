@@ -19,4 +19,7 @@ class Comment extends Model
  public function articles(){
    return $this->belongsTo('App\Article', 'articles_id', 'id');
  }
+ public function users(){
+   return $this->belongsTo('App\User', 'users_id', 'id');
+ }
 }

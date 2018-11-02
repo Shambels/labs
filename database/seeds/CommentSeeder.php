@@ -13,7 +13,11 @@ class CommentSeeder extends Seeder
     {
         $articles = App\Article::all();
         $articles->each(function($article){
-          $article->comments()->save(factory(App\Comment::class)->make());
+          for($i=0; $i<rand(0,4); $i++){
+
+            $article->comments()->save(factory(App\Comment::class)->make());
+            
+          }
         });
     }
 }

@@ -15,6 +15,10 @@ class CreateTextsTable extends Migration
     {
         Schema::create('texts', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('homesection');
+            $table->string('servicessection');
+            $table->string('blogsection');
+            $table->string('contactsection');
             $table->string('carouseltext');
             $table->string('discovertitle');
             $table->mediumText('discoverleft');
@@ -38,6 +42,9 @@ class CreateTextsTable extends Migration
             $table->string('tags');
             $table->string('quote');
             $table->string('ad');
+            $table->string('leavecom');
+            $table->string('sendbtn');
+            $table->string('readmorebtn');
             $table->string('contacttitle');
             $table->mediumText('contacttext');
             $table->string('contactoffice');

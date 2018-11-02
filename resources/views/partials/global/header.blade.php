@@ -7,10 +7,10 @@
     <div class="responsive"><i class="fa fa-bars"></i></div>
     <nav>
       <ul class="menu-list">
-        <li class="{{Route::currentRouteName()=='home'? 'active':''}}"><a href="{{route('home')}}">Home</a></li>
-        <li class="{{Route::currentRouteName()=='services'? 'active':''}}"><a href="{{route('services')}}">Services</a></li>
-        <li class="{{Route::currentRouteName()=='blog'?'active':''}}"><a href="{{route('blog')}}">Blog</a></li>
-        <li class="{{Route::currentRouteName()=='contact'?'active':''}}"><a href="{{route('contact')}}">Contact</a></li>
+        <li class="{{Route::currentRouteName()=='home'? 'active':''}}"><a href="{{route('home')}}">{{$text->homesection}}</a></li>
+        <li class="{{Route::currentRouteName()=='services'? 'active':''}}"><a href="{{route('services')}}">{{$text->servicessection}}</a></li>
+        <li class="{{Route::currentRouteName()=='blog'?'active':''}}"><a href="{{route('blog')}}">{{$text->blogsection}}</a></li>
+        <li class="{{Route::currentRouteName()=='contact'?'active':''}}"><a href="{{route('contact')}}">{{$text->contactsection}}</a></li>
         @auth
           @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))
           <li><a href="{{ url(config('adminlte.logout_url', 'auth/logout')) }}">{{ trans('adminlte::adminlte.log_out') }}</a></li>

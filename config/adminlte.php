@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'skin' => 'blue',
+    'skin' => 'purple',
 
     /*
     |--------------------------------------------------------------------------
@@ -108,19 +108,52 @@ return [
     */
 
     'menu' => [
-        'MAIN NAVIGATION',
+        'WEBSITE',
         [
             'text' => 'Blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
         [
+            
+            'text' => 'Summary',
+            'icon' => 'database',
+            'url'  => 'admin/home',
+        ],
+        [
             'text'        => 'Pages',
-            'url'         => 'admin/pages',
             'icon'        => 'file',
             'label'       => 4,
             'label_color' => 'success',
+            'submenu'     => [
+            [
+              'text' => 'Home',
+              'url' => 'admin/edit/homepage',
+              'icon' => 'home'
+            ],
+            [
+              'text' => 'Services',
+              'url' => 'admin/edit/servicespage',
+              'icon' => 'flask'
+            ], 
+            [
+              'text' => 'Blog',
+              'url' => 'admin/edit/blogpage',
+              'icon' => 'rss'
+            ], 
+            [
+              'text' => 'Contact',
+              'url' => 'admin/edit/contactpage',
+              'icon' => 'envelope'
+            ], 
+            ]         
         ],
+        [
+          'text' => 'Preview',
+          'icon' => 'eye',
+          'url' => 'admin/previews'
+        ],
+        
         'ACCOUNT SETTINGS',
         [
             'text' => 'Profile',
@@ -131,57 +164,6 @@ return [
             'text' => 'Change Password',
             'url'  => 'admin/settings',
             'icon' => 'lock',
-        ],
-        [
-            'text'    => 'Multilevel',
-            'icon'    => 'share',
-            'submenu' => [
-                [
-                    'text' => 'Level One',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'Level One',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'Level Two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'Level Two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'Level One',
-                    'url'  => '#',
-                ],
-            ],
-        ],
-        'LABELS',
-        [
-            'text'       => 'Important',
-            'icon_color' => 'red',
-        ],
-        [
-            'text'       => 'Warning',
-            'icon_color' => 'yellow',
-        ],
-        [
-            'text'       => 'Information',
-            'icon_color' => 'aqua',
         ],
     ],
 

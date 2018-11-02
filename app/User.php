@@ -36,7 +36,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function role(){
+    public function roles(){
 
       return $this->belongsTo('App\Role', 'roles_id', 'id');
 
@@ -45,5 +45,5 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Article','users_id','id');
     }
-    
+  
 }

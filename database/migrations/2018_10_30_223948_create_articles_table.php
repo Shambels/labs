@@ -19,6 +19,7 @@ class CreateArticlesTable extends Migration
             $table->string('name');
             $table->string('preview');
             $table->text('content');
+            $table->string('image');
             
             $table->softDeletes();
             $table->timestamps();

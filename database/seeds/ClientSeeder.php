@@ -13,8 +13,10 @@ class ClientSeeder extends Seeder
     {
       factory(App\Client::class, 9)->create()
       ->each(function($client){
-          for($i = 0; $i < rand(1,3); $i++)
-          $client->testimonials()->save(factory(App\Testimonial::class)->make());
-      });;
+          for($i = 0; $i < rand(1,3); $i++){
+
+            $client->testimonials()->save(factory(App\Testimonial::class)->make());
+          }
+      });
     }
 }

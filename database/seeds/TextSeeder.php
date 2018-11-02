@@ -12,6 +12,10 @@ class TextSeeder extends Seeder
     public function run()
     {
         DB::table('texts')->insert([
+          'homesection' => 'Home',
+          'servicessection' => 'Services',
+          'blogsection' => 'Blog',
+          'contactsection' => 'Contact',
           'carouseltext' => 'Get your freebie template now!',
           'discovertitle' => 'Get in <span>the Lab</span> and discover the world' ,
           'discoverleft' => 'orem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur leo est, feugiat nec elementum id, suscipit id nulla. Nulla sit amet luctus dolor. Etiam finibus consequat ante ac congue. Quisque porttitor porttitor tempus. Donec maximus ipsum non ornare vporttitor porttitorestibulum. Sed libero nibh, feugiat at enim id, bibendum sollicitudin arcu.',
@@ -35,6 +39,9 @@ class TextSeeder extends Seeder
           'tags' => 'Tags',
           'quote' => 'Quote',
           'ad' => 'Ad',
+          'leavecom' => 'Leave a comment',
+          'sendbtn' => 'send',
+          'readmorebtn' => 'Read More',
           'contacttitle' => 'CONTACT US',
           'contacttext' => 'Cras ex mauris, ornare eget pretium sit amet, dignissim et turpis. Nunc nec maximus dui, vel suscipit dolor. Donec elementum velit a orci facilisis rutrum.',
           'contactoffice' => 'Main Office',
