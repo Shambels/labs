@@ -7,7 +7,7 @@
     <form action="/admin/edit/homepage/carouseltext" method="POST">
       @csrf
       <div class="form-group">
-        <input name="carouseltext" value="{{old('carouseltext', $text->carouseltext)}}" placeholder="Carousel Text" type="text" class="form-control">
+        <input name="title" value="{{old('title', $text->carouseltext)}}" placeholder="Type Here" type="text" class="form-control">
       </div>
       <button class="btn btn-success" type="submit">OK</button>
     </form>

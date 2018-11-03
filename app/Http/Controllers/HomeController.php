@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\TitleRequest;
+use App\Http\Requests\ParagraphRequest;
+use App\Http\Requests\ButtonRequest;
 use App\Text;
 use App\Service;
 use App\Icon;
+use App\Testimonial;
+
 
 class HomeController extends Controller
 {
@@ -26,65 +31,59 @@ class HomeController extends Controller
      */
    
 
-    public function carouselText(Request $request){
-      $this->validate($request, [
-        'carouseltext'=> 'bail|required|max:50'
-      ]);
+    public function carouselText(TitleRequest $request){
       $text= Text::find(1);
-      $text->carouseltext = $request->carouseltext;
+      $text->carouseltext = $request->title;
       $text->save();
       return redirect()->back();
     }
 
-    public function services(Request $request, $id){
-      $this->validate($request, [
-        'name' => 'bail|required|max:35',
-        'content' => 'bail|required|max:150',
-      ]);
-      $service = Service::find($id);
-      $service->name = $request->name;
-      $service->content = $request->content;
-      $service->icons_id= $request->icon;
-      $service->save();
-      return redirect()->back();            
-    }
-
-    public function discovertitle(Request $request){
-      $this->validate($request, [
-        'discovertitle'=> 'bail|required|max:75'
-      ]);
+    public function discoverTitle(TitleRequest $request){
       $text= Text::find(1);
-      $text->discovertitle = $request->discovertitle;
+      $text->discovertitle = $request->title;
+      $text->save();
+      return redirect()->back();
+    }
+    
+    public function teamTitle(TitleRequest $request){
+      $text= Text::find(1);
+      $text->team = $request->title;
       $text->save();
       return redirect()->back();
     }
 
-    public function discoverleft(Request $request){
-      $this->validate($request, [
-        'discoverleft'=> 'bail|required|max:500'
-      ]);
+    public function discoverLeft(ParagraphRequest $request){
       $text= Text::find(1);
       $text->discoverleft = $request->discoverleft;
       $text->save();
       return redirect()->back();
     }
     
-    public function discoverright(Request $request){
-      $this->validate($request, [
-        'discoverright'=> 'bail|required|max:500'
-      ]);
+    public function discoverRight(ParagraphRequest $request){
       $text= Text::find(1);
       $text->discoverright = $request->discoverright;
       $text->save();
       return redirect()->back();
     }
 
-    public function browseblog(Request $request){
-      $this->validate($request, [
-        'browseblog' => 'bail|required|max:25'
-      ]);
+    public function browseBlog(ButtonRequest $request){
       $text= Text::find(1);
-      $text->browseblog = $request->browseblog;
+      dd($text);
+      $text->browseblog = $request->buttontext;
+      $text->save();
+      return redirect()->back();
+    }
+
+    public function browseServices(ButtonRequest $request){
+      $text= Text::find(1);
+      $text->browseservices = $request->buttontext;
+      $text->save();
+      return redirect()->back();
+    }
+
+    public function browseStandout(ButtonRequest $request){
+      $text= Text::find(1);
+      $text->browsestandout = $request->buttontext;
       $text->save();
       return redirect()->back();
     }
@@ -99,13 +98,10 @@ class HomeController extends Controller
       return redirect()->back();
     }
     
-    public function testimonial(Request $request){
-      $this->validate($request, [
-        'testimonial' => 'bail|required|max:75'
-      ]);
-      $text= Text::find(1);
-      $text->testimonial = $request->testimonial;
-      $text->save();
-      return redirect()->back();
-    }
+    
+
+  
+
+   
+    
 }

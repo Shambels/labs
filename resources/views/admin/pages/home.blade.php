@@ -131,7 +131,8 @@
               <!-- single testimonial -->
               <div class="testimonial">
                 <span>‘​‌‘​‌</span>
-              <p>{{$testimonial->message}}</p>
+              <p class="editable">{{$testimonial->message}}</p>
+              @include('admin.pages.cards.testimonial')
                 <div class="client-info">
                   <div class="avatar">
                     <img src="{{$testimonial->clients->image}}" alt="">
@@ -142,6 +143,7 @@
                   </div>
                 </div>
               </div>
+
               @endforeach
             </div>
           </div>
@@ -151,14 +153,15 @@
     <!-- Testimonial section end-->
   
     <!-- Services section -->
-    @include('partials/services')
+    @include('admin/pages/partials/services')
   
     <!-- Team Section -->
     <div class="team-section spad">
       <div class="overlay"></div>
       <div class="container">
         <div class="section-title">
-          <h2>{!!$text->team!!}</h2>
+          <h2 class="editable">{!!$text->team!!}</h2>
+          @include('admin.pages.cards.titles.team')
         </div>
         <div class="row">
           <!-- single member -->
@@ -202,7 +205,7 @@
           </div>
           <div class="col-md-3">
             <div class="promo-btn-area">
-            <a href="{{Route('services')}}" class="site-btn btn-2">{!!$text->browsestandout!!}</a>
+            <div class="site-btn btn-2">{!!$text->browsestandout!!}</div>
             </div>
           </div>
         </div>

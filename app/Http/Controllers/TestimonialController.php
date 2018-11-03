@@ -2,63 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Testimonial;
 use Illuminate\Http\Request;
+use App\Http\Requests\TitleRequest;
+use App\Testimonial;
+use App\Text;
 
 class TestimonialController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Testimonial  $testimonial
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Testimonial $testimonial)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Testimonial  $testimonial
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Testimonial $testimonial)
-    {
-        //
-    }
+    
 
     /**
      * Update the specified resource in storage.
@@ -67,9 +18,25 @@ class TestimonialController extends Controller
      * @param  \App\Testimonial  $testimonial
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Testimonial $testimonial)
+
+
+    public function title(TitleRequest $request){
+      $text = Text::find(1);
+      $text->testimonial = $request->title;
+      $text->save();
+      return redirect()->back();
+    }
+
+    public function update(Request $request, $id)
     {
-        //
+      $this->validate($request, [
+        'message' => 'bail|required|max:250',
+      ]);
+      $testimonial = Testimonial::find($id);
+      $testimonial->message = $request->message;
+      $testimonial->valid = true;
+      $testimonial->save();
+      return redirect()->back(); 
     }
 
     /**
@@ -78,8 +45,8 @@ class TestimonialController extends Controller
      * @param  \App\Testimonial  $testimonial
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Testimonial $testimonial)
-    {
-        //
+    public function delete(Request $request, $id){
+      $testimonial = Testimonial::find($id)->delete();
+      return redirect()->back();  
     }
 }

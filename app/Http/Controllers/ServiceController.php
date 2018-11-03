@@ -2,64 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Service;
 use Illuminate\Http\Request;
+use App\Http\Requests\TitleRequest;
+use App\Service;
+use App\Text;
 
 class ServiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+   
+    public function title(TitleRequest $request){
+      $text = Text::find(1);
+      $text->services = $request->title;
+      $text->save();
+      return redirect()->back();
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Service  $service
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Service $service)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Service  $service
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Service $service)
-    {
-        //
-    }
-
     /**
      * Update the specified resource in storage.
      *
@@ -67,9 +23,19 @@ class ServiceController extends Controller
      * @param  \App\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Service $service)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+          'name' => 'bail|required|max:35',
+          'content' => 'bail|required|max:150',
+        ]);
+        $service = Service::find($id);
+        $service->name = $request->name;
+        $service->content = $request->content;
+        $service->icons_id= $request->icon;
+        $service->save();
+        return redirect()->back();            
+      
     }
 
     /**
@@ -78,8 +44,9 @@ class ServiceController extends Controller
      * @param  \App\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Service $service)
+    public function delete(Service $service, $id)
     {
-        //
+      $service = Service::find($id)->delete();
+      return redirect()->back();
     }
 }

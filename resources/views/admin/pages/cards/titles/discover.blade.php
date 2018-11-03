@@ -7,7 +7,7 @@
     <form action="/admin/edit/homepage/discovertitle" method="POST">
       @csrf
       <div class="form-group">
-        <input name="discovertitle" value="{{old('discovertitle', $text->discovertitle)}}" placeholder="Type here" type="text" class="form-control">
+        <input name="title" value="{{old('title', $text->discovertitle)}}" placeholder="Type here" type="text" class="form-control">
       </div>
       <button class="btn btn-success" type="submit">OK</button>
     </form>

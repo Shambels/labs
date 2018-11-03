@@ -6,7 +6,7 @@
    </div>
    <!-- /.card-header -->
    <div class="card-body">
-     <form action="/admin/edit/homepage/services/{{$service->id}}" method="POST">
+     <form action="/admin/edit/service/{{$service->id}}" method="POST">
        @csrf
        <!-- text input -->
        <div class="form-group">
@@ -35,6 +35,10 @@
              </select>
            </div>
            <button class="btn btn-success" type="submit">OK</button>
+         </form>
+         <form action="/admin/edit/service/{{$service->id}}/delete" method="POST">
+          @csrf  
+          <button class="btn btn-danger" type="submit">Delete</button>
          </form>
        </div>
        <!-- /.card-body -->

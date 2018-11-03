@@ -38,13 +38,24 @@ Route::middleware('can:is-admin')->group(function() {
   // HOME PAGE 
   Route::get('/admin/edit/homepage', 'AdminpageController@home')->name('edithome');
   Route::post('/admin/edit/homepage/carouseltext', 'HomeController@carouselText');
-  Route::post('/admin/edit/homepage/services/{id}', 'HomeController@services');
-  Route::post('/admin/edit/homepage/discovertitle', 'HomeController@discovertitle');
-  Route::post('/admin/edit/homepage/discoverleft', 'HomeController@discoverleft');
-  Route::post('/admin/edit/homepage/discoverright', 'HomeController@discoverright');
-  Route::post('/admin/edit/homepage/browseblog', 'HomeController@browseblog');
+  Route::post('/admin/edit/homepage/discovertitle', 'HomeController@discoverTitle');
+  Route::post('/admin/edit/homepage/discoverleft', 'HomeController@discoverLeft');
+  Route::post('/admin/edit/homepage/discoverright', 'HomeController@discoverRight');
+  Route::post('/admin/edit/homepage/browseblog', 'HomeController@browseBlog');
+  Route::post('/admin/edit/homepage/browseservices', 'HomeController@browseServices');
+  Route::post('/admin/edit/homepage/browsestandout', 'HomeController@browseStandout');
   Route::post('/admin/edit/homepage/video', 'HomeController@video');
-  Route::post('/admin/edit/homepage/testimonial', 'HomeController@testimonial');
+  Route::post('/admin/edit/homepage/teamtitle', 'HomeController@teamTitle');
+
+  
+  
+  Route::post('/admin/edit/testimonialtitle', 'TestimonialController@title');
+  Route::post('/admin/edit/testimonial/{id}', 'TestimonialController@update');
+  Route::post('/admin/edit/testimonial/{id}/delete', 'TestimonialController@delete');
+  
+  Route::post('/admin/edit/servicestitle', 'ServiceController@title');
+  Route::post('/admin/edit/service/{id}', 'ServiceController@update');
+  Route::post('/admin/edit/service/{id}/delete', 'ServiceController@delete');
   
 });
 
