@@ -9,7 +9,7 @@
       <div class="hero-content">
         <div class="hero-center">
           <img src="storage/img/big-logo.png" alt="">
-          <p>{{$text->carouseltext}}</p>
+          <p>{!!$text->carouseltext!!}</p>
         </div>
       </div>
       <!-- slider -->
@@ -66,21 +66,21 @@
           </div>
           <div class="row">
             <div class="col-md-6">
-            <p>{{$text->discoverleft}}</p>
+            <p>{!!$text->discoverleft!!}</p>
             </div>
             <div class="col-md-6">
-              <p>{{$text->discoverleft}}</p>
+              <p>{!!$text->discoverright!!}</p>
             </div>
           </div>
           <div class="text-center mt60">
-          <a href="{{Route('blog')}}" class="site-btn">{{$text->browseblog}}</a>
+          <a href="{{Route('blog')}}" class="site-btn">{!!$text->browseblog!!}</a>
           </div>
           <!-- popup video -->
           <div class="intro-video">
             <div class="row">
               <div class="col-md-8 offset-2">
                 <img src="{{Storage::url('img/'.$YTimage->name)}}" alt="">
-                <a href="{{$text->video}}" class="video-popup">
+                <a href="{!!$text->video!!}" class="video-popup">
                   <i class="fa fa-play"></i>
                 </a>
               </div>
@@ -98,7 +98,7 @@
         <div class="row">
           <div class="col-md-8 offset-4">
             <div class="section-title left">
-            <h2>{{$text->testimonial}}</h2>
+            <h2>{!!$text->testimonial!!}</h2>
             </div>
             <div class="owl-carousel" id="testimonial-slide">
               @foreach ($testimonials as $testimonial)
@@ -171,12 +171,12 @@
       <div class="container">
         <div class="row">
           <div class="col-md-9">
-            <h2>{{$text->standouttitle}}</h2>
-            <p>{{$text->standouttext}}</p>
+            <h2>{!!$text->standouttitle!!}</h2>
+            <p>{!!$text->standouttext!!}</p>
           </div>
           <div class="col-md-3">
             <div class="promo-btn-area">
-            <a href="{{Route('services')}}" class="site-btn btn-2">{{$text->browsestandout}}</a>
+            <a href="{{Route('services')}}" class="site-btn btn-2">{!!$text->browsestandout!!}</a>
             </div>
           </div>
         </div>

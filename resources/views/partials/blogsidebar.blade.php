@@ -9,7 +9,7 @@
         </div>
         <!-- Categories -->
         <div class="widget-item">
-          <h2 class="widget-title">{{$text->categories}}</h2>
+          <h2 class="widget-title">{!!$text->categories!!}</h2>
           <ul>
             @foreach ($categories as $category)
             <li><a href="#">{{$category->name}}</a></li>
@@ -27,7 +27,7 @@
         </div>
         <!-- Tags -->
         <div class="widget-item">
-          <h2 class="widget-title">{{$text->tags}}</h2>
+          <h2 class="widget-title">{!!$text->tags!!}</h2>
           <ul class="tag">
             @foreach ($tags as $tag)
               <li><a href="">{{$tag->name}}</a></li>
@@ -36,7 +36,7 @@
         </div>
         <!-- Quote-->
         <div class="widget-item">
-          <h2 class="widget-title">{{$text->quote}}</h2>
+          <h2 class="widget-title">{!!$text->quote!!}</h2>
           <div class="quote">
             <span class="quotation">‘​‌‘​‌</span>
             <p>{{$quote}}</p>
@@ -44,7 +44,7 @@
         </div>
         <!-- Ad -->
         <div class="widget-item">
-          <h2 class="widget-title">{{$text->ad}}</h2>
+          <h2 class="widget-title">{!!$text->ad!!}</h2>
           <div class="add">
             <a href=""><img src="{{Storage::url($ad->name)}}" alt=""></a>
           </div>

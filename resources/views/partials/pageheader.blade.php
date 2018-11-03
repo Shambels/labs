@@ -5,21 +5,21 @@
 			<div class="page-info">
 				<h2>
 					@if(Route::currentRouteName()== 'services')
-					{{$text->servicessection}}
+					{!!$text->servicessection!!}
 					@elseif(Route::currentRouteName()== 'contact')
-					{{$text->contactsection}}
+					{!!$text->contactsection!!}
 					@else
-					{{$text->blogsection}}
+					{!!$text->blogsection!!}
 					@endif
 				</h2>
 				<div class="page-links">
-					<a href="{{route('home')}}">{{$text->homesection}}</a>
+					<a href="{{route('home')}}">{!!$text->homesection!!}</a>
 					@if(Route::currentRouteName()== 'services')
-					<span>{{$text->servicessection}}</span>
+					<span>{!!$text->servicessection!!}</span>
 					@elseif(Route::currentRouteName()== 'contact')
-					<span>{{$text->contactsection}}</span>
+					<span>{!!$text->contactsection!!}</span>
 					@else
-					<span>{{$text->blogsection}}</span>
+					<span>{!!$text->blogsection!!}</span>
 					@endif
 				</div>
 			</div>

@@ -37,7 +37,14 @@ Route::middleware('can:is-admin')->group(function() {
 
   // HOME PAGE 
   Route::get('/admin/edit/homepage', 'AdminpageController@home')->name('edithome');
-  
   Route::post('/admin/edit/homepage/carouseltext', 'HomeController@carouselText');
+  Route::post('/admin/edit/homepage/services/{id}', 'HomeController@services');
+  Route::post('/admin/edit/homepage/discovertitle', 'HomeController@discovertitle');
+  Route::post('/admin/edit/homepage/discoverleft', 'HomeController@discoverleft');
+  Route::post('/admin/edit/homepage/discoverright', 'HomeController@discoverright');
+  Route::post('/admin/edit/homepage/browseblog', 'HomeController@browseblog');
+  Route::post('/admin/edit/homepage/video', 'HomeController@video');
+  Route::post('/admin/edit/homepage/testimonial', 'HomeController@testimonial');
+  
 });
 

@@ -73,7 +73,7 @@
 						<!-- Commert Form -->
 						<div class="row">
 							<div id="sendCommentForm" class="col-md-9 comment-from">
-								<h2>{{$text->leavecom}}</h2>
+								<h2>{!!$text->leavecom!!}</h2>
 								<form class="form-class">
 									<div class="row">
 										<div class="col-sm-6">
@@ -85,7 +85,7 @@
 										<div class="col-sm-12">
 											<input type="text" name="subject" placeholder="Subject">
 											<textarea name="message" placeholder="Message"></textarea>
-											<button class="site-btn">{{$text->leavecom}}</button>
+											<button class="site-btn">{!!$text->sendbtn!!}</button>
 										</div>
 									</div>
 								</form>

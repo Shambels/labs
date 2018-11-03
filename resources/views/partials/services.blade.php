@@ -23,7 +23,7 @@
         @if (Route::currentRouteName()=='services')
           {{$services->links()}}
         @else
-      <a href="{{Route('services')}}" class="site-btn">{{$text->browseservices}}</a>
+      <a href="{{Route('services')}}" class="site-btn">{!!$text->browseservices!!}</a>
         @endif
       </div>
     </div>

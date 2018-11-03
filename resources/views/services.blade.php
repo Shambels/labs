@@ -50,7 +50,7 @@
 				</div>
 			</div>
 			<div class="text-center mt100">
-				<a href="" class="site-btn">{{$text->browseservices2}}</a>
+				<a href="" class="site-btn">{!!$text->browseservices2!!}</a>
 			</div>
 		</div>
 	</div>

@@ -43,7 +43,7 @@
 
                 </div>
                 <p>{{$article->preview}}</p>
-                <a href="/blogpost/{{$article->id}}" class="read-more">{{$text->readmorebtn}}</a>
+                <a href="/blogpost/{{$article->id}}" class="read-more">{!!$text->readmorebtn!!}</a>
               </div>
             </div>
           @endforeach

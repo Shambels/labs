@@ -27,15 +27,7 @@
         <div class="hero-center">
           <img src="storage/img/big-logo.png" alt="">
           <p class="editable">{{$text->carouseltext}}</p>
-
-          @can ('is-admin')
-            <form action="/admin/edit/homepage/carouseltext" method="POST" class="d-none">
-              @csrf
-              <input size="35" name="carouseltext" placeholder="Carousel Text" type="text" value="{{old('carouseltext', $text->carouseltext)}}">
-              <button class="btn btn-success" type="submit">OK</button>
-            </form>
-          @endcan
-
+          @include ('admin.pages.cards.carouseltext')
         </div>
       </div>
       <!-- slider -->
@@ -43,6 +35,7 @@
           <img class="item  hero-item" src="storage/img/{{$image->name}}">
         @endforeach
     </div>
+
     {{-- MARGIN --}}
     <div style="margin: 20rem 0;"></div>
 
@@ -63,71 +56,59 @@
                 <h2>{{$service->name}}</h2>
               <p>{{$service->content}}</p>
               </div>
-
-              @can ('is-admin')
-              <form action="/admin/edit/homepage/services" method="POST" class="d-none">
-                @csrf
-                <select name="icon" id="">
-                  <option value="{{$service->icons->id}}">{!!$service->icons->class!!}</option>
-                  @foreach ($icons as $icon)
-                    @if ($service->icons->id != $icon->id)
-                      <option value="{{$icon->id}}">
-                        <i class="{!!$icon->class!!}"></i>
-                      </option>
-                    @endif
-                  @endforeach
-                </select>
-                <input name="" type="text">
-                <input name="" type="text">
-                <button class="btn btn-success" type="submit">OK</button>
-              </form>
-              @endcan
-            </div>
+             @include('admin.pages.cards.service')
+                </div>
             @endforeach
+
+
             <!-- single card  --col-sm-12-->
             @foreach ($servicedown as $service)
             <div class="col-md-4 col-sm-12">
-              <div class="lab-card">
+              <div class="lab-card editable">
                 <div class="icon">
                 <i class="{{$service->icons->class}}"></i>
                 </div>
               <h2>{{$service->name}}</h2>
               <p>{{$service->content}}</p>
               </div>
+              @include('admin.pages.cards.service')
             </div>
             @endforeach
           </div>
         </div>
       </div>
       <!-- card section end-->
-  
-  
       <!-- About contant  -- discover-->
       <div class="about-contant">
         <div class="container">
           <div class="section-title">
-          <h2>{!!$text->discovertitle!!}</h2>
+          <h2 class="editable">{!!$text->discovertitle!!}</h2>
+          @include('admin.pages.cards.titles.discover')
           </div>
           <div class="row">
             <div class="col-md-6">
-            <p>{{$text->discoverleft}}</p>
+            <p class="editable">{!!$text->discoverleft!!}</p>
+            @include('admin.pages.cards.discoverleft')
             </div>
             <div class="col-md-6">
-              <p>{{$text->discoverleft}}</p>
+              <p class="editable">{!!$text->discoverright!!}</p>
+              @include('admin.pages.cards.discoverright')
             </div>
           </div>
           <div class="text-center mt60">
-          <a href="{{Route('blog')}}" class="site-btn">{{$text->browseblog}}</a>
+          <div class="site-btn editable">{!!$text->browseblog!!}</div>
+          @include('admin.pages.cards.buttons.browseblog')
           </div>
           <!-- popup video -->
           <div class="intro-video">
             <div class="row">
-              <div class="col-md-8 offset-2">
+              <div class="col-md-8 offset-2 editable">
                 <img src="{{Storage::url('img/'.$YTimage->name)}}" alt="">
                 <a href="{{$text->video}}" class="video-popup">
                   <i class="fa fa-play"></i>
                 </a>
               </div>
+              @include('admin.pages.cards.links.youtube')
             </div>
           </div>
         </div>
@@ -142,7 +123,8 @@
         <div class="row">
           <div class="col-md-8 offset-4">
             <div class="section-title left">
-            <h2>{{$text->testimonial}}</h2>
+            <h2 class="editable">{!!$text->testimonial!!}</h2>
+            @include('admin.pages.cards.titles.testimonial')
             </div>
             <div class="owl-carousel" id="testimonial-slide">
               @foreach ($testimonials as $testimonial)
@@ -215,12 +197,12 @@
       <div class="container">
         <div class="row">
           <div class="col-md-9">
-            <h2>{{$text->standouttitle}}</h2>
-            <p>{{$text->standouttext}}</p>
+            <h2>{!!$text->standouttitle!!}</h2>
+            <p>{!!$text->standouttext!!}</p>
           </div>
           <div class="col-md-3">
             <div class="promo-btn-area">
-            <a href="{{Route('services')}}" class="site-btn btn-2">{{$text->browsestandout}}</a>
+            <a href="{{Route('services')}}" class="site-btn btn-2">{!!$text->browsestandout!!}</a>
             </div>
           </div>
         </div>
@@ -233,13 +215,13 @@
       <!-- contact info -->
       <div class="col-md-5 offset-1 contact-info col-push">
         <div class="section-title left">
-          <h2>{{$text->contacttitle}}</h2>
+          <h2>{!!$text->contacttitle!!}</h2>
         </div>
-      <p>{{$text->contacttext}}</p>
-        <h3 class="mt60">{{$text->contactoffice}}</h3>
-        <p class="con-item">{{$text->contactaddress}} <br> {{$text->contacttown}} </p>
-        <p class="con-item">{{$text->contactphone}}</p>
-        <p class="con-item">{{$text->contactemails}}</p>
+      <p>{!!$text->contacttext!!}</p>
+        <h3 class="mt60">{!!$text->contactoffice!!}</h3>
+        <p class="con-item">{!!$text->contactaddress!!} <br> {!!$text->contacttown!!} </p>
+        <p class="con-item">{!!$text->contactphone!!}</p>
+        <p class="con-item">{!!$text->contactemail!!}}</p>
       </div>
       <!-- contact form -->
       <div class="col-md-6 col-pull">
@@ -254,7 +236,7 @@
             <div class="col-sm-12">
               <input type="text" name="subject" placeholder="Subject">
               <textarea name="message" placeholder="Message"></textarea>
-              <button class="site-btn">{{$text->contactformbtn}}</button>
+              <button class="site-btn">{!!$text->contactformbtn!!}</button>
             </div>
           </div>
         </form>
