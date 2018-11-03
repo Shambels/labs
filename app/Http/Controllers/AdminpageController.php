@@ -13,9 +13,16 @@ use App\Article;
 use App\Category;
 use App\Tag;
 use App\Comment;
+use App\Icon;
 
 class AdminpageController extends Controller
 {
+
+  public function index()
+  {
+      return view('admin/adminhome');
+  }
+  
     public function home(){
       $text= Text::find(1);
       $carouselImages = Image::where('folder','carousel')->get();
@@ -26,8 +33,9 @@ class AdminpageController extends Controller
       $testimonials = Testimonial::with('clients')->get()->random(6);
       $teammembers = User::where('roles_id','2')->get()->random(2);
       $teamleader = User::where('roles_id', '1')->get()->first();
+      $icons = Icon::all();
 
-      return view ('admin/pages/home', compact('carouselImages','YTimage','text','services','servicesup','servicedown','testimonials','teammembers','teamleader'));
+      return view ('admin/pages/home', compact('carouselImages','YTimage','text','services','servicesup','servicedown','testimonials','teammembers','teamleader','icons'));
 
     }
 
@@ -38,7 +46,7 @@ class AdminpageController extends Controller
       $servicesleft = Service::with('icons')->get()->random(3);
       $servicesright = Service::with('icons')->get()->random(3);
       $projects= Project::orderBy('created_at')->get()->take(3);
-      return view ('services', compact('text','services','servicesleft','servicesright','projects'));
+      return view ('admin/pages/services', compact('text','services','servicesleft','servicesright','projects'));
     }
 
     public function blog(){
@@ -50,7 +58,7 @@ class AdminpageController extends Controller
       $ad= Image::where('folder','ad')->first();
       $quote = Testimonial::get()->random(1)->first()->message;
       // Article::orderBy('created_at');
-      return view ('blog', compact('text','articles','categories','instagrams','tags','ad','quote'));
+      return view ('admin/pages/blog', compact('text','articles','categories','instagrams','tags','ad','quote'));
     }
 
 
@@ -66,11 +74,11 @@ class AdminpageController extends Controller
       // $comments = Comment::where('articles_id', $id)/* ->where('valid', 1) */->get();
       $comments = Comment::with('users')->where('articles_id',$id)->get();
       // Article::orderBy('created_at');
-      return view ('blogpost', compact('text','article','categories','instagrams','tags','ad','quote','comments'));
+      return view ('admin/pages/blogpost', compact('text','article','categories','instagrams','tags','ad','quote','comments'));
     }
     
     public function contact(){
       $text = Text::find(1); 
-      return view ('contact', compact('text'));
+      return view ('admin/pages/contact', compact('text'));
     }
 }

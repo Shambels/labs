@@ -28,8 +28,16 @@ Route::middleware('can:is-editor')->group(function() {
   // Route::get('', '')->name('editorhome');
 });
 
+
+
+// EDITS
 Route::middleware('can:is-admin')->group(function() {
-  Route::get('/admin/home', 'HomeController@index')->name('adminhome');
+
+  Route::get('/admin/home', 'AdminpageController@index')->name('adminhome');
+
+  // HOME PAGE 
   Route::get('/admin/edit/homepage', 'AdminpageController@home')->name('edithome');
+  
+  Route::post('/admin/edit/homepage/carouseltext', 'HomeController@carouselText');
 });
 

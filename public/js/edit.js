@@ -76,7 +76,18 @@ module.exports = __webpack_require__(44);
 /***/ 44:
 /***/ (function(module, exports) {
 
-console.log('ko');
+var editables = Array.from(document.getElementsByClassName('editable'));
+
+function edit(x, y) {
+  x.classList.toggle('d-none');
+  y.classList.toggle('d-none');
+}
+
+editables.forEach(function (element) {
+  element.addEventListener('dblclick', function () {
+    edit(element, element.nextElementSibling);
+  });
+});
 
 /***/ })
 

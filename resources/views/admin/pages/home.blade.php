@@ -6,6 +6,19 @@
 
 @section('content')
 
+@if ($errors->any())
+<div class="alert alert-danger">
+  <ul>
+    @foreach($errors->all() as $error)
+    <li>{{$error}}
+        <button type="button" class="close" data-dismiss="alert">X</button>
+    </li>
+    @endforeach
+  </ul>
+</div>
+@endif
+
+
 <!-- Intro Section -->
     <!-- Carousel -->
     
@@ -16,11 +29,11 @@
           <p class="editable">{{$text->carouseltext}}</p>
 
           @can ('is-admin')
-          <form action="/admin/edit/homepage/carouseltext" method="POST" class="d-none">
-          @csrf
-          <input name="carouseltext" placeholder="Carousel Text" type="text" value="{{old('carouseltext', $text->carouseltext)}}">
-          <button class="btn btn-success" type="submit">OK</button>
-          </form>
+            <form action="/admin/edit/homepage/carouseltext" method="POST" class="d-none">
+              @csrf
+              <input size="35" name="carouseltext" placeholder="Carousel Text" type="text" value="{{old('carouseltext', $text->carouseltext)}}">
+              <button class="btn btn-success" type="submit">OK</button>
+            </form>
           @endcan
 
         </div>
@@ -42,15 +55,33 @@
           <div class="row">
             <!-- single card -->
             @foreach ($servicesup as $service)
-            
             <div class="col-md-4 col-sm-6">
-              <div class="lab-card">
+              <div class="lab-card editable">
                 <div class="icon">
                 <i class="{{$service->icons->class}}"></i>
                 </div>
                 <h2>{{$service->name}}</h2>
               <p>{{$service->content}}</p>
               </div>
+
+              @can ('is-admin')
+              <form action="/admin/edit/homepage/services" method="POST" class="d-none">
+                @csrf
+                <select name="icon" id="">
+                  <option value="{{$service->icons->id}}">{!!$service->icons->class!!}</option>
+                  @foreach ($icons as $icon)
+                    @if ($service->icons->id != $icon->id)
+                      <option value="{{$icon->id}}">
+                        <i class="{!!$icon->class!!}"></i>
+                      </option>
+                    @endif
+                  @endforeach
+                </select>
+                <input name="" type="text">
+                <input name="" type="text">
+                <button class="btn btn-success" type="submit">OK</button>
+              </form>
+              @endcan
             </div>
             @endforeach
             <!-- single card  --col-sm-12-->
