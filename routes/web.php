@@ -79,7 +79,8 @@ Route::middleware('can:is-admin')->group(function() {
   Route::post('admin/edit/project/{id}/delete', 'ProjectController@delete');
 
   // BLOG 
-
+  Route::post('admin/edit/article/{id}', 'ArticleController@update');
+  Route::post('admin/edit/article/{id}/delete', 'ArticleController@delete');
 
   // NEWSLETTER
   Route::post('/admin/edit/newsletter/title', 'ContactController@newsletterTitle');

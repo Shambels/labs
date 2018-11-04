@@ -14,7 +14,7 @@
           {{-- {{dd($article)}} --}}
             <div class="post-item">
               <div class="post-thumbnail">
-              <img src="{{$article->image}}" alt="">
+              <img src="{{Storage::url('public/images/articles/'.$article->image)}}" alt="">
                 <div class="post-date">
                   <h2>{{$article->created_at->format('d')}}</h2>
                   <h3>{{$article->created_at->format('M Y')}}</h3>

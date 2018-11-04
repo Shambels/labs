@@ -11,7 +11,7 @@
 					<!-- Single Post -->
 					<div class="single-post">
 						<div class="post-thumbnail">
-							<img src="{{$article->image}}" alt="">
+							<img src="{{Storage::url('public/images/articles/'.$article->image)}}" alt="">
 							<div class="post-date">
 								<h2>03</h2>
 								<h3>Nov 2017</h3>
