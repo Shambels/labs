@@ -53,7 +53,7 @@ class AdminpageController extends Controller
 
     public function blog(){
       $text = Text::find(1);
-      $articles = Article::with('users','comments','tags')->paginate(3);
+      $articles = Article::with('users','comments','tags','categories')->paginate(3);
       $categories = Category::all();
       $instagrams= Image::where('folder','instagram')->get();
       $tags = Tag::all();

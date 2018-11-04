@@ -25,11 +25,21 @@
         <div class="form-group">
           <label>Article Tags</label>
           @foreach ($article->tags as $tag )
-            <input name="tag{{$tag->id}}" value="{{old('tag'.$tag->id, $tag->name)}}" placeholder="Type here" type="text" class="form-control">
+            <input name="tag{{$tag->id}}" value="{{old('tag'.$tag->id, $tag->name)}}" placeholder="Type here... or leave the field empty to detach the Tag" type="text" class="form-control">
           @endforeach
-          <div class="addable" class="btn btn-light"><i class="fas fa-plus"></i></div>
+          <div class="tag">
+            <div class="addable" class="btn btn-light"><i class="fas fa-plus"></i></div>
+          </div>
         </div>
-
+        <div class="form-group">
+          <label>Article Categories</label>
+          @foreach ($article->categories as $category)
+            <input name="category{{$category->id}}" value="{{old('category'.$category->id, $category->name)}}" placeholder="Type here... or leave the field empty to detach the Category " type="text" class="form-control">
+          @endforeach
+          <div class="category">            
+            <div class="addable" class="btn btn-light"><i class="fas fa-plus"></i></div>
+          </div>
+        </div>
         <button class="btn btn-success" type="submit">OK</button>
       </form>
       <form action="/admin/edit/article/{{$article->id}}/delete" method="POST">

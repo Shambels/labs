@@ -84,11 +84,11 @@ function edit(x, y) {
   y.classList.toggle('d-none');
 }
 
-function add(x) {
+function add(x, y) {
   var input = document.createElement('input');
   input.type = "text";
-  input.name = "newtag";
-  input.placeholder = "New Tag";
+  input.name = "new" + y;
+  input.placeholder = "New " + y;
   input.classList.add('form-control');
   x.after(input);
 }
@@ -100,7 +100,7 @@ editables.forEach(function (element) {
 
 addables.forEach(function (element) {
   element.addEventListener('click', function () {
-    add(element);
+    add(element, element.parentElement.className);
   });
 });
 

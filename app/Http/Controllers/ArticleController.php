@@ -86,6 +86,8 @@ class ArticleController extends Controller
      $article->name= $request->name;
      $article->preview= $request->preview;
      $article->content= $request->content;
+
+    //  Tags
      foreach ($article->tags as $tag){
       $tagID=$tag->id;
       $specTag='tag'.$tagID;
@@ -93,7 +95,7 @@ class ArticleController extends Controller
       if($tag->name!=null){
         $tag->save();
       } else {
-        $tag->delete();
+        $article->tags()->detach($tag);
       }
      }
      if($request->newtag){
@@ -102,6 +104,8 @@ class ArticleController extends Controller
         $newtag->save();
         $article->tags()->attach($newtag);
      }
+
+    //  Categories
      $article->save();
      $request->session()->flash('success','Article Successfully Updated ! ');
      return redirect()->back();   
