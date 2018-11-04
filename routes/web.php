@@ -81,6 +81,12 @@ Route::middleware('can:is-admin')->group(function() {
   // BLOG 
   Route::post('admin/edit/article/{id}', 'ArticleController@update');
   Route::post('admin/edit/article/{id}/delete', 'ArticleController@delete');
+    // Sidebar
+    Route::post('admin/edit/blogpage/titles/categories', 'BlogController@categories');
+    Route::post('admin/edit/blogpage/titles/instagram', 'BlogController@instagram');
+    Route::post('admin/edit/blogpage/titles/tags', 'BlogController@tags');
+    Route::post('admin/edit/blogpage/titles/quote', 'BlogController@quote');
+    Route::post('admin/edit/blogpage/titles/ad', 'BlogController@ad');
 
   // NEWSLETTER
   Route::post('/admin/edit/newsletter/title', 'ContactController@newsletterTitle');

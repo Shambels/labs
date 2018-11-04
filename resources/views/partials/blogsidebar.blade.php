@@ -18,7 +18,7 @@
         </div>
         <!-- Instagram-->
         <div class="widget-item">
-          <h2 class="widget-title">Instagram</h2>
+          <h2 class="widget-title">{!!$text->instagram!!}</h2>
           <ul class="instagram">
             @foreach ($instagrams as $instagram)
               <li><img src="{{Storage::url($instagram->name)}}" alt=""></li>
