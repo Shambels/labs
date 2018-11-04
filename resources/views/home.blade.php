@@ -139,7 +139,7 @@
           
           <div class="col-sm-4">
             <div class="member">
-              <img src="{{Storage::url($teammembers[0]->image)}}" alt="">
+              <img src="{{Storage::url('images/users/mediums/'.$teammembers[0]->image)}}" alt="">
               <h2>{{$teammembers[0]->name}}</h2>
               <h3>{{$teammembers[0]->title}}</h3>
             </div>
@@ -147,7 +147,7 @@
           <!-- single member -->
           <div class="col-sm-4">
             <div class="member">
-            <img src="{{Storage::url($teamleader->image)}}" alt="">
+            <img src="{{Storage::url('images/users/mediums/'.$teamleader->image)}}" alt="">
               <h2>{{$teamleader->name}}</h2>
             <h3>{{$teamleader->title}}</h3>
             </div>
@@ -155,7 +155,7 @@
           <!-- single member -->
           <div class="col-sm-4">
             <div class="member">
-                <img src="{{Storage::url($teammembers[1]->image)}}" alt="">
+                <img src="{{Storage::url('images/users/mediums/'.$teammembers[1]->image)}}" alt="">
                 <h2>{{$teammembers[1]->name}}</h2>
                 <h3>{{$teammembers[1]->title}}</h3>
             </div>

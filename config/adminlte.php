@@ -93,7 +93,7 @@ return [
 
     'login_url' => 'login',
 
-    'register_url' => 'register',
+    'register_url' => '',
 
     /*
     |--------------------------------------------------------------------------
@@ -129,7 +129,8 @@ return [
             [
               'text' => 'Home',
               'url' => 'admin/edit/homepage',
-              'icon' => 'home'
+              'icon' => 'home',
+              
             ],
             [
               'text' => 'Services',
@@ -185,6 +186,11 @@ return [
             'url'  => 'admin/userlist',
             'icon' => 'user',
         ],
+        [
+          'text' => 'Images',
+          'url' => 'admin/edit/homepage/images',
+          'icon' => 'image',          
+          ]
     ],
 
     /*

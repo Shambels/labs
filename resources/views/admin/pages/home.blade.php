@@ -6,17 +6,10 @@
 
 @section('content')
 
-@if ($errors->any())
-<div class="alert alert-danger">
-  <ul>
-    @foreach($errors->all() as $error)
-    <li>{{$error}}
-        <button type="button" class="close" data-dismiss="alert">X</button>
-    </li>
-    @endforeach
-  </ul>
-</div>
-@endif
+@include('admin.alerts.success')
+@include('admin.alerts.error')
+
+
 
 
 <!-- Intro Section -->
@@ -167,27 +160,111 @@
           <!-- single member -->
           
           <div class="col-sm-4">
-            <div class="member">
-              <img src="{{Storage::url($teammembers[0]->image)}}" alt="">
+            <div class="member editable">              
+              <img src="{{Storage::url('images/users/mediums/'.$teammembers[0]->image)}}" alt="">
               <h2>{{$teammembers[0]->name}}</h2>
               <h3>{{$teammembers[0]->title}}</h3>
             </div>
+            @can ('is-admin')
+              <div class="card d-none">
+                <div class="card-header">
+                  <h3 class="card-title">Edit User</h3>
+                </div>
+                <div class="card-body">
+                  <form action="/admin/edit/user/{{$teammembers[0]->id}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                      <label>User Image</label>
+                      <input name="image" type="file" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>User Name</label>
+                      <input name="name" value="{{old('name', $teammembers[0]->name)}}" placeholder="Type here" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                      <label>User Title</label>
+                      <input name="title" value="{{old('title', $teammembers[0]->title)}}" placeholder="Type here" type="text" class="form-control">
+                    </div>
+                    <button class="btn btn-success" type="submit">OK</button>
+                  </form>
+                  <form action="/admin/edit/testimonial/{{$testimonial->id}}/delete" method="POST">
+                    @csrf
+                    <button class="mt-1 btn btn-danger" type="submit">Delete</button>
+                  </form>
+                </div>
+              </div>
+            @endcan
           </div>
           <!-- single member -->
           <div class="col-sm-4">
-            <div class="member">
-            <img src="{{Storage::url($teamleader->image)}}" alt="">
+            <div class="member editable">              
+            <img src="{{Storage::url('images/users/mediums/'.$teamleader->image)}}" alt="">
               <h2>{{$teamleader->name}}</h2>
             <h3>{{$teamleader->title}}</h3>
             </div>
+            @can ('is-admin')
+            <div class="card d-none">
+              <div class="card-header">
+                <h3 class="card-title">Edit Admin</h3>
+              </div>
+              <div class="card-body">
+                <form action="/admin/edit/user/{{$teamleader->id}}" method="POST" enctype="multipart/form-data">
+                  @csrf
+                  <div class="form-group">
+                    <label>User Image</label>
+                    <input name="image" type="file" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label>User Name</label>
+                    <input name="name" value="{{old('name', $teamleader->name)}}" placeholder="Type here" type="text" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label>User Title</label>
+                    <input name="title" value="{{old('title', $teamleader->title)}}" placeholder="Type here" type="text" class="form-control">
+                  </div>
+                  <button class="btn btn-success" type="submit">OK</button>
+                </form>
+              </div>
+            </div>
+            @endcan
+            
           </div>
           <!-- single member -->
           <div class="col-sm-4">
-            <div class="member">
-                <img src="{{Storage::url($teammembers[1]->image)}}" alt="">
+            <div class="member editable">              
+                <img src="{{Storage::url('images/users/mediums/'.$teammembers[1]->image)}}" alt="">
                 <h2>{{$teammembers[1]->name}}</h2>
                 <h3>{{$teammembers[1]->title}}</h3>
             </div>
+            @can ('is-admin')
+            <div class="card d-none">
+              <div class="card-header">
+                <h3 class="card-title">Edit User</h3>
+              </div>
+              <div class="card-body">
+                <form action="/admin/edit/user/{{$teammembers[1]->id}}" method="POST" enctype="multipart/form-data">
+                  @csrf
+                  <div class="form-group">
+                    <label>User Image</label>
+                    <input name="image" type="file" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label>User Name</label>
+                    <input name="name" value="{{old('name', $teammembers[1]->name)}}" placeholder="Type here" type="text" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label>User Title</label>
+                    <input name="title" value="{{old('title', $teammembers[1]->title)}}" placeholder="Type here" type="text" class="form-control">
+                  </div>
+                  <button class="btn btn-success" type="submit">OK</button>
+                </form>
+                <form action="/admin/edit/user/{{$teammembers[1]->id}}/delete" method="POST">
+                  @csrf
+                  <button class="mt-1 btn btn-danger" type="submit">Delete</button>
+                </form>
+              </div>
+            </div>
+            @endcan
           </div>
         </div>
       </div>
@@ -200,53 +277,22 @@
       <div class="container">
         <div class="row">
           <div class="col-md-9">
-            <h2>{!!$text->standouttitle!!}</h2>
-            <p>{!!$text->standouttext!!}</p>
+            <h2 class="editable">{!!$text->standouttitle!!}</h2>
+            @include('admin.pages.cards.titles.standout')
+            <p class="editable">{!!$text->standouttext!!}</p>
+            @include('admin.pages.cards.standouttext')
           </div>
           <div class="col-md-3">
-            <div class="promo-btn-area">
-            <div class="site-btn btn-2">{!!$text->browsestandout!!}</div>
+            <div class="promo-btn-area editable">
+              <div class="site-btn btn-2">{!!$text->browsestandout!!}</div>
             </div>
+            @include('admin.pages.cards.buttons.browsestandout')
           </div>
         </div>
       </div>
     </div>
-{{-- CONTACT FORM --}}
-<div class="contact-section spad fix" style="background: blueviolet;">
-  <div class="container">
-    <div class="row">
-      <!-- contact info -->
-      <div class="col-md-5 offset-1 contact-info col-push">
-        <div class="section-title left">
-          <h2>{!!$text->contacttitle!!}</h2>
-        </div>
-      <p>{!!$text->contacttext!!}</p>
-        <h3 class="mt60">{!!$text->contactoffice!!}</h3>
-        <p class="con-item">{!!$text->contactaddress!!} <br> {!!$text->contacttown!!} </p>
-        <p class="con-item">{!!$text->contactphone!!}</p>
-        <p class="con-item">{!!$text->contactemail!!}}</p>
-      </div>
-      <!-- contact form -->
-      <div class="col-md-6 col-pull">
-        <form class="form-class" id="con_form">
-          <div class="row">
-            <div class="col-sm-6">
-              <input type="text" name="name" placeholder="Your name">
-            </div>
-            <div class="col-sm-6">
-              <input type="text" name="email" placeholder="Your email">
-            </div>
-            <div class="col-sm-12">
-              <input type="text" name="subject" placeholder="Subject">
-              <textarea name="message" placeholder="Message"></textarea>
-              <button class="site-btn">{!!$text->contactformbtn!!}</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-   @include('partials.global.footer')
+
+  @include('admin.pages.partials.contact')
+  @include('admin.pages.partials.footer')
     
 @stop

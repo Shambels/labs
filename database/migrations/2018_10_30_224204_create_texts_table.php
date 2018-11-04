@@ -54,8 +54,8 @@ class CreateTextsTable extends Migration
             $table->string('contactemail');
             $table->string('contactformbtn');
             $table->string('copyright');
-            $table->string('copyrightlink');
-            $table->string('copyrighturl');
+            $table->string('copyrightlink')->nullable();
+            $table->string('copyrighturl')->nullable();
             $table->softDeletes();
 
 

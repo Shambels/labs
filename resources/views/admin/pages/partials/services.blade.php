@@ -25,7 +25,8 @@
       @if (Route::currentRouteName()=='services')
         {{$services->links()}}
       @else
-    <div class="site-btn">{!!$text->browseservices!!}</div>
+    <div class="site-btn editable">{!!$text->browseservices!!}</div>
+    @include('admin.pages.cards.buttons.browseservices')
       @endif
     </div>
   </div>

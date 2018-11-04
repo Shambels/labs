@@ -14,6 +14,7 @@ class ServiceController extends Controller
       $text = Text::find(1);
       $text->services = $request->title;
       $text->save();
+      $request->session()->flash('success', 'Section Title Successfully Updated !');
       return redirect()->back();
     }
     /**
@@ -34,6 +35,7 @@ class ServiceController extends Controller
         $service->content = $request->content;
         $service->icons_id= $request->icon;
         $service->save();
+        $request->session()->flash('success', 'Service Card Successfully Updated !');
         return redirect()->back();            
       
     }
@@ -44,9 +46,10 @@ class ServiceController extends Controller
      * @param  \App\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function delete(Service $service, $id)
+    public function delete($id)
     {
       $service = Service::find($id)->delete();
+      $request->session()->flash('success', 'Service Card Successfully Deleted !');
       return redirect()->back();
     }
 }

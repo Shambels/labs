@@ -46,8 +46,8 @@ Route::middleware('can:is-admin')->group(function() {
   Route::post('/admin/edit/homepage/browsestandout', 'HomeController@browseStandout');
   Route::post('/admin/edit/homepage/video', 'HomeController@video');
   Route::post('/admin/edit/homepage/teamtitle', 'HomeController@teamTitle');
-
-  
+  Route::post('/admin/edit/homepage/standouttitle', 'HomeController@standoutTitle');
+  Route::post('/admin/edit/homepage/standouttext', 'HomeController@standoutText');
   
   Route::post('/admin/edit/testimonialtitle', 'TestimonialController@title');
   Route::post('/admin/edit/testimonial/{id}', 'TestimonialController@update');
@@ -57,5 +57,15 @@ Route::middleware('can:is-admin')->group(function() {
   Route::post('/admin/edit/service/{id}', 'ServiceController@update');
   Route::post('/admin/edit/service/{id}/delete', 'ServiceController@delete');
   
+  Route::post('/admin/edit/user/{id}', 'UserController@update');
+  Route::post('/admin/edit/user/{id}/delete', 'UserController@delete');
+
+  Route::post('/admin/edit/contact/title', 'ContactController@title');
+  Route::post('/admin/edit/contact/text', 'ContactController@text');
+  Route::post('/admin/edit/contact/info', 'ContactController@info');
+  Route::post('/admin/edit/contact/sendbutton', 'ContactController@sendButton');
+
+  Route::post('/admin/edit/footer', 'HomeController@footer');
+
 });
 

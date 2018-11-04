@@ -24,6 +24,7 @@ class TestimonialController extends Controller
       $text = Text::find(1);
       $text->testimonial = $request->title;
       $text->save();
+      $request->session()->flash('success', 'Section Title Successfully Updated !');
       return redirect()->back();
     }
 
@@ -36,6 +37,7 @@ class TestimonialController extends Controller
       $testimonial->message = $request->message;
       $testimonial->valid = true;
       $testimonial->save();
+      $request->session()->flash('success', 'Testimonial Successfully Updated !');
       return redirect()->back(); 
     }
 
@@ -47,6 +49,7 @@ class TestimonialController extends Controller
      */
     public function delete(Request $request, $id){
       $testimonial = Testimonial::find($id)->delete();
+      $request->session()->flash('success', 'Testimonial Successfully Deleted !');
       return redirect()->back();  
     }
 }

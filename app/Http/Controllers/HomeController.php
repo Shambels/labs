@@ -35,6 +35,7 @@ class HomeController extends Controller
       $text= Text::find(1);
       $text->carouseltext = $request->title;
       $text->save();
+      $request->session()->flash('success', 'Carousel Text Successfully Updated ');
       return redirect()->back();
     }
 
@@ -42,6 +43,7 @@ class HomeController extends Controller
       $text= Text::find(1);
       $text->discovertitle = $request->title;
       $text->save();
+      $request->session()->flash('success', 'Section Title Successfully Updated !');
       return redirect()->back();
     }
     
@@ -49,6 +51,26 @@ class HomeController extends Controller
       $text= Text::find(1);
       $text->team = $request->title;
       $text->save();
+      $request->session()->flash('success', 'Section Title Successfully Updated !');
+      return redirect()->back();
+    }
+
+    public function standoutTitle(TitleRequest $request){
+      $text= Text::find(1);
+      $text->standouttitle = $request->title;
+      $text->save();
+      $request->session()->flash('success', 'Section Title Successfully Updated !');
+      return redirect()->back();
+    }
+
+    public function standoutText(Request $request){
+      $this->validate($request, [
+        'text' => 'bail|required|max:120'
+      ]);
+      $text= Text::find(1);
+      $text->standouttext = $request->text;
+      $text->save();
+      $request->session()->flash('success', 'Section Text Successfully Updated !');
       return redirect()->back();
     }
 
@@ -56,6 +78,7 @@ class HomeController extends Controller
       $text= Text::find(1);
       $text->discoverleft = $request->discoverleft;
       $text->save();
+      $request->session()->flash('success', 'Paragraph Successfully Updated !');
       return redirect()->back();
     }
     
@@ -63,14 +86,15 @@ class HomeController extends Controller
       $text= Text::find(1);
       $text->discoverright = $request->discoverright;
       $text->save();
+      $request->session()->flash('success', 'Paragraph Successfully Updated !');
       return redirect()->back();
     }
 
     public function browseBlog(ButtonRequest $request){
       $text= Text::find(1);
-      dd($text);
       $text->browseblog = $request->buttontext;
       $text->save();
+      $request->session()->flash('success', 'Button Text Successfully Updated !');
       return redirect()->back();
     }
 
@@ -78,6 +102,7 @@ class HomeController extends Controller
       $text= Text::find(1);
       $text->browseservices = $request->buttontext;
       $text->save();
+      $request->session()->flash('success', 'Button Text Successfully Updated !');
       return redirect()->back();
     }
 
@@ -85,6 +110,7 @@ class HomeController extends Controller
       $text= Text::find(1);
       $text->browsestandout = $request->buttontext;
       $text->save();
+      $request->session()->flash('success', 'Button Text Successfully Updated !');
       return redirect()->back();
     }
 
@@ -95,11 +121,24 @@ class HomeController extends Controller
       $text= Text::find(1);
       $text->video = $request->video;
       $text->save();
+      $request->session()->flash('success', 'Video URL Successfully Updated !');
       return redirect()->back();
     }
     
-    
-
+    public function footer(Request $request){
+      $this->validate($request, [
+        'content' => 'bail|required|max:500',
+        'link' => 'nullable' ,
+        'url' => 'bail|url|nullable'
+      ]);
+      $text=Text::find(1);
+      $text->copyright = $request->content;
+      $text->copyrightlink = $request->link;
+      $text->copyrighturl = $request->url;
+      $text->save();
+      $request->session()->flash('success', 'Video URL Successfully Updated !');
+      return redirect()->back();
+    }
   
 
    
