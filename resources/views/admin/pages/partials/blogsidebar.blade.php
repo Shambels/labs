@@ -13,7 +13,10 @@
           @include('admin.pages.cards.titles.blog.categories')
           <ul>
             @foreach ($categories as $category)
-            <li><a href="#">{{$category->name}}</a></li>
+            <li>
+              <a class="editable">{{$category->name}}</a>
+              @include('admin.pages.cards.blog.category')
+            </li>
             @endforeach
           </ul>
         </div>
@@ -23,7 +26,10 @@
           @include('admin.pages.cards.titles.blog.instagram')
           <ul class="instagram">
             @foreach ($instagrams as $instagram)
-              <li><img src="{{Storage::url($instagram->name)}}" alt=""></li>
+              <li class="editable">
+                <img src="{{Storage::url('public/images/instagram/thumbnails/'.$instagram->name)}}" alt="">
+              </li>
+              @include('admin.pages.cards.blog.instagram')
             @endforeach
           </ul>
         </div>
@@ -33,7 +39,10 @@
           @include('admin.pages.cards.titles.blog.tags')
           <ul class="tag">
             @foreach ($tags as $tag)
-              <li><a href="">{{$tag->name}}</a></li>
+              <li>
+                <a class="editable">{{$tag->name}}</a>
+                @include('admin.pages.cards.blog.tag')
+              </li>
             @endforeach
           </ul>
         </div>
@@ -43,7 +52,8 @@
           @include('admin.pages.cards.titles.blog.quote')
           <div class="quote">
             <span class="quotation">‘​‌‘​‌</span>
-            <p>{{$quote}}</p>
+            <p class="editable">{{$quote}}</p>
+            @include('admin.pages.cards.blog.quote')
           </div>
         </div>
         <!-- Ad -->
@@ -51,7 +61,10 @@
           <h2 class="widget-title editable">{!!$text->ad!!}</h2>
           @include('admin.pages.cards.titles.blog.ad')
           <div class="add">
-            <a href=""><img src="{{Storage::url($ad->name)}}" alt=""></a>
+            <a>
+              <img class="editable" src="{{Storage::url($ad->name)}}" alt="">
+              @include('admin.pages.cards.blog.ad')
+            </a>
           </div>
         </div>
       </div>

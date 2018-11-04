@@ -82,11 +82,27 @@ Route::middleware('can:is-admin')->group(function() {
   Route::post('admin/edit/article/{id}', 'ArticleController@update');
   Route::post('admin/edit/article/{id}/delete', 'ArticleController@delete');
     // Sidebar
-    Route::post('admin/edit/blogpage/titles/categories', 'BlogController@categories');
-    Route::post('admin/edit/blogpage/titles/instagram', 'BlogController@instagram');
-    Route::post('admin/edit/blogpage/titles/tags', 'BlogController@tags');
-    Route::post('admin/edit/blogpage/titles/quote', 'BlogController@quote');
-    Route::post('admin/edit/blogpage/titles/ad', 'BlogController@ad');
+      // Titles
+      Route::post('admin/edit/blogpage/titles/categories', 'BlogController@categoriesTitle');
+      Route::post('admin/edit/blogpage/titles/instagram', 'BlogController@instagramTitle');
+      Route::post('admin/edit/blogpage/titles/tags', 'BlogController@tagsTitle');
+      Route::post('admin/edit/blogpage/titles/quote', 'BlogController@quoteTitle');
+      Route::post('admin/edit/blogpage/titles/ad', 'BlogController@adTitle');
+      // Content
+      Route::post('admin/edit/category/{id}', 'CategoryController@update');
+      Route::post('admin/edit/category/{id}/delete', 'CategoryController@delete');
+      Route::post('admin/edit/category/store', 'CategoryController@store');
+
+      Route::post('admin/edit/instagram/{id}', 'InstagramController@update');
+      Route::post('admin/edit/instagram/{id}/delete', 'InstagramController@delete');
+      Route::post('admin/edit/instagram/store', 'InstagramController@store');
+
+      Route::post('admin/edit/tag/{id}', 'TagController@update');
+      Route::post('admin/edit/tag/{id}/delete', 'TagController@delete');
+      Route::post('admin/edit/tag/store', 'TagController@store');
+
+      Route::post('admin/edit/quote', 'BlogController@quote');
+      Route::post('admin/edit/ad', 'BlogController@ad');
 
   // NEWSLETTER
   Route::post('/admin/edit/newsletter/title', 'ContactController@newsletterTitle');

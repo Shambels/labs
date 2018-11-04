@@ -180,10 +180,19 @@ return [
           'text' => 'Articles',
           'url' => 'admin/list/articles',
           'icon' => 'newspaper',          
+        ],[
+          'text' => 'Categories',
+          'url' => 'admin/list/categories',
+          'icon' => 'sort',          
+        ],
+        [
+          'text' => 'Tags',
+          'url' => 'admin/list/tags',
+          'icon' => 'tags',          
         ],
         [
           'text' => 'Images',
-          'url' => 'admin/list/icons',
+          'url' => 'admin/list/images',
           'icon' => 'image',          
         ],
         [
@@ -207,10 +216,19 @@ return [
             'text' => 'Articles',
             'url' => 'admin/trash/articles',
             'icon' => 'newspaper',          
+          ],[
+            'text' => 'Categories',
+            'url' => 'admin/trash/categories',
+            'icon' => 'sort',          
           ],
           [
+            'text' => 'Tags',
+            'url' => 'admin/trash/tags',
+            'icon' => 'tags',          
+          ],          
+          [
             'text' => 'Images',
-            'url' => 'admin/trash/icons',
+            'url' => 'admin/trash/images',
             'icon' => 'image',          
           ],
           ]

@@ -67,9 +67,13 @@ class TagController extends Controller
      * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tag $tag)
+    public function update(CategoryRequest $request,$id)
     {
-        //
+      $tag= Tag::find($id);
+      $tag->name = $request->name;
+      $tag->save();
+      $request->session()->flash('success', 'Tag Successfully Updated !');
+      return redirect()->back();
     }
 
     /**
@@ -78,8 +82,11 @@ class TagController extends Controller
      * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tag $tag)
+    public function delete(Request $request, $id)
     {
-        //
+      $tag = Tag::find($id);
+      $tag->delete();
+      $request->session()->flash('success', 'Tag Successfully Deleted !');
+      return redirect()->back();
     }
 }

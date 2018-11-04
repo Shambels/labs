@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -67,9 +68,13 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, $id)
     {
-        //
+        $category= Category::find($id);
+        $category->name = $request->name;
+        $category->save();
+        $request->session()->flash('success', 'Category Successfully Updated !');
+        return redirect()->back();
     }
 
     /**
@@ -78,8 +83,12 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function delete(Request $request, $id)
     {
-        //
+        $category = Category::find($id);
+        $category->delete();
+        $request->session()->flash('success', 'Category Successfully Deleted !');
+        return redirect()->back();
+
     }
 }

@@ -8,7 +8,7 @@ use App\Text;
 
 class BlogController extends Controller
 {
-    public function categories (TitleRequest $request){
+    public function categoriesTitle (TitleRequest $request){
       $text = Text::find(1);
       $text->categories = $request->title;
       $text->save();
@@ -16,7 +16,7 @@ class BlogController extends Controller
       return redirect()->back();
     }
 
-    public function instagram (TitleRequest $request){
+    public function instagramTitle (TitleRequest $request){
       $text = Text::find(1);
       $text->instagram = $request->title;
       $text->save();
@@ -24,7 +24,7 @@ class BlogController extends Controller
       return redirect()->back();
     }
 
-    public function tags (TitleRequest $request){
+    public function tagsTitle (TitleRequest $request){
       $text = Text::find(1);
       $text->tags = $request->title;
       $text->save();
@@ -32,7 +32,7 @@ class BlogController extends Controller
       return redirect()->back();
     }
 
-    public function quote (TitleRequest $request){
+    public function quoteTitle (TitleRequest $request){
       $text = Text::find(1);
       $text->quote = $request->title;
       $text->save();
@@ -40,7 +40,7 @@ class BlogController extends Controller
       return redirect()->back();
     }
 
-    public function ad(TitleRequest $request){
+    public function adTitle(TitleRequest $request){
       $text = Text::find(1);
       $text->ad = $request->title;
       $text->save();
