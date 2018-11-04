@@ -1,5 +1,5 @@
 {{-- CONTACT SECTION --}}
-<div class="contact-section spad fix" style="background: blueviolet;">
+<div class="contact-section spad fix" style="background: #6d4bb5;">
     <div class="container">
       <div class="row">
         <!-- contact info -->

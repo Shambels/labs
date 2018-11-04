@@ -22,7 +22,7 @@
       @endforeach
     </div>
     <div class="text-center">
-      @if (Route::currentRouteName()=='services')
+      @if (Route::currentRouteName()=='editservices')
         {{$services->links()}}
       @else
     <div class="site-btn editable">{!!$text->browseservices!!}</div>

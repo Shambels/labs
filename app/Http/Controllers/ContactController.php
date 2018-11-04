@@ -46,11 +46,26 @@ class ContactController extends Controller
     $request->session()->flash('success', 'Contact Information Successfully Updated !');
     return redirect()->back();
   }
-
   
   public function sendButton(ButtonRequest $request){
     $text= Text::find(1);
     $text->contactformbtn = $request->buttontext;
+    $text->save();
+    $request->session()->flash('success', 'Button Text Successfully Updated !');
+    return redirect()->back();
+  }
+
+  public function newsletterTitle(TitleRequest $request){
+    $text = Text::find(1);
+    $text->newstitle = $request->title;
+    $text->save();
+    $request->session()->flash('success', 'Section Title Successfully Updated !');
+    return redirect()->back();
+  }
+
+  public function newsletterButton(ButtonRequest $request){
+    $text= Text::find(1);
+    $text->newsbtn = $request->buttontext;
     $text->save();
     $request->session()->flash('success', 'Button Text Successfully Updated !');
     return redirect()->back();

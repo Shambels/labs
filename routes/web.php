@@ -19,9 +19,9 @@ Route::get('/services','PagesController@services')->name('services');
 Route::get('/blog','PagesController@blog')->name('blog');
 Route::get('/blogpost/{id}','PagesController@blogpost')->name('blogpost');
 Route::get('/contact','PagesController@contact')->name('contact');
+Route::post('/newsletter', 'ContactController@subscribe')->name('newsletter');
 
-
-Route::post('/newsletter', 'PagesController@newsletter')->name('newsletter');
+// Route::post('/newsletter', 'PagesController@newsletter')->name('newsletter');
 
 
 Route::middleware('can:is-editor')->group(function() {
@@ -35,8 +35,19 @@ Route::middleware('can:is-admin')->group(function() {
 
   Route::get('/admin/home', 'AdminpageController@index')->name('adminhome');
 
-  // HOME PAGE 
+  // PAGES
   Route::get('/admin/edit/homepage', 'AdminpageController@home')->name('edithome');
+  Route::get('/admin/edit/servicespage', 'AdminpageController@services')->name('editservices');
+  Route::get('/admin/edit/blogpage', 'AdminpageController@blog')->name('editblog');
+  Route::get('/admin/edit/contactpage', 'AdminpageController@contact')->name('editcontact');
+  // PAGES NAMES
+  Route::post('admin/edit/pagename/home', 'PagenameController@home');
+  Route::post('admin/edit/pagename/services', 'PagenameController@services');
+  Route::post('admin/edit/pagename/blog', 'PagenameController@blog');
+  Route::post('admin/edit/pagename/contact', 'PagenameController@contact');
+  
+
+  // HOME 
   Route::post('/admin/edit/homepage/carouseltext', 'HomeController@carouselText');
   Route::post('/admin/edit/homepage/discovertitle', 'HomeController@discoverTitle');
   Route::post('/admin/edit/homepage/discoverleft', 'HomeController@discoverLeft');
@@ -48,22 +59,40 @@ Route::middleware('can:is-admin')->group(function() {
   Route::post('/admin/edit/homepage/teamtitle', 'HomeController@teamTitle');
   Route::post('/admin/edit/homepage/standouttitle', 'HomeController@standoutTitle');
   Route::post('/admin/edit/homepage/standouttext', 'HomeController@standoutText');
-  
+
+  // TESTIMONIALS
   Route::post('/admin/edit/testimonialtitle', 'TestimonialController@title');
   Route::post('/admin/edit/testimonial/{id}', 'TestimonialController@update');
   Route::post('/admin/edit/testimonial/{id}/delete', 'TestimonialController@delete');
   
+  // SERVICES
+  Route::post('/admin/edit/servicespage/browseservices2', 'ServiceController@browseServices2');
+  Route::post('/admin/edit/servicespage/title2', 'ServiceController@title2');
+  
   Route::post('/admin/edit/servicestitle', 'ServiceController@title');
   Route::post('/admin/edit/service/{id}', 'ServiceController@update');
   Route::post('/admin/edit/service/{id}/delete', 'ServiceController@delete');
-  
-  Route::post('/admin/edit/user/{id}', 'UserController@update');
-  Route::post('/admin/edit/user/{id}/delete', 'UserController@delete');
 
+  // PROJECTS
+  Route::post('admin/edit/project/{id}', 'ProjectController@update');
+  Route::post('admin/edit/project/{id}/delete', 'ProjectController@delete');
+
+  // BLOG 
+  
+
+  // NEWSLETTER
+  Route::post('/admin/edit/newsletter/title', 'ContactController@newsletterTitle');
+  Route::post('admin/edit/newsletter/button', 'ContactController@newsletterButton');
+  
+  // CONTACT 
   Route::post('/admin/edit/contact/title', 'ContactController@title');
   Route::post('/admin/edit/contact/text', 'ContactController@text');
   Route::post('/admin/edit/contact/info', 'ContactController@info');
   Route::post('/admin/edit/contact/sendbutton', 'ContactController@sendButton');
+
+  // USERS
+  Route::post('/admin/edit/user/{id}', 'UserController@update');
+  Route::post('/admin/edit/user/{id}/delete', 'UserController@delete');
 
   Route::post('/admin/edit/footer', 'HomeController@footer');
 
