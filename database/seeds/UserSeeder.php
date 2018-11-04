@@ -53,7 +53,7 @@ class UserSeeder extends Seeder
         $articles->each(function($article){
             $tagsCount = App\Tag::all()->count();
             for( $i = 0 ; $i < rand(1,3); $i++) {
-
+              $article->categories()->attach(rand(1,2));
               $article->tags()->attach(rand(1,$tagsCount));
 
             }

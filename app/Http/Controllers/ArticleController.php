@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Tag;
+use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\ArticleRequest;
 use Storage;
@@ -106,6 +107,24 @@ class ArticleController extends Controller
      }
 
     //  Categories
+    foreach ($article->categories as $category){
+      $catID=$category->id;
+      $specCat='category'.$catID;
+      $category->name = $request->$specCat;
+      if($category->name!=null){
+        $category->save();
+      } else {
+        $article->categories()->detach($category);
+      }
+     }
+     if($request->newcategory){
+        $newcat= new Category;
+        $newcat->name = $request->newcategory;
+        $newcat->save();
+        $article->categories()->attach($newcat);
+     }
+
+
      $article->save();
      $request->session()->flash('success','Article Successfully Updated ! ');
      return redirect()->back();   
