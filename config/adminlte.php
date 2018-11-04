@@ -117,7 +117,7 @@ return [
         [
             
             'text' => 'Summary',
-            'icon' => 'database',
+            'icon' => 'eye',
             'url'  => 'admin/home',
         ],
         [
@@ -149,11 +149,7 @@ return [
             ], 
             ]         
         ],
-        [
-          'text' => 'Preview',
-          'icon' => 'eye',
-          'url' => 'admin/previews'
-        ],
+       
         'CONTACT',
         [
             'text' => 'Inbox',
@@ -165,9 +161,60 @@ return [
             'url'  => 'admin/settings',
             'icon' => 'envelope-square',
         ],
-        
-      
-        
+
+        'LISTS',
+        [
+            'text' => 'Users',
+            'url'  => 'admin/list/users',
+            'icon' => 'user',
+        ],
+        [
+          'text' => 'Services',
+          'url' => 'admin/list/services',
+          'icon' => 'taxi',          
+        ],[
+          'text' => 'Projects',
+          'url' => 'admin/list/projects',
+          'icon' => 'umbrella',          
+        ],[
+          'text' => 'Articles',
+          'url' => 'admin/list/articles',
+          'icon' => 'newspaper',          
+        ],
+        [
+          'text' => 'Images',
+          'url' => 'admin/list/icons',
+          'icon' => 'image',          
+        ],
+        [
+          'text' => 'Trash Can',
+          'icon' => 'trash-alt',
+          'submenu' =>[
+            [
+              'text' => 'Users',
+              'url'  => 'admin/trash/users',
+              'icon' => 'user',
+          ],
+          [
+            'text' => 'Services',
+            'url' => 'admin/trash/services',
+            'icon' => 'taxi',          
+          ],[
+            'text' => 'Projects',
+            'url' => 'admin/trash/projects',
+            'icon' => 'umbrella',          
+          ],[
+            'text' => 'Articles',
+            'url' => 'admin/trash/articles',
+            'icon' => 'newspaper',          
+          ],
+          [
+            'text' => 'Images',
+            'url' => 'admin/trash/icons',
+            'icon' => 'image',          
+          ],
+          ]
+        ],
         'ACCOUNT SETTINGS',
         [
             'text' => 'Profile',
@@ -179,18 +226,6 @@ return [
             'url'  => 'admin/settings',
             'icon' => 'lock',
         ],
-
-        'MISC',
-        [
-            'text' => 'Users',
-            'url'  => 'admin/userlist',
-            'icon' => 'user',
-        ],
-        [
-          'text' => 'Images',
-          'url' => 'admin/edit/homepage/images',
-          'icon' => 'image',          
-          ]
     ],
 
     /*

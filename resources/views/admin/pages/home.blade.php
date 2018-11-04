@@ -5,7 +5,6 @@
 
 
 @section('content')
-
 @include('admin.alerts.success')
 @include('admin.alerts.error')
 
@@ -16,18 +15,19 @@
     <!-- Carousel -->
     
     <div class="hero-section">
-      <div class="hero-content">
+      <div class="hero-content" style="position:unset!important">
         <div class="hero-center">
-          <img src="storage/img/big-logo.png" alt="">
+          <img class="editable" src="storage/img/big-logo.png" alt="">
           <p class="editable">{{$text->carouseltext}}</p>
-          @include ('admin.pages.cards.carouseltext')
+          @include ('admin.pages.cards.carousel.text')
         </div>
       </div>
+    </div>
       <!-- slider -->
         @foreach ($carouselImages as $image)
-          <img class="item  hero-item" src="storage/img/{{$image->name}}">
+          <img class="editable" src="{{Storage::url('public/images/carousel/'.$image->name)}}">
+          @include('admin.pages.cards.carousel.image')
         @endforeach
-    </div>
 
     {{-- MARGIN --}}
     <div style="margin: 20rem 0;"></div>

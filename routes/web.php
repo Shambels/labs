@@ -49,6 +49,7 @@ Route::middleware('can:is-admin')->group(function() {
 
   // HOME 
   Route::post('/admin/edit/homepage/carouseltext', 'HomeController@carouselText');
+  Route::post('/admin/edit/homepage/carouselimage/{id}', 'HomeController@carouselImage');
   Route::post('/admin/edit/homepage/discovertitle', 'HomeController@discoverTitle');
   Route::post('/admin/edit/homepage/discoverleft', 'HomeController@discoverLeft');
   Route::post('/admin/edit/homepage/discoverright', 'HomeController@discoverRight');
@@ -78,7 +79,7 @@ Route::middleware('can:is-admin')->group(function() {
   Route::post('admin/edit/project/{id}/delete', 'ProjectController@delete');
 
   // BLOG 
-  
+
 
   // NEWSLETTER
   Route::post('/admin/edit/newsletter/title', 'ContactController@newsletterTitle');
@@ -96,5 +97,20 @@ Route::middleware('can:is-admin')->group(function() {
 
   Route::post('/admin/edit/footer', 'HomeController@footer');
 
+
+  // LISTS
+  Route::get('admin/list/users', 'ListController@users')->name('userslist');
+  Route::get('admin/list/services', 'ListController@services')->name('serviceslist');
+  Route::get('admin/list/projects', 'ListController@projects')->name('projectslist');
+  Route::get('admin/list/articles', 'ListController@articles')->name('articleslist');
+  Route::get('admin/list/icons', 'ListController@icons')->name('iconslist');
+      
+      // TRASH CAN
+      Route::get('admin/trash/users', 'TrashController@users')->name('trasheduserslist');
+      Route::get('admin/trash/services', 'TrashController@services')->name('trashedserviceslist');
+      Route::get('admin/trash/projects', 'TrashController@projects')->name('trashedprojectslist');
+      Route::get('admin/trash/articles', 'TrashController@articles')->name('trashedarticleslist');
+      Route::get('admin/trash/icons', 'TrashController@icons')->name('trashediconslist');
+     
 });
 

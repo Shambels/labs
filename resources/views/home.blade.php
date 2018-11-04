@@ -15,7 +15,7 @@
       <!-- slider -->
       <div id="hero-slider" class="owl-carousel">
         @foreach ($carouselImages as $image)
-          <div class="item  hero-item" data-bg="{{Storage::url('img/'.$image->name)}}"></div>
+          <div class="item  hero-item" data-bg="{{Storage::url('public/images/carousel/'.$image->name)}}"></div>
         @endforeach
       </div>
     </div>

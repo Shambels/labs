@@ -10,7 +10,9 @@ use App\Text;
 use App\Service;
 use App\Icon;
 use App\Testimonial;
-
+use App\Image;
+use Storage;
+use ImgInt;
 
 class HomeController extends Controller
 {
@@ -36,6 +38,24 @@ class HomeController extends Controller
       $text->carouseltext = $request->title;
       $text->save();
       $request->session()->flash('success', 'Carousel Text Successfully Updated ');
+      return redirect()->back();
+    }
+    public function carouselImage(Request $request, $id){
+      $this->validate($request, [
+        'image' => 'nullable|image'
+      ]);
+      $item = Image::find($id);
+      if ($request->file('image')) {
+        $image = $request->file('image');
+        $imagename = time().$image->hashname();
+        Storage::delete(['public/images/carousel/originals/'.$item->name,'public/images/carousel/'.$item->name]);
+        $image->storeAs('public/images/carousel/originals/', $imagename);
+        $resized = ImgInt::make($image)->resize(1628,796)->save();
+        Storage::put('public/images/carousel/'.$imagename, $resized);
+        $item->name= $imagename;
+      }
+      $item->save();
+      $request->session()->flash('success', 'Background Image Successfully Updated !');
       return redirect()->back();
     }
 

@@ -88,7 +88,7 @@ class UserController extends Controller
         $request->session()->flash('success', 'User Successfully Deleted !');
         return redirect()->back();
       } else {
-          redirect()->back()->withErrors('msg', "You Can't Delete Your Own Account");
+          redirect()->back()->withErrors('error', "You Can't Delete Your Own Account");
         }
     }
 }
