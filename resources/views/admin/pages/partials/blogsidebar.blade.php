@@ -40,18 +40,23 @@
         </div>
         <!-- Tags -->
         <div class="widget-item">
+          
           <h2 class="widget-title editable">{!!$text->tags!!}</h2>
           @include('admin.pages.cards.titles.blog.tags')
+          <div class="togglable" class="btn btn-light">
+              <i class="fas fa-plus"></i>
+            </div>
+            @include('admin.pages.cards.blog.store.tag')
           <ul class="tag">
             @foreach ($tags as $tag)
               <li>
                 <a class="editable">{{$tag->name}}</a>
                 @include('admin.pages.cards.blog.tag')
               </li>
-            @endforeach
-
+            @endforeach            
           </ul>
         </div>
+        
         <!-- Quote-->
         <div class="widget-item">
           <h2 class="widget-title editable">{!!$text->quote!!}</h2>

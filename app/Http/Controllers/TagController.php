@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Tag;
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoryRequest;
 
 class TagController extends Controller
 {
@@ -33,9 +34,13 @@ class TagController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+      $tag= new Category;
+      $tag->name = $request->name;
+      $tag->save();
+      $request->session()->flash('success', 'Category Successfully Created !');
+      return redirect()->back(); 
     }
 
     /**
