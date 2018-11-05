@@ -18,6 +18,11 @@
               @include('admin.pages.cards.blog.category')
             </li>
             @endforeach
+            <div class="togglable" class="btn btn-light">
+              <i class="fas fa-plus"></i>
+            </div>
+            @include('admin.pages.cards.blog.store.category')
+        
           </ul>
         </div>
         <!-- Instagram-->
@@ -44,6 +49,7 @@
                 @include('admin.pages.cards.blog.tag')
               </li>
             @endforeach
+
           </ul>
         </div>
         <!-- Quote-->

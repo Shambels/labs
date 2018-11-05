@@ -78,6 +78,7 @@ module.exports = __webpack_require__(44);
 
 var editables = Array.from(document.getElementsByClassName('editable'));
 var addables = Array.from(document.getElementsByClassName('addable'));
+var togglables = Array.from(document.getElementsByClassName('togglable'));
 
 function edit(x, y) {
   x.classList.toggle('d-none');
@@ -92,6 +93,11 @@ function add(x, y) {
   input.classList.add('form-control');
   x.after(input);
 }
+
+function toggle(x) {
+  x.classList.toggle('d-none');
+}
+
 editables.forEach(function (element) {
   element.addEventListener('dblclick', function () {
     edit(element, element.nextElementSibling);
@@ -101,6 +107,12 @@ editables.forEach(function (element) {
 addables.forEach(function (element) {
   element.addEventListener('click', function () {
     add(element, element.parentElement.className);
+  });
+});
+
+togglables.forEach(function (element) {
+  element.addEventListener('click', function () {
+    toggle(element.nextElementSibling);
   });
 });
 

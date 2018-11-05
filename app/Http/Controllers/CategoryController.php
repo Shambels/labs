@@ -36,30 +36,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $category= new Category;
+      $category->name = $request->name;
+      $category->save();
+      $request->session()->flash('success', 'Category Successfully Created !');
+      return redirect()->back(); 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Category $category)
-    {
-        //
-    }
+   
 
     /**
      * Update the specified resource in storage.
