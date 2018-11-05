@@ -31,7 +31,7 @@
 				<!-- PHONE -->
 				<div class="col-md-4 col-sm-4 devices">
 					<div class="text-center">
-						<img src="storage/img/device.png" alt="">
+						<img src="{{Storage::url('public/images/services/'.$phoneimage->name)}}" alt="">
 					</div>
 				</div>
 				<!-- RIGHT SERVICE COLUMN -->
@@ -67,7 +67,7 @@
           <div class="col-md-4 col-sm-6">
             <div class="sv-card">
               <div class="card-img">
-              <img src="{{$project->image}}" alt="">
+              <img src="{{Storage::url('public/images/projects/mediums/'.$project->image)}}" alt="">
               </div>
               <div class="card-text">
                 <h2>{{$project->name}}</h2>

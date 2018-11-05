@@ -47,8 +47,8 @@ class AdminpageController extends Controller
       $servicesright = Service::with('icons')->get()->random(3);
       $projects= Project::orderBy('created_at')->get()->take(3);
       $icons = Icon::all();
-
-      return view ('admin/pages/services', compact('text','services','servicesleft','servicesright','projects','icons'));
+      $phoneimage= Image::where('folder','services')->get()->first();
+      return view ('admin/pages/services', compact('text','services','servicesleft','servicesright','projects','icons','phoneimage'));
     }
 
     public function blog(){

@@ -38,7 +38,8 @@
       <!-- PHONE -->
       <div class="col-md-4 col-sm-4 devices">
         <div class="text-center">
-          <img src="storage/img/device.png" alt="">
+          <img  class="editable" src="{{Storage::url('public/images/services/'.$phoneimage->name)}}" alt="">
+          @include('admin.pages.cards.phone')
         </div>
       </div>
       <!-- RIGHT SERVICE COLUMN -->

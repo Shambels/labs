@@ -37,25 +37,25 @@ class ImageSeeder extends Seeder
             'name'=>'card-3.jpg',
             'folder' => 'projects'
           ],[
-            'name'=>'img/instagram/1.jpg',
+            'name'=>'1.jpg',
             'folder' => 'instagram'
           ],[
-            'name'=>'img/instagram/2.jpg',
+            'name'=>'2.jpg',
             'folder' => 'instagram'
           ],[
-            'name'=>'img/instagram/3.jpg',
+            'name'=>'3.jpg',
             'folder' => 'instagram'
           ],[
-            'name'=>'img/instagram/4.jpg',
+            'name'=>'4.jpg',
             'folder' => 'instagram'
           ],[
-            'name'=>'img/instagram/5.jpg',
+            'name'=>'5.jpg',
             'folder' => 'instagram'
           ],[
-            'name'=>'img/instagram/6.jpg',
+            'name'=>'6.jpg',
             'folder' => 'instagram'
           ],[
-            'name'=>'img/add.jpg',
+            'name'=>'add.jpg',
             'folder' => 'ad'
           ],
 

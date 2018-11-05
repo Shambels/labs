@@ -67,10 +67,11 @@ Route::middleware('can:is-admin')->group(function() {
   Route::post('/admin/edit/testimonial/{id}/delete', 'TestimonialController@delete');
   
   // SERVICES
+  Route::post('/admin/edit/servicespage/title', 'ServiceController@title');
   Route::post('/admin/edit/servicespage/browseservices2', 'ServiceController@browseServices2');
   Route::post('/admin/edit/servicespage/title2', 'ServiceController@title2');
+  Route::post('admin/edit/servicespage/phone', 'ServiceController@phone');
   
-  Route::post('/admin/edit/servicestitle', 'ServiceController@title');
   Route::post('/admin/edit/service/{id}', 'ServiceController@update');
   Route::post('/admin/edit/service/{id}/delete', 'ServiceController@delete');
 

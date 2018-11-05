@@ -7,6 +7,9 @@ use App\Http\Requests\TitleRequest;
 use App\Http\Requests\ButtonRequest;
 use App\Service;
 use App\Text;
+use App\Image;
+use Storage;
+use ImgInt;
 
 class ServiceController extends Controller
 {
@@ -32,6 +35,30 @@ class ServiceController extends Controller
       $text->browseservices2 = $request->buttontext;
       $text->save();
       $request->session()->flash('success', 'Button Text Successfully Updated !');
+      return redirect()->back();
+    }
+
+    public function phone(Request $request){
+      $this->validate($request, [
+        'image' => 'image'
+      ]);
+
+      $phone=Image::where('folder','services')->first();
+      if ($request->file('image')){
+        $image = $request->file('image');
+        $imagename = time().$image->hashname();
+        if ($phone->name!='device.png'){
+          Storage::delete(['public/images/services/originals/'.$phone->name,'public/images/services/'.$phone->name]);
+          $image->storeAs('public/images/services/originals', $imagename);
+          $resized = ImgInt::make($image)->resize(240,490)->save();
+          Storage::put('public/images/services/'.$imagename, $resized);
+          $phone->name= $imagename;
+          $request->session()->flash('success', 'Image Successfully Updated');
+        } 
+
+      } else {
+        $request->session()->flash('success', 'No Image Selected');
+      }
       return redirect()->back();
     }
     /**

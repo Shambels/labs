@@ -46,7 +46,7 @@
         <div class="widget-item">
           <h2 class="widget-title">{!!$text->ad!!}</h2>
           <div class="add">
-            <a href=""><img src="{{Storage::url($ad->name)}}" alt=""></a>
+            <a href=""><img src="{{Storage::url('public/images/ad/'.$ad->name)}}" alt=""></a>
           </div>
         </div>
       </div>

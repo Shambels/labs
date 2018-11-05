@@ -9,6 +9,14 @@ use ImgInt;
 
 class InstagramController extends Controller
 {
+
+    public function store(Request $request, $id){
+      $this->validate($request,[
+        'name' => 'image'
+      ]);
+      $instagram = new Image;
+      
+    }
     public function update(Request $request, $id){
       $this->validate($request,[
         'name' => 'image'

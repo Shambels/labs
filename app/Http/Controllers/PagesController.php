@@ -37,7 +37,8 @@ class PagesController extends Controller
       $servicesleft = Service::with('icons')->get()->random(3);
       $servicesright = Service::with('icons')->get()->random(3);
       $projects= Project::orderBy('created_at')->get()->take(3);
-      return view ('services', compact('text','services','servicesleft','servicesright','projects'));
+      $phoneimage= Image::where('folder','services')->get()->first();
+      return view ('services', compact('text','services','servicesleft','servicesright','projects','phoneimage'));
     }
 
     public function blog(){

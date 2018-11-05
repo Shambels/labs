@@ -8,6 +8,6 @@ $factory->define(App\Article::class, function (Faker $faker) {
         'preview' => $faker->sentence(rand(15,20)),
         'content' => $faker->sentence(rand(50,100)),
         'valid' => true,
-        'image' => $faker->imageUrl($width=750, $height=269)
+        'image' => 'blog-default.jpg'
     ];
 });
