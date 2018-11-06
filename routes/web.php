@@ -13,6 +13,10 @@
 
 Auth::routes();
 
+
+Route::get('/results/{search}','PagesController@results');
+
+
 Route::get('/', 'PagesController@home')->name('home');
 Route::get('/home', 'PagesController@home')->name('home');
 Route::get('/services','PagesController@services')->name('services');

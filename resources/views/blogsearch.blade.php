@@ -49,7 +49,7 @@
           @endforeach
 					<!-- Pagination -->
 					<div class="page-pagination">
-						{{-- {{$results->links()}} --}}
+						{{$results->links()}}
 					</div>
         </div>
         

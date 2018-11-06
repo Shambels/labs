@@ -13,6 +13,8 @@ use App\Article;
 use App\Category;
 use App\Tag;
 use App\Comment;
+use Illuminate\Pagination\LengthAwarePaginator;
+
 
 
 class PagesController extends Controller
@@ -53,40 +55,53 @@ class PagesController extends Controller
       return view ('blog', compact('text','articles','categories','instagrams','tags','ad','quote'));
     }
 
-    public  function search(Request $request){
-      $allarticles = Article::with('users','comments','tags')->get();
+    public function search(Request $request){
       $search = $request->search;
+      return redirect('/results/'.$search);
+    }
+    public  function results($search,Request $request){
+      $allarticles = Article::with('users','comments','tags')->get();
+      // $search = $request->search;
       $tagmatch = Tag::where('name',$search)->first();
       $categorymatch = Category::where('name',$search)->first();
       $results= collect([]);
+      // dd($tagmatch);
       
       foreach ($allarticles as $article) {
         // NAME Search
         if (preg_match('/\b'.$search.'\b/i', $article->name)) {
-            $results->push($article);                        
+          if(!$results->contains($article)){
+            $results->push($article);       
+          }      
         }
         // TAGS Search
         if($tagmatch){
           foreach ($article->tags as $tag) {
             if ($tag->name==$tagmatch->name) {
               if(!$results->contains($article)){
-                $results->push($article);
+                $results->push($article);                
               }
             }
           }
         }
-
         // CATEGORY Search
         if($categorymatch){
           foreach ($article->categories as $category) {
             if($category->name=$categorymatch->name) {
               if(!$results->contains($article)) {
-                $results->push($article);
+                $results->push($article);          
               }
             }
           }
         }
       }
+      // dd($results);
+       $currentPage = LengthAwarePaginator::resolveCurrentPage();
+       $perPage = 3;
+       $currentPageItems = $results->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+       $paginatedItems= new LengthAwarePaginator($currentPageItems , count($results), $perPage);
+       $paginatedItems->setPath($request->url());
+      // $results->paginate(3);
       $text = Text::find(1);
       $categories = Category::all();
       $instagrams= Image::where('folder','instagram')->get();
@@ -94,7 +109,7 @@ class PagesController extends Controller
       $ad= Image::where('folder','ad')->first();
       $quote = Testimonial::get()->random(1)->first();
       // Article::orderBy('created_at');
-      return view ('blogsearch', compact('text','articles','categories','instagrams','tags','ad','quote','tagmatch','results'));
+      return view ('blogsearch',['results' => $paginatedItems], compact('text','articles','categories','instagrams','tags','ad','quote','tagmatch'));
     }
 
     public function blogpost($id){
