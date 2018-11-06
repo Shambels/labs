@@ -63,7 +63,7 @@
           @include('admin.pages.cards.titles.blog.quote')
           <div class="quote">
             <span class="quotation">‘​‌‘​‌</span>
-            <p class="editable">{{$quote}}</p>
+            <p class="editable">{{$quote->message}}</p>
             @include('admin.pages.cards.blog.quote')
           </div>
         </div>
@@ -73,7 +73,7 @@
           @include('admin.pages.cards.titles.blog.ad')
           <div class="add">
             <a>
-              <img class="editable" src="{{Storage::url($ad->name)}}" alt="">
+              <img class="editable" src="{{Storage::url('public/images/ad/'.$ad->name)}}" alt="">
               @include('admin.pages.cards.blog.ad')
             </a>
           </div>

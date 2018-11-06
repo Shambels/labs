@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCommentsTable extends Migration
+class CreateMapcoordsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('mapcoords', function (Blueprint $table) {
             $table->increments('id');
-            $table->boolean('valid')->nullable();
-            $table->string('content');
-            $table->string('name');            
-            $table->softDeletes();
+            $table->string('fulladdress');
+            $table->string('lat');
+            $table->string('long');
+            $table->string('apikey');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('mapcoords');
     }
 }

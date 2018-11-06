@@ -20,12 +20,15 @@ Route::get('/blog','PagesController@blog')->name('blog');
 Route::get('/blogpost/{id}','PagesController@blogpost')->name('blogpost');
 Route::get('/contact','PagesController@contact')->name('contact');
 Route::post('/newsletter', 'ContactController@subscribe')->name('newsletter');
-
+Route::post('/search', 'PagesController@search')->name('search');
+// Route::get('/search/results', 'PagesController@searchresults')->name('searchresults');
 // Route::post('/newsletter', 'PagesController@newsletter')->name('newsletter');
 
 
 Route::middleware('can:is-editor')->group(function() {
   // Route::get('', '')->name('editorhome');
+
+  Route::post('/article/{id}/comments/add', 'ArticleController@addComment');
 });
 
 
@@ -39,6 +42,7 @@ Route::middleware('can:is-admin')->group(function() {
   Route::get('/admin/edit/homepage', 'AdminpageController@home')->name('edithome');
   Route::get('/admin/edit/servicespage', 'AdminpageController@services')->name('editservices');
   Route::get('/admin/edit/blogpage', 'AdminpageController@blog')->name('editblog');
+  Route::get('/admin/edit/blogpost/{id}','AdminpageController@blogpost')->name('editblogpost');
   Route::get('/admin/edit/contactpage', 'AdminpageController@contact')->name('editcontact');
   // PAGES NAMES
   Route::post('admin/edit/pagename/home', 'PagenameController@home');
@@ -102,7 +106,9 @@ Route::middleware('can:is-admin')->group(function() {
       Route::post('/admin/edit/tag/{id}', 'TagController@update');
       Route::post('/admin/edit/tag/{id}/delete', 'TagController@delete');
 
-      Route::post('/admin/edit/quote', 'BlogController@quote');
+      Route::post('/admin/edit/quote/{id}', 'BlogController@quote');
+      Route::post('/admin/edit/quote/{id}/delete', 'BlogController@quoteDelete');
+
       Route::post('/admin/edit/ad', 'BlogController@ad');
 
   // NEWSLETTER

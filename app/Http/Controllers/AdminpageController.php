@@ -58,7 +58,7 @@ class AdminpageController extends Controller
       $instagrams= Image::where('folder','instagram')->get();
       $tags = Tag::all();
       $ad= Image::where('folder','ad')->first();
-      $quote = Testimonial::get()->random(1)->first()->message;
+      $quote = Testimonial::get()->random(1)->first();
       // Article::orderBy('created_at');
       return view ('admin/pages/blog', compact('text','articles','categories','instagrams','tags','ad','quote'));
     }
@@ -71,7 +71,7 @@ class AdminpageController extends Controller
       $instagrams= Image::where('folder','instagram')->get();
       $tags = Tag::all();
       $ad= Image::where('folder','ad')->first();
-      $quote = Testimonial::get()->random(1)->first()->message;
+      $quote = Testimonial::get()->random(1)->first();
       
       // $comments = Comment::where('articles_id', $id)/* ->where('valid', 1) */->get();
       $comments = Comment::with('users')->where('articles_id',$id)->get();

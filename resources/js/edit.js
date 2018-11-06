@@ -1,6 +1,7 @@
 var editables = Array.from(document.getElementsByClassName('editable'));
 var addables = Array.from(document.getElementsByClassName('addable'));
 var togglables = Array.from(document.getElementsByClassName('togglable'));
+var count= 0;
 
 function edit(x, y){
   x.classList.toggle('d-none');
@@ -10,10 +11,11 @@ function edit(x, y){
 function add(x,y){
    var input = document.createElement('input');
    input.type="text";
-   input.name="new"+y;
+   input.name="new"+y+count;
    input.placeholder="New "+y;
    input.classList.add('form-control');
    x.after(input);
+   count++
 }
 
 function toggle(x){

@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
   
     {   
+        $this->call(MapcoordSeeder::class);
         $this->call(CategorySeeder::class);
         $this->call(TagSeeder::class);
         $this->call(RoleSeeder::class);

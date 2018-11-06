@@ -2,9 +2,10 @@
     <div class="col-md-4 col-sm-5 sidebar">
         <!-- Single widget -->
         <div class="widget-item">
-          <form action="#" class="search-form">
-            <input type="text" placeholder="Search">
-            <button class="search-btn"><i class="flaticon-026-search"></i></button>
+          <form action="/search" class="search-form" method="POST">
+            @csrf
+            <input name="search" type="text" placeholder="Search">
+            <button class="search-btn" type="submit"><i class="flaticon-026-search"></i></button>
           </form>
         </div>
         <!-- Categories -->
@@ -39,7 +40,7 @@
           <h2 class="widget-title">{!!$text->quote!!}</h2>
           <div class="quote">
             <span class="quotation">‘​‌‘​‌</span>
-            <p>{{$quote}}</p>
+            <p>{{$quote->message}}</p>
           </div>
         </div>
         <!-- Ad -->

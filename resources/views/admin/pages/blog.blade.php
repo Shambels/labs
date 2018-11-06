@@ -29,7 +29,7 @@
               <div class="post-content">
               <h2 class="post-title">{{$article->name}}</h2>
                 <div class="post-meta">
-                  <a href="/blogpost/{{$article->id}}">{{$article->users->name}}</a>
+                  <a href="/admin/edit/blogpost/{{$article->id}}">{{$article->users->name}}</a>
                   <a href="">
                     @foreach ($article->tags as $tag)
                       <span>
@@ -38,9 +38,9 @@
                       @if (!$loop->last) , @endif
                     @endforeach
                   </a>
-                  <a href="/blogpost/{{$article->id}}">
-                    {{count($article->comments)}}
-                    @if ((count($article->comments)) < 2 ) 
+                  <a href="/admin/edit/blogpost/{{$article->id}}">
+                    {{count($article->comments->where('valid',true))}}
+                    @if ((count($article->comments->where('valid',true))) < 2 ) 
                       Comment
                     @else
                       Comments
@@ -49,7 +49,7 @@
 
                 </div>
                 <p>{{$article->preview}}</p>
-                <a href="/blogpost/{{$article->id}}" class="read-more">{!!$text->readmorebtn!!}</a>
+                <a href="/admin/edit/blogpost/{{$article->id}}" class="read-more">{!!$text->readmorebtn!!}</a>
               </div>
             </div>
             @include('admin.pages.cards.article')

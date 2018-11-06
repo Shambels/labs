@@ -48,11 +48,44 @@ class PagesController extends Controller
       $instagrams= Image::where('folder','instagram')->get();
       $tags = Tag::all();
       $ad= Image::where('folder','ad')->first();
-      $quote = Testimonial::get()->random(1)->first()->message;
+      $quote = Testimonial::get()->random(1)->first();
       // Article::orderBy('created_at');
       return view ('blog', compact('text','articles','categories','instagrams','tags','ad','quote'));
     }
 
+    public  function search(Request $request){
+      $allarticles = Article::with('users','comments','tags')->get();
+      $tagmatch = Tag::where('name',$request->search)->first();
+      $results= collect([]);
+      
+      foreach ($allarticles as $article) {
+        // dd($article->name);
+
+        // if ($article->name->($tagmatch->name) {        
+            // $results->push($article);          
+        // }
+
+
+        // foreach ($article->tags as $tag) {
+        //   if ($tag->name==$tagmatch->name) {
+        //     if(!$result->contains($article)){
+        //       $results->push($article);
+        //     }
+        //   }
+        // }
+      }
+
+      dd($results);
+      // dd($articles);
+      $text = Text::find(1);
+      $categories = Category::all();
+      $instagrams= Image::where('folder','instagram')->get();
+      $tags = Tag::all();
+      $ad= Image::where('folder','ad')->first();
+      $quote = Testimonial::get()->random(1)->first();
+      // Article::orderBy('created_at');
+      return view ('blogsearch', compact('text','articles','categories','instagrams','tags','ad','quote','tagmatch'));
+    }
 
     public function blogpost($id){
       $text = Text::find(1);
@@ -61,7 +94,7 @@ class PagesController extends Controller
       $instagrams= Image::where('folder','instagram')->get();
       $tags = Tag::all();
       $ad= Image::where('folder','ad')->first();
-      $quote = Testimonial::get()->random(1)->first()->message;
+      $quote = Testimonial::get()->random(1)->first();
       
       // $comments = Comment::where('articles_id', $id)/* ->where('valid', 1) */->get();
       $comments = Comment::with('users')->where('articles_id',$id)->get();

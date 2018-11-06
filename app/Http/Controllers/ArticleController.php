@@ -5,13 +5,29 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Tag;
 use App\Category;
+use App\Comment;
 use Illuminate\Http\Request;
 use App\Http\Requests\ArticleRequest;
+use App\Http\Requests\CommentRequest;
 use Storage;
 use ImgInt;
 
 class ArticleController extends Controller
 {
+
+  public function search(Request $request){
+    
+    $tagmatch = Tag::where('name',$request->search)->get()->first()->id;
+    dd($tagmatch);
+    $results = Article::where('tags_id',$tagmatch)->get();
+    $results->save();
+    return redirect('/search/result');
+
+  }
+    public function addComment(CommentRequest $request, $id){
+      
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -88,47 +104,166 @@ class ArticleController extends Controller
      $article->preview= $request->preview;
      $article->content= $request->content;
 
-    //  Tags
+
+
+    // ********  TAGS ********
+
+     $tags = Tag::all();
+
+
+    // *** Current Tags ***
+
      foreach ($article->tags as $tag){
+       // Find input ID + Value (=newname)
       $tagID=$tag->id;
       $specTag='tag'.$tagID;
-      $tag->name = $request->$specTag;
-      if($tag->name!=null){
-        $tag->save();
-      } else {
-        $article->tags()->detach($tag);
+      $oldmatch=false;
+      // Detach Previous Tag        
+      $article->tags()->detach($tag);
+
+      // If Newname already exists
+      foreach ($tags as $item){
+        if ($item->name==$request->$specTag) {
+          $oldmatch=true;  
+          // Attach New One
+          $article->tags()->attach($item);
+          $article->save();
+        }
+      }
+      // If Newname doesn't exist
+      if ($oldmatch==false){
+        // If Input isn't Empty
+        if($request->$specTag!=null){
+          // Create new One  
+          $newOldTag = new Tag;      
+          $newOldTag->name = $request->$specTag;
+          $newOldTag->valid=true;
+          $newOldTag->save();
+          $article->tags()->attach($newOldTag);          
+        }
       }
      }
-     if($request->newtag){
-        $newtag= new Tag;
-        $newtag->name = $request->newtag;
-        $newtag->save();
-        $article->tags()->attach($newtag);
-     }
 
-    //  Categories
+    // *** New Tags ***
+    //  $i=0;
+    
+     for ($i=0; $i<10;$i++){
+
+     $NTI='newtag'.$i;
+     dd($NTI);
+    // if "New Tag" Input has a value
+     if ($request->$NTI) {
+       dd($request->$NTI);
+        $match=false;
+        // check if that tag already exists
+        foreach ($tags as $tag){
+          if ($tag->name == $request->$NTI){
+            $match= true;
+            $newtag= $tag;
+            $newtag->save();
+          }
+        }
+        
+        // If it doesn't, create new one
+        if ($match==false) { 
+          $newtag= new Tag;
+          $newtag->name = $request->$NTI;
+          $newtag->valid=true;
+          $newtag->save();
+        }
+
+        $linked=false;
+        // Check if tag isn't already linked to Article
+        foreach ($article->tags as $tag) {
+          if ($tag->name == $newtag->name) {
+            $linked=true;
+          }
+        }
+        // If it isn't
+        if ($linked==false){
+          // Link the new Tag to the Article.
+          $article->tags()->attach($newtag);
+          $article->save();
+        }
+      }
+    }
+
+    // ******** CATEGORIES ********
+
+    $categories= Category::all();
+
+
+    // *** Current Categories ***
     foreach ($article->categories as $category){
+      // Find Category ID + Value (=Newname)
       $catID=$category->id;
       $specCat='category'.$catID;
-      $category->name = $request->$specCat;
-      if($category->name!=null){
-        $category->save();
-      } else {
-        $article->categories()->detach($category);
+      $oldmatch=false;
+      // Detach Previous Category
+      $article->categories()->detach($category);
+      
+      // If Newname already Exists
+      foreach ($categories as $item) {
+        if ($item->name==$request->$specCat) {
+          $oldmatch=true;
+          // Attach new one
+          $article->categories()->attach($item);
+          $article->save();
+        }
       }
-     }
-     if($request->newcategory){
+      // If Newname doesn't exist
+      if ($oldmatch=false) {
+        // & If Input isn't Empty
+        if ($request->$specCat!=null) {
+          // Create new One
+          $newOldCat = new Category;
+          $newOldCat->name = $request->$specCat;
+          $newOldCat->valid = true;
+          $newOldCat->save();
+          $article->categories()->attach($newOldCat);
+        }
+      }                   
+    }
+
+    //  *** New Categories ***
+
+    // if "New Category" Input has a value
+    if ($request->newcategory) {
+      $match=false;
+      // check if that category already exists
+      foreach ($categories as $category){
+        if ($tag->name == $request->newcategory){
+          $match = true;
+          $newcat = $category;
+        }
+      }
+      // If it doesn't, create new one
+      if ($match==false) { 
         $newcat= new Category;
         $newcat->name = $request->newcategory;
+        $newcat->valid=true;
         $newcat->save();
-        $article->categories()->attach($newcat);
-     }
+      }
 
+      $linked=false;
+      // Check if tag isn't already linked to Article
+      foreach ($article->categories as $category) {
+        if ($category->name == $newcat->name) {
+          $linked = true;
+        }
+      }
 
+      // If it isn't
+      if ($linked==false){
+        //  attach it to the article
+      $article->categories()->attach($newcat);
+      }  
+    }
      $article->save();
+    //  dd($article);
      $request->session()->flash('success','Article Successfully Updated ! ');
      return redirect()->back();   
-    }
+  }
 
     /**
      * Remove the specified resource from storage.

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\TitleRequest;
+use App\Http\Requests\ParagraphRequest;
 use App\Text;
+use App\Testimonial;
 
 class BlogController extends Controller
 {
@@ -45,6 +47,24 @@ class BlogController extends Controller
       $text->ad = $request->title;
       $text->save();
       $request->session()->flash('success', 'Title Successfully Updated !');
+      return redirect()->back();
+    }
+
+    public function quote(Request $request, $id){
+      $this->validate($request, [
+        'content' => 'bail|required|max:300'
+      ]);
+      $quote = Testimonial::find($id);
+      $quote->message = $request->content;
+      $quote->save();
+      $request->session()->flash('success', 'Testimonial Successfully Updated !');
+      return redirect()->back();
+    }
+
+    public function quoteDelete(Request $request, $id){
+      $quote = Testimonial::find($id);
+      $quote->delete();
+      $request->session()->flash('success', 'Testimonial Successfully Deleted !');
       return redirect()->back();
     }
 

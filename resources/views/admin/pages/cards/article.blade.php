@@ -16,11 +16,11 @@
         </div>
         <div class="form-group">
             <label>Article preview</label>
-            <input name="preview" value="{{old('preview', $article->preview)}}" placeholder="Type here" type="text" class="form-control">
+            <textarea name="preview" placeholder="Type here" type="text" class="form-control">{{old('preview', $article->preview)}}</textarea>
           </div>
         <div class="form-group">
           <label>Article Content</label>
-          <input name="content" value="{{old('content', $article->content)}}" placeholder="Type here" type="text" class="form-control">
+          <textarea name="content" rows="8" placeholder="Type here" type="text" class="form-control">{{old('content', $article->content)}}</textarea>
         </div>
         <div class="form-group">
           <label>Article Tags</label>
