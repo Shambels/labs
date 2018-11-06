@@ -55,28 +55,38 @@ class PagesController extends Controller
 
     public  function search(Request $request){
       $allarticles = Article::with('users','comments','tags')->get();
-      $tagmatch = Tag::where('name',$request->search)->first();
+      $search = $request->search;
+      $tagmatch = Tag::where('name',$search)->first();
+      $categorymatch = Category::where('name',$search)->first();
       $results= collect([]);
       
       foreach ($allarticles as $article) {
-        // dd($article->name);
+        // NAME Search
+        if (preg_match('/\b'.$search.'\b/i', $article->name)) {
+            $results->push($article);                        
+        }
+        // TAGS Search
+        if($tagmatch){
+          foreach ($article->tags as $tag) {
+            if ($tag->name==$tagmatch->name) {
+              if(!$results->contains($article)){
+                $results->push($article);
+              }
+            }
+          }
+        }
 
-        // if ($article->name->($tagmatch->name) {        
-            // $results->push($article);          
-        // }
-
-
-        // foreach ($article->tags as $tag) {
-        //   if ($tag->name==$tagmatch->name) {
-        //     if(!$result->contains($article)){
-        //       $results->push($article);
-        //     }
-        //   }
-        // }
+        // CATEGORY Search
+        if($categorymatch){
+          foreach ($article->categories as $category) {
+            if($category->name=$categorymatch->name) {
+              if(!$results->contains($article)) {
+                $results->push($article);
+              }
+            }
+          }
+        }
       }
-
-      dd($results);
-      // dd($articles);
       $text = Text::find(1);
       $categories = Category::all();
       $instagrams= Image::where('folder','instagram')->get();
@@ -84,7 +94,7 @@ class PagesController extends Controller
       $ad= Image::where('folder','ad')->first();
       $quote = Testimonial::get()->random(1)->first();
       // Article::orderBy('created_at');
-      return view ('blogsearch', compact('text','articles','categories','instagrams','tags','ad','quote','tagmatch'));
+      return view ('blogsearch', compact('text','articles','categories','instagrams','tags','ad','quote','tagmatch','results'));
     }
 
     public function blogpost($id){

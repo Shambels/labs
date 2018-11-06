@@ -231,7 +231,7 @@ class ArticleController extends Controller
 
     //  *** New Categories ***
 
-    for ($i=0;i<10;$i++) {
+    for ($i=0;$i<10;$i++) {
       
       $NCI = 'newcategory'.$i;
     

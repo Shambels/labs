@@ -10,7 +10,7 @@
 			<div class="row">
 				<div class="col-md-8 col-sm-7 blog-posts">
           <!-- Post item -->
-          @foreach ($articles as $article)
+          @foreach ($results as $article)
           {{-- {{dd($article)}} --}}
             <div class="post-item">
               <div class="post-thumbnail">
@@ -49,7 +49,7 @@
           @endforeach
 					<!-- Pagination -->
 					<div class="page-pagination">
-						{{$articles->links()}}
+						{{-- {{$results->links()}} --}}
 					</div>
         </div>
         
