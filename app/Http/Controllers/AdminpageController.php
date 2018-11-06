@@ -14,6 +14,7 @@ use App\Category;
 use App\Tag;
 use App\Comment;
 use App\Icon;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class AdminpageController extends Controller
 {
@@ -79,6 +80,62 @@ class AdminpageController extends Controller
       return view ('admin/pages/blogpost', compact('text','article','categories','instagrams','tags','ad','quote','comments'));
     }
     
+    public function search(Request $request){
+      $search = $request->search;
+      return redirect('/admin/results/'.$search);
+    }
+    public  function results($search,Request $request){
+      $allarticles = Article::with('users','comments','tags')->get();
+      // $search = $request->search;
+      $tagmatch = Tag::where('name',$search)->first();
+      $categorymatch = Category::where('name',$search)->first();
+      $results= collect([]);
+      // dd($tagmatch);
+      
+      foreach ($allarticles as $article) {
+        // NAME Search
+        if (preg_match('/\b'.$search.'\b/i', $article->name)) {
+          if(!$results->contains($article)){
+            $results->push($article);       
+          }      
+        }
+        // TAGS Search
+        if($tagmatch){
+          foreach ($article->tags as $tag) {
+            if ($tag->name==$tagmatch->name) {
+              if(!$results->contains($article)){
+                $results->push($article);                
+              }
+            }
+          }
+        }
+        // CATEGORY Search
+        if($categorymatch){
+          foreach ($article->categories as $category) {
+            if($category->name=$categorymatch->name) {
+              if(!$results->contains($article)) {
+                $results->push($article);          
+              }
+            }
+          }
+        }
+      }
+      // Collection Pagination Fix
+       $currentPage = LengthAwarePaginator::resolveCurrentPage();
+       $perPage = 3;
+       $currentPageItems = $results->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+       $paginatedItems= new LengthAwarePaginator($currentPageItems , count($results), $perPage);
+       $paginatedItems->setPath($request->url());
+      $text = Text::find(1);
+      $categories = Category::all();
+      $instagrams= Image::where('folder','instagram')->get();
+      $tags = Tag::all();
+      $ad= Image::where('folder','ad')->first();
+      $quote = Testimonial::get()->random(1)->first();
+      // Article::orderBy('created_at');
+      return view ('admin/pages/blogsearch',['results' => $paginatedItems], compact('text','articles','categories','instagrams','tags','ad','quote','tagmatch'));
+    }
+
     public function contact(){
       $text = Text::find(1); 
       return view ('admin/pages/contact', compact('text'));

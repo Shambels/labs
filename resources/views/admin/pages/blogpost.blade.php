@@ -51,7 +51,7 @@
 						<!-- Post Author -->
 						<div class="author">
 							<div class="avatar">
-								<img src="{{Storage::url('public/images/users/thumbnails/'.$article->users->image)}}" alt="">
+								<img src="{{Storage::url('public/images/users/thumbnails/'.$article->users->image)}}" alt="article_author_avatar">
 							</div>
 							<div class="author-info">
 								<h2>{{$article->users->name}}, <span>{{$article->users->title}}</span></h2>
@@ -63,41 +63,33 @@
 							<h2>Comments ( {{count($article->comments->where('valid',true))}} )</h2>
 							<ul class="comment-list">
                 @foreach ($comments->where('valid',true) as $comment)
+                @if ($comment->users)
 								<li>
 									<div class="avatar">
                     {{-- <img src="{{Storage::url($comment->users->image)}}" alt=""> --}}
-                    <img src="{{$comment->users->image}}" alt="">
+                    <img src="{{Storage::url('public/images/users/mediums/'.$comment->users->image)}}" alt="comment_author_avatar">
 									</div>
 									<div class="commetn-text">
 										<h3>{{$comment->users->name}} | {{$comment->created_at->format('d M, Y')}} | <a href="#sendCommentForm">Reply</a></h3>
-										<p>{{$comment->content}}</p>
+										<p>{{$comment->message}}</p>
 									</div>
                 </li>
+                @else
+                <li>
+                  <div class="avatar">                         
+                    <img src="{{Storage::url('public/img/avatar/0'.rand(1,3).'.jpg')}}" alt="guest_avatar">                                                         
+                  </div>
+                  <div class="comment-text">                    
+                    <h3>{{$comment->name}} | {{$comment->created_at->format('d M, Y')}} | <a href="#sendCommentForm">Reply</a></h3>
+                    <p>{{$comment->message}}</p>
+                  </div>
+                </li>
+                @endif
                 @endforeach
 							</ul>
 						</div>
 						<!-- Commert Form -->
-						<div class="row">
-							<div id="sendCommentForm" class="col-md-9 comment-from">
-								<h2>{!!$text->leavecom!!}</h2>
-								<form action="/article/{{$article->id}}/comments/add" class="form-class">            
-                  @csrf
-									<div class="row">
-										<div class="col-sm-6">
-											<input type="text" name="name" placeholder="Your name">
-										</div>
-										<div class="col-sm-6">
-											<input type="text" name="email" placeholder="Your email">
-										</div>
-										<div class="col-sm-12">
-											<input type="text" name="subject" placeholder="Subject">
-											<textarea name="message" placeholder="Message"></textarea>
-											<button type="submit" class="site-btn">{!!$text->sendbtn!!}</button>
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
+            @include('partials.commentform')
 					</div>
         </div>
         

@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\CommentRequest;
+use Auth;
 class CommentController extends Controller
 {
     /**
@@ -33,9 +34,38 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CommentRequest $request, $id)
     {
-        //
+        $comment = new Comment;
+        $comment->articles_id= $id;
+
+        if(Auth::user()){
+          $comment->name = Auth::user()->name;
+          $comment->email = Auth::user()->email;
+          $comment->users_id= Auth::user()->id;
+          if(Auth::user()->roles_id=1){
+            $comment->valid = true;
+          }
+        } else {
+          $comment->users_id=null;
+          if ($request->name) {
+            $comment->name = $request->name;
+           
+          } else {
+            $comment->name = 'Anonymous';
+          }
+          if ($request->email) {
+            $comment->email = $request->email;
+          } else {
+            $comment->email = null;
+          }
+        }
+
+        $comment->subject = $request->subject;
+        $comment->message = $request->message;
+        $comment->save();
+        $request->session()->flash('success', 'Your Comment has been sent ! ');
+        return redirect()->back();
     }
 
     /**

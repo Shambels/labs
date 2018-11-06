@@ -95,13 +95,13 @@ class PagesController extends Controller
           }
         }
       }
-      // dd($results);
+      // Collection Pagination Fix
        $currentPage = LengthAwarePaginator::resolveCurrentPage();
        $perPage = 3;
        $currentPageItems = $results->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
        $paginatedItems= new LengthAwarePaginator($currentPageItems , count($results), $perPage);
        $paginatedItems->setPath($request->url());
-      // $results->paginate(3);
+
       $text = Text::find(1);
       $categories = Category::all();
       $instagrams= Image::where('folder','instagram')->get();
