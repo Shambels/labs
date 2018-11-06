@@ -11,6 +11,7 @@ use App\Http\Requests\ArticleRequest;
 use App\Http\Requests\CommentRequest;
 use Storage;
 use ImgInt;
+use Auth;
 
 class ArticleController extends Controller
 {
@@ -105,7 +106,6 @@ class ArticleController extends Controller
      $article->content= $request->content;
 
 
-
     // ********  TAGS ********
 
      $tags = Tag::all();
@@ -137,7 +137,9 @@ class ArticleController extends Controller
           // Create new One  
           $newOldTag = new Tag;      
           $newOldTag->name = $request->$specTag;
-          $newOldTag->valid=true;
+          if(Auth::user()->roles_id==1) {
+            $newOldTag->valid=true;            
+          }
           $newOldTag->save();
           $article->tags()->attach($newOldTag);          
         }
@@ -150,14 +152,12 @@ class ArticleController extends Controller
      for ($i=0; $i<10;$i++){
 
      $NTI='newtag'.$i;
-     dd($NTI);
     // if "New Tag" Input has a value
      if ($request->$NTI) {
-       dd($request->$NTI);
         $match=false;
         // check if that tag already exists
-        foreach ($tags as $tag){
-          if ($tag->name == $request->$NTI){
+        foreach ($tags as $tag) {
+          if ($tag->name == $request->$NTI) {
             $match= true;
             $newtag= $tag;
             $newtag->save();
@@ -167,8 +167,10 @@ class ArticleController extends Controller
         // If it doesn't, create new one
         if ($match==false) { 
           $newtag= new Tag;
-          $newtag->name = $request->$NTI;
-          $newtag->valid=true;
+          $newtag->name = $request->$NTI; 
+          if (Auth::user()->roles_id==1) {         
+            $newtag->valid=true;
+          }
           $newtag->save();
         }
 
@@ -218,7 +220,9 @@ class ArticleController extends Controller
           // Create new One
           $newOldCat = new Category;
           $newOldCat->name = $request->$specCat;
-          $newOldCat->valid = true;
+          if (Auth::user()->roles_id==1) {
+            $newOldCat->valid = true;
+          }
           $newOldCat->save();
           $article->categories()->attach($newOldCat);
         }
@@ -227,21 +231,30 @@ class ArticleController extends Controller
 
     //  *** New Categories ***
 
+    for ($i=0;i<10;$i++) {
+      
+      $NCI = 'newcategory'.$i;
+    
     // if "New Category" Input has a value
-    if ($request->newcategory) {
+    if ($request->$NCI) {
       $match=false;
       // check if that category already exists
-      foreach ($categories as $category){
-        if ($tag->name == $request->newcategory){
+      foreach ($categories as $category) {
+        if ($category->name == $request->$NCI) {
           $match = true;
           $newcat = $category;
+          $newcat->save();
         }
       }
-      // If it doesn't, create new one
+
+      // If it doesn't exist,
       if ($match==false) { 
+        // create new category
         $newcat= new Category;
-        $newcat->name = $request->newcategory;
-        $newcat->valid=true;
+        $newcat->name = $request->$NCI;
+        if (Auth::user()->roles_id==1) {
+          $newcat->valid=true;
+        }
         $newcat->save();
       }
 
@@ -252,18 +265,19 @@ class ArticleController extends Controller
           $linked = true;
         }
       }
-
       // If it isn't
-      if ($linked==false){
-        //  attach it to the article
+      if ($linked==false) {
+        //  attach new category to the article
       $article->categories()->attach($newcat);
+      $article->save();
       }  
     }
+  }
+  
      $article->save();
-    //  dd($article);
      $request->session()->flash('success','Article Successfully Updated ! ');
      return redirect()->back();   
-  }
+}
 
     /**
      * Remove the specified resource from storage.
