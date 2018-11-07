@@ -8,7 +8,7 @@
     <div class="hero-section">
       <div class="hero-content">
         <div class="hero-center">
-          <img src="storage/img/big-logo.png" alt="">
+        <img src="{{Storage::url('public/images/logo/'.$logo->name)}}" alt="">
           <p>{!!$text->carouseltext!!}</p>
         </div>
       </div>

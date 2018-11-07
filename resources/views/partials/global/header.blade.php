@@ -1,7 +1,7 @@
 <!-- Header section -->
 <header class="header-section">
     <div class="logo">
-      <img src="storage/img/logo.png" alt=""><!-- Logo -->
+      <img src="{{Storage::url('public/images/logo/mini/'.$logo->name)}}" alt=""><!-- Logo -->
     </div>
     <!-- Navigation -->
     <div class="responsive"><i class="fa fa-bars"></i></div>
