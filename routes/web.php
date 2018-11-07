@@ -44,16 +44,19 @@ Route::middleware('can:is-admin')->group(function() {
   Route::get('/admin/edit/blogpage', 'AdminpageController@blog')->name('editblog');
   Route::get('/admin/edit/blogpost/{id}','AdminpageController@blogpost')->name('editblogpost');
   Route::get('/admin/edit/contactpage', 'AdminpageController@contact')->name('editcontact');
-  // PAGES NAMES
-  Route::post('admin/edit/pagename/home', 'PagenameController@home');
-  Route::post('admin/edit/pagename/services', 'PagenameController@services');
-  Route::post('admin/edit/pagename/blog', 'PagenameController@blog');
-  Route::post('admin/edit/pagename/contact', 'PagenameController@contact');
+    // PAGES NAMES
+    Route::post('admin/edit/pagename/home', 'PagenameController@home');
+    Route::post('admin/edit/pagename/services', 'PagenameController@services');
+    Route::post('admin/edit/pagename/blog', 'PagenameController@blog');
+    Route::post('admin/edit/pagename/contact', 'PagenameController@contact');
   
 
-  // HOME 
+  // HOME PAGE
   Route::post('/admin/edit/homepage/carouseltext', 'HomeController@carouselText');
   Route::post('/admin/edit/homepage/carouselimage/{id}', 'HomeController@carouselImage');
+  Route::post('/admin/edit/homepage/carouselimage/{id}/delete', 'HomeController@deleteCarouselImage');
+  Route::post('/admin/edit/homepage/addcarouselimage', 'HomeController@addCarouselImage');
+
   Route::post('/admin/edit/homepage/discovertitle', 'HomeController@discoverTitle');
   Route::post('/admin/edit/homepage/discoverleft', 'HomeController@discoverLeft');
   Route::post('/admin/edit/homepage/discoverright', 'HomeController@discoverRight');
@@ -64,6 +67,9 @@ Route::middleware('can:is-admin')->group(function() {
   Route::post('/admin/edit/homepage/teamtitle', 'HomeController@teamTitle');
   Route::post('/admin/edit/homepage/standouttitle', 'HomeController@standoutTitle');
   Route::post('/admin/edit/homepage/standouttext', 'HomeController@standoutText');
+
+  // LOGO
+  Route::post('admin/edit/logo', 'HomeController@logo');
 
   // TESTIMONIALS
   Route::post('/admin/edit/testimonialtitle', 'TestimonialController@title');
@@ -110,7 +116,7 @@ Route::middleware('can:is-admin')->group(function() {
       Route::post('/admin/edit/quote/{id}/delete', 'BlogController@quoteDelete');
 
       Route::post('/admin/edit/ad', 'BlogController@ad');
-  
+
       // Search
       Route::get('/admin/results/{search}','AdminpageController@results');
       Route::post('/admin/search', 'AdminpageController@search')->name('search');

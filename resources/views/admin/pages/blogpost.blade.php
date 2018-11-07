@@ -60,7 +60,7 @@
 						</div>
 						<!-- Post Comments -->
 						<div class="comments">
-							<h2>Comments ( {{count($article->comments->where('valid',true))}} )</h2>
+							<h2>Comments ( {{count($comments->where('valid',true))}} )</h2>
 							<ul class="comment-list">
                 @foreach ($comments->where('valid',true) as $comment)
                 @if ($comment->users)
@@ -69,7 +69,7 @@
                     {{-- <img src="{{Storage::url($comment->users->image)}}" alt=""> --}}
                     <img src="{{Storage::url('public/images/users/mediums/'.$comment->users->image)}}" alt="comment_author_avatar">
 									</div>
-									<div class="commetn-text">
+									<div class="comment-text">
 										<h3>{{$comment->users->name}} | {{$comment->created_at->format('d M, Y')}} | <a href="#sendCommentForm">Reply</a></h3>
 										<p>{{$comment->message}}</p>
 									</div>

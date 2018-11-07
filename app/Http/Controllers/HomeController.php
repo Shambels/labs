@@ -32,6 +32,19 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
    
+    public function logo(Request $request) {
+      $logo = Image::where('folder','carousel');
+      if ($request->file('image')) {
+        $image = $request->file('image');
+        $imagename = time().$image->hashname();
+        Storage::delete(['public/images/logo/original/'.$logo->name,'public/images/logo/'.$logo->name,'public/logo/carousel/brand/'.$logo->name]);
+        $image->storeAs('public/image', $logo);
+      }
+
+      $request->session()->flash('success', 'Carousel Text Successfully Updated ');
+      return redirect()->back();
+
+    }
 
     public function carouselText(TitleRequest $request){
       $text= Text::find(1);
@@ -40,6 +53,29 @@ class HomeController extends Controller
       $request->session()->flash('success', 'Carousel Text Successfully Updated ');
       return redirect()->back();
     }
+
+    public function addCarouselImage(Request $request){
+      $this->validate($request, [
+        'image' => 'nullable|image'
+      ]);
+
+      if ($request->file('image')) {
+        $image = $request->file('image');
+        $imagename = time().$image->hashname();
+        $image->storeAs('public/images/carousel/originals/', $imagename);
+        $resized = ImgInt::make($image)->resize(1628,796)->save();
+        Storage::put('public/images/carousel/'.$imagename, $resized);
+        $preview = ImgInt::make($image)->resize(548,264)->save();
+        Storage::put('public/images/carousel/previews/'.$imagename, $preview); 
+        $item = new Image;       
+        $item->name= $imagename;
+        $item->folder='carousel';
+      }
+      $item->save();
+      $request->session()->flash('success', 'Background Image Successfully Added !');
+      return redirect()->back();
+    }
+
     public function carouselImage(Request $request, $id){
       $this->validate($request, [
         'image' => 'nullable|image'
@@ -48,15 +84,26 @@ class HomeController extends Controller
       if ($request->file('image')) {
         $image = $request->file('image');
         $imagename = time().$image->hashname();
-        Storage::delete(['public/images/carousel/originals/'.$item->name,'public/images/carousel/'.$item->name]);
+        Storage::delete(['public/images/carousel/originals/'.$item->name,'public/images/carousel/'.$item->name,'public/images/carousel/previews/'.$item->name]);
         $image->storeAs('public/images/carousel/originals/', $imagename);
         $resized = ImgInt::make($image)->resize(1628,796)->save();
         Storage::put('public/images/carousel/'.$imagename, $resized);
+        $preview = ImgInt::make($image)->resize(548,264)->save();
+        Storage::put('public/images/carousel/previews/'.$imagename, $preview);        
         $item->name= $imagename;
       }
       $item->save();
       $request->session()->flash('success', 'Background Image Successfully Updated !');
       return redirect()->back();
+    }
+
+    public function deleteCarouselImage(Request $request, $id) {
+      $item= Image::find($id);
+      Storage::delete(['public/images/carousel/originals/'.$item->name,'public/images/carousel/'.$item->name,'public/images/carousel/previews/'.$item->name]);
+      $item->delete();
+      $request->session()->flash('success', 'Background Image Successfully Deleted !');
+      return redirect()->back();
+
     }
 
     public function discoverTitle(TitleRequest $request){

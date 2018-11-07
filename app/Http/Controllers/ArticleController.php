@@ -214,7 +214,7 @@ class ArticleController extends Controller
         }
       }
       // If Newname doesn't exist
-      if ($oldmatch=false) {
+      if ($oldmatch==false) {
         // & If Input isn't Empty
         if ($request->$specCat!=null) {
           // Create new One

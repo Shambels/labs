@@ -26,6 +26,7 @@ class AdminpageController extends Controller
   
     public function home(){
       $text= Text::find(1);
+      $logo= Image::where('folder','carousel')->first();
       $carouselImages = Image::where('folder','carousel')->get();
       $YTimage = Image::where('folder','youtube')->get()->first();
       $servicesup = Service::with('icons')->get()->random(2);
@@ -36,24 +37,26 @@ class AdminpageController extends Controller
       $teamleader = User::where('roles_id', '1')->get()->first();
       $icons = Icon::all();
 
-      return view ('admin/pages/home', compact('carouselImages','YTimage','text','services','servicesup','servicedown','testimonials','teammembers','teamleader','icons'));
+      return view ('admin/pages/home', compact('carouselImages','YTimage','text','logo','services','servicesup','servicedown','testimonials','teammembers','teamleader','icons'));
 
     }
 
 
     public function services(){
       $text= Text::find(1);
+      $logo= Image::where('folder','carousel')->first();
       $services = Service::paginate(9);
       $servicesleft = Service::with('icons')->get()->random(3);
       $servicesright = Service::with('icons')->get()->random(3);
       $projects= Project::orderBy('created_at')->get()->take(3);
       $icons = Icon::all();
       $phoneimage= Image::where('folder','services')->get()->first();
-      return view ('admin/pages/services', compact('text','services','servicesleft','servicesright','projects','icons','phoneimage'));
+      return view ('admin/pages/services', compact('text','logo','services','servicesleft','servicesright','projects','icons','phoneimage'));
     }
 
     public function blog(){
       $text = Text::find(1);
+      $logo= Image::where('folder','carousel')->first();
       $articles = Article::with('users','comments','tags','categories')->paginate(3);
       $categories = Category::all();
       $instagrams= Image::where('folder','instagram')->get();
@@ -61,12 +64,13 @@ class AdminpageController extends Controller
       $ad= Image::where('folder','ad')->first();
       $quote = Testimonial::get()->random(1)->first();
       // Article::orderBy('created_at');
-      return view ('admin/pages/blog', compact('text','articles','categories','instagrams','tags','ad','quote'));
+      return view ('admin/pages/blog', compact('text','logo','articles','categories','instagrams','tags','ad','quote'));
     }
 
 
     public function blogpost($id){
       $text = Text::find(1);
+      $logo= Image::where('folder','carousel')->first();
       $article= Article::with('users', 'comments', 'tags')->find($id);
       $categories = Category::all();
       $instagrams= Image::where('folder','instagram')->get();
@@ -77,7 +81,7 @@ class AdminpageController extends Controller
       // $comments = Comment::where('articles_id', $id)/* ->where('valid', 1) */->get();
       $comments = Comment::with('users')->where('articles_id',$id)->get();
       // Article::orderBy('created_at');
-      return view ('admin/pages/blogpost', compact('text','article','categories','instagrams','tags','ad','quote','comments'));
+      return view ('admin/pages/blogpost', compact('text','logo','article','categories','instagrams','tags','ad','quote','comments'));
     }
     
     public function search(Request $request){
@@ -126,18 +130,21 @@ class AdminpageController extends Controller
        $currentPageItems = $results->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
        $paginatedItems= new LengthAwarePaginator($currentPageItems , count($results), $perPage);
        $paginatedItems->setPath($request->url());
+
       $text = Text::find(1);
+      $logo= Image::where('folder','carousel')->first();
       $categories = Category::all();
       $instagrams= Image::where('folder','instagram')->get();
       $tags = Tag::all();
       $ad= Image::where('folder','ad')->first();
       $quote = Testimonial::get()->random(1)->first();
       // Article::orderBy('created_at');
-      return view ('admin/pages/blogsearch',['results' => $paginatedItems], compact('text','articles','categories','instagrams','tags','ad','quote','tagmatch'));
+      return view ('admin/pages/blogsearch',['results' => $paginatedItems], compact('text','logo','articles','categories','instagrams','tags','ad','quote','tagmatch'));
     }
 
     public function contact(){
       $text = Text::find(1); 
-      return view ('admin/pages/contact', compact('text'));
+      $logo= Image::where('folder','carousel')->first();
+      return view ('admin/pages/contact', compact('text','logo'));
     }
 }

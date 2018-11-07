@@ -11,6 +11,10 @@
       </div>
       <button class="btn btn-success" type="submit">OK</button>
     </form>
+    <form action="/admin/edit/homepage/carouselimage/{{$image->id}}/delete" method="POST" enctype="multipart/form-data">
+      @csrf
+      <button class="btn btn-danger" type="submit">Delete</button>
+    </form>
   </div>
 </div>
 @endcan

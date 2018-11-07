@@ -40,8 +40,7 @@
           </ul>
         </div>
         <!-- Tags -->
-        <div class="widget-item">
-          
+        <div class="widget-item">          
           <h2 class="widget-title editable">{!!$text->tags!!}</h2>
           @include('admin.pages.cards.titles.blog.tags')
           <div class="togglable" class="btn btn-light">

@@ -13,7 +13,13 @@
           <h2 class="widget-title">{!!$text->categories!!}</h2>
           <ul>
             @foreach ($categories as $category)
-            <li><a href="#">{{$category->name}}</a></li>
+            <li>
+              <form action="/search" class="mb-0" method="POST">
+                @csrf
+                <input type="hidden" name="search" value="{{$category->name}}">
+                <a onclick="event.target.parentElement.submit();" style="cursor: pointer;">{{$category->name}}</a>
+              </form>
+            </li>
             @endforeach
           </ul>
         </div>
@@ -31,7 +37,13 @@
           <h2 class="widget-title">{!!$text->tags!!}</h2>
           <ul class="tag">
             @foreach ($tags as $tag)
-              <li><a href="">{{$tag->name}}</a></li>
+            <li>
+                <form action="/search" class="mb-0" method="POST">
+                  @csrf
+                  <input type="hidden" name="search" value="{{$tag->name}}">
+                  <a onclick="event.target.parentElement.submit();" style="cursor: pointer"> {{$tag->name}}</a>
+                </form>  
+            </li>
             @endforeach
           </ul>
         </div>

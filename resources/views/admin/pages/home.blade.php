@@ -13,21 +13,32 @@
 
 <!-- Intro Section -->
     <!-- Carousel -->
-    
-    <div class="hero-section">
-      <div class="hero-content" style="position:unset!important">
-        <div class="hero-center">
-          <img class="editable" src="storage/img/big-logo.png" alt="">
-          <p class="editable">{{$text->carouseltext}}</p>
-          @include ('admin.pages.cards.carousel.text')
-        </div>
-      </div>
+
+  <h2>Logo</h2>
+  <div class="editable">            
+    <img src="{{Storage::url('public/images/logo/mediums/'.$logo->name)}} alt="logo">
+  </div>
+  @include('admin.pages.cards.logo')
+      <h2>Carousel Text</h2>                                        
+        <p class="editable p-4" style="border: solid 3px #6d4bb5">{{$text->carouseltext}}</p>
+        @include('admin.pages.cards.carousel.text')        
+
+  <!-- slider -->
+    <h2>Carousel Images</h2>
+    <div class="togglable" class="btn btn-light" style="font-size: 1.8rem;">
+      <i class="fas fa-plus"></i>
     </div>
-      <!-- slider -->
-        @foreach ($carouselImages as $image)
-          <img class="editable" src="{{Storage::url('public/images/carousel/'.$image->name)}}">
-          @include('admin.pages.cards.carousel.image')
-        @endforeach
+    @include('admin.pages.cards.carousel.newimage')
+    @foreach ($carouselImages->chunk(3) as $chunk)
+    <div class="row my-4">
+      @foreach ($chunk as $image)
+      <div class="col-md-4">
+        <img class="editable" src="{{Storage::url('public/images/carousel/previews/'.$image->name)}}" style="border: solid 3px #6d4bb5">
+        @include('admin.pages.cards.carousel.image')
+      </div>          
+      @endforeach
+    </div>
+    @endforeach
 
     {{-- MARGIN --}}
     <div style="margin: 20rem 0;"></div>

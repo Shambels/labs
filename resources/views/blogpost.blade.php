@@ -53,7 +53,7 @@
 						</div>
 						<!-- Post Comments -->
 						<div class="comments">
-							<h2>Comments ( {{count($article->comments)}} )</h2>
+							<h2>Comments ( {{count($comments->where('valid',true))}} )</h2>
 							<ul class="comment-list">
                 @foreach ($comments->where('valid', true) as $comment)
                 @if ($comment->users)
