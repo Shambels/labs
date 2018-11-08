@@ -34,9 +34,9 @@
               <th>#</th>                         
               <th>Validated</th>            
               <th>Creation Date</th>
-              <th>Article</th>
               <th>Subject</th>
               <th>Message</th>
+              <th>Article</th>
               <th></th>
             
             </tr>
@@ -45,29 +45,46 @@
             @foreach ($user->comments as  $key=>$comment)                
               <tr class="user-list-item">          
                 <td>{{$key+1}}</td>
-                <td>
-                    <input type="checkbox" checked data-toggle="toggle" data-on="Ready" data-off="Not Ready" data-onstyle="success" data-offstyle="danger">
-
-                </td>
                 {{-- <td>
-                  @if ($comment->valid==null)
-                    <span class="">TBD</span>
-                  @elseif ($comment->vaid==true)
-                    <span class="text-success">OK</span>
-                  @else
-                    <span class="text-danger">DENIED </span>
-                  @endif
+                  <div id="container">
+                    <div class="inner-container">
+                      <div class="toggle">
+                        <p>N</p>
+                      </div>
+                      <div class="toggle">
+                        <p>Y</p>
+                      </div>
+                    </div>
+                    <div class="inner-container" id='toggle-container'>
+                      <div class="toggle">
+                        <p>N</p>
+                      </div>
+                      <div class="toggle">
+                        <p>Y</p>
+                      </div>
+                    </div>
+                  </div>
+                  <input id="on-off" name="valid" type="hidden" value="">
                 </td> --}}
-                <td>{{$comment->created_at}}</td>
-                <td>{{substr($comment->articles->name,0,35)}}...</td>
-                <td>{{$comment->subject}}</td>
-                <td><a href="">{{count($user->articles->where('valid',true))}}</a></td>
+                <td>
+                  @if ($comment->valid==true)
+                  <span class="text-success">OK</span>
+                  @elseif ($comment->valid==false)
+                    <span class="text-danger">DENIED </span>
+                  @elseif ($comment->valid==null)
+                  <span class="">TBD</span>
+                  @endif
+                </td>
+                <td>{{$comment->created_at->format('d M Y')}}</td>
+                <td>{{substr($comment->subject,0,30)}}...</td>
+                <td>{{substr($comment->message,0,30)}}...</td>                
+                <td>{{substr($comment->articles->name,0,30)}}...</td>
                 <td class="user-list-btn d-flex">
-                  <a href="/admin/edit/user/{{$user->id}}/edit" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
-                  <form action="/admin/edit/user/{{$user->id}}/delete" method="POST">
+                  <a href="/admin/edit/comment/{{$comment->id}}/edit" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
+                  <form action="/admin/edit/comment/{{$comment->id}}/delete" method="POST">
                     @csrf
                     <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                </form>
+                  </form>
                 </td>
               </tr>              
             @endforeach

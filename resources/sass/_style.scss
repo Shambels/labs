@@ -1748,3 +1748,10 @@ ul {
     opacity: 1;
   }
 }
+
+.fa-arrow-down {
+  transition: .6s!important;
+}
+.demitour {
+  transform: rotate(-180deg)!important;
+}

@@ -25,7 +25,13 @@
           <a href="/admin/list/users/{{$admin->id}}/articles">
             <div class="description-block">
               <h5 class="description-header">{{count($admin->articles)}}</h5>
-              <span class="description-text">Articles</span>
+              <span class="description-text">
+                @if (count($admin->articles)<2) 
+                Article
+                @else
+                Articles
+                @endif
+              </span>
             </div>
           </a>
           <!-- /.description-block -->
@@ -67,7 +73,7 @@
               <h5 class="widget-user-desc">{{$user->title}}</h5>
               <h6 class="widget-user-desc py-1 font-italic">{{$user->email}}</h6>
               <h6 class="widget-user-desc">           
-                <button type="button" class="btn bg-gray" data-widget="collapse">
+                <button type="button" class="btn bg-gray arrowable" data-widget="collapse">
                   <i class="fa fa-arrow-down"></i>
                 </button>                
                 <div class="box-body" style="display: none;">
@@ -78,8 +84,8 @@
             </div>            
             <div class="box-body" style="display:none">
               <ul class="nav-stacked" style="list-style-type: none;">
-                <li class="py-2"><a href="#">Articles <span class="pull-right badge bg-blue">{{count($user->articles->where('valid',true))}}</span></a></li>
-                <li class="py-2"><a href="#">Comments<span class="pull-right badge bg-aqua">{{count($user->comments->where('valid',true))}}</span></a></li>
+                <li class="py-2"><a href="/admin/list/users/{{$user->id}}/articles">Articles <span class="pull-right badge bg-blue">{{count($user->articles->where('valid',true))}}</span></a></li>
+                <li class="py-2"><a href="/admin/list/users/{{$user->id}}/comments">Comments<span class="pull-right badge bg-aqua">{{count($user->comments->where('valid',true))}}</span></a></li>
                 
                 
               </ul>
@@ -134,8 +140,8 @@
                 <td>{{$user->name}}</td>
                 <td>{{$user->created_at}}</td>
                 <td>{{$user->email}}</td>
-                <td><a href="">{{count($user->articles->where('valid',true))}}</a></td>
-                <td><a href="">{{count($user->comments->where('valid',true))}}</a></td>
+                <td><a href="/admin/list/users/{{$user->id}}/articles">{{count($user->articles->where('valid',true))}}</a></td>
+                <td><a href="/admin/list/users/{{$user->id}}/comments">{{count($user->comments->where('valid',true))}}</a></td>
                 <td class="font-italic">{{substr($user->bio, 0,55)}}...</td>
                 <td class="user-list-btn d-flex">
                   <a href="/admin/edit/user/{{$user->id}}/edit" class="btn btn-secondary"><i class="fas fa-edit"></i></a>

@@ -92,9 +92,14 @@ Route::middleware('can:is-admin')->group(function() {
   Route::post('admin/edit/project/{id}', 'ProjectController@update');
   Route::post('admin/edit/project/{id}/delete', 'ProjectController@delete');
 
-  // BLOG 
+  // BLOG PAGE
   Route::post('admin/edit/article/{id}', 'ArticleController@update');
   Route::post('admin/edit/article/{id}/delete', 'ArticleController@delete');
+
+  // Comments
+    Route::get('/admin/edit/comment/{id}/edit', 'CommentController@edit');
+    Route::post('/admin/edit/comment/{id}/update', 'CommentController@update');
+    Route::post('/admin/edit/comment/{id}/delete', 'CommentController@delete');
     // Sidebar
       // Titles
       Route::post('/admin/edit/blogpage/titles/categories', 'BlogController@categoriesTitle');
@@ -139,10 +144,9 @@ Route::middleware('can:is-admin')->group(function() {
   Route::post('/admin/edit/user/{id}/delete', 'UserController@delete');
   Route::post('/admin/edit/adduser', 'UserController@store');
         // User's Articles
-        Route::get('/admin/list/users/{id}/articles', 'ListController@userArticles');
+        Route::get('/admin/list/users/{id}/articles', 'ListController@userArticles');        
         // User's Comments
         Route::get('/admin/list/users/{id}/comments', 'ListController@userComments');
-
   // FOOTER
   Route::post('/admin/edit/footer', 'HomeController@footer');
 

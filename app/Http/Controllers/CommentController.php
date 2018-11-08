@@ -6,6 +6,7 @@ use App\Comment;
 use Illuminate\Http\Request;
 use App\Http\Requests\CommentRequest;
 use Auth;
+use Route;
 class CommentController extends Controller
 {
     /**
@@ -85,9 +86,10 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Comment $comment)
+    public function edit($id)
     {
-        //
+      $comment = Comment::find($id);
+      return view('admin.lists.cards.editcomment', compact('comment'));
     }
 
     /**
@@ -97,9 +99,27 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, $id)
     {
-        //
+        $comment = Comment::find($id);
+        if ($request->valid == 1){
+          $comment->valid = true;
+        } else if ($request->valid==0) {
+          $comment->valid = false;
+          // dd($comment->valid);
+        } 
+
+        // dd($comment->valid);
+        $comment->subject = $request->subject;
+        $comment->message = $request->message;
+        $comment->save();
+        $request->session()->flash('success','Comment Successfully Updated !');        
+        // dd(Route::curentRouteName());
+        // if (Route::curentRouteName()=='editblogpost'){
+          // return redirect()->back();
+        // } else {
+          return redirect('/admin/list/users/'.$comment->users->id.'/comments');
+        // }
     }
 
     /**

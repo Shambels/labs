@@ -11,6 +11,7 @@ require('./owlcarousel.min');
 require('./circleprogress.min');
 // require('../../node_modules/owl.carousel/dist/owl.carousel');
 require('./main');
+// require('./toggle');
 
 
 // window.Vue = require('vue');

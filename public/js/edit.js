@@ -80,6 +80,7 @@ var editables = Array.from(document.getElementsByClassName('editable'));
 var addables = Array.from(document.getElementsByClassName('addable'));
 var togglables = Array.from(document.getElementsByClassName('togglable'));
 var count = 0;
+var arrowables = Array.from(document.getElementsByClassName('arrowable'));
 
 function edit(x, y) {
   x.classList.toggle('d-none');
@@ -100,6 +101,10 @@ function toggle(x) {
   x.classList.toggle('d-none');
 }
 
+function demiTour(x) {
+  x.classList.toggle('demitour');
+}
+
 editables.forEach(function (element) {
   element.addEventListener('dblclick', function () {
     edit(element, element.nextElementSibling);
@@ -115,6 +120,12 @@ addables.forEach(function (element) {
 togglables.forEach(function (element) {
   element.addEventListener('click', function () {
     toggle(element.nextElementSibling);
+  });
+});
+
+arrowables.forEach(function (element) {
+  element.addEventListener('click', function () {
+    demiTour(element.firstElementChild);
   });
 });
 

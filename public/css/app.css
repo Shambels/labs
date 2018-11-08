@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);/* Magnific Popup CSS */
+@import url(https://fonts.googleapis.com/css?family=Nunito);@import url(https://fonts.googleapis.com/css?family=Asap:400,500,700);/* Magnific Popup CSS */
 .mfp-bg {
   top: 0;
   left: 0;
@@ -18366,5 +18366,87 @@ ul {
 
 .user-list-item:hover .user-list-btn {
   opacity: 1;
+}
+
+.fa-arrow-down {
+  -webkit-transition: 0.6s !important;
+  transition: 0.6s !important;
+}
+
+.demitour {
+  -webkit-transform: rotate(-180deg) !important;
+          transform: rotate(-180deg) !important;
+}
+
+.tda {
+  text-decoration: none;
+  opacity: .6;
+  padding: 60px;
+  font-weight: bolder;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  font-size: .8em;
+}
+
+.tda:hover {
+  opacity: 1;
+}
+
+#container {
+  width: 50px;
+  height: 36px;
+  margin: auto;
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  cursor: pointer;
+}
+
+.inner-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: inherit;
+  height: inherit;
+  text-transform: uppercase;
+  font-size: .6em;
+  letter-spacing: .2em;
+}
+
+.inner-container:first-child {
+  background: #e9e9e9;
+  color: #FFF;
+}
+
+.inner-container:nth-child(2) {
+  color: white;
+  -webkit-clip-path: inset(0 50% 0 0);
+          clip-path: inset(0 50% 0 0);
+  -webkit-transition: 0.3s cubic-bezier(0, 0, 0, 1);
+  transition: 0.3s cubic-bezier(0, 0, 0, 1);
+}
+
+.toggle {
+  width: 50%;
+  position: absolute;
+  height: inherit;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.toggle p {
+  margin: auto;
+}
+
+.toggle:nth-child(1) {
+  right: 0;
 }
 
