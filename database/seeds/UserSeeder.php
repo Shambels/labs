@@ -19,8 +19,8 @@ class UserSeeder extends Seeder
             'password' => bcrypt('123456'),
             'roles_id' => '1',
             'image' => 'default-avatar.jpg',
+            // 'bio' => 'physicist who developed the special and general theories of relativity',
             'title' => 'Labs Administrator',
-            // 'bio' => 'German-born physicist who developed the special and general theories of relativity and won the Nobel Prize for Physics in 1921 for his explanation of the photoelectric effect.'
           ],[
             'name' => 'Editor',
             'email' => 'editor@test.com',

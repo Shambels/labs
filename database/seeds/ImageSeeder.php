@@ -23,7 +23,7 @@ class ImageSeeder extends Seeder
             'folder' => 'youtube'
           ],[
             'name'=>'big-logo.png',
-            'folder' => 'brands'
+            'folder' => 'logo'
           ],[
             'name'=>'device.png',
             'folder' => 'services'

@@ -37,19 +37,21 @@ class HomeController extends Controller
         'image' => 'nullable|image'
       ]);
 
-      $logo = Image::where('folder','carousel')->first();
+      $logo = Image::where('folder','logo')->first();
       if ($request->file('image')) {
         $image = $request->file('image');
         $imagename = time().$image->hashname();
         Storage::delete(['public/images/logo/original/'.$logo->name,'public/images/logo/'.$logo->name,'public/images/logo/mini/'.$logo->name]);
-        $image->storeAs('public/images/logo/original/', $logo->name);
+        $image->storeAs('public/images/logo/original/', $imagename);
         $resized = ImgInt::make($image)->resize(504,148)->save();
         Storage::put('public/images/logo/'.$imagename, $resized);
         $mini= ImgInt::make($image)->resize(111,32)->save();
         Storage::put('public/images/logo/mini/'.$imagename,$mini);
         $logo->name= $imagename;
+        
       }
       $logo->save();
+      // dd($logo);
       $request->session()->flash('success', 'Logo Successfully Updated ');
       return redirect()->back();
 

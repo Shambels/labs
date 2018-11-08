@@ -26,7 +26,7 @@ class AdminpageController extends Controller
   
     public function home(){
       $text= Text::find(1);
-      $logo= Image::where('folder','carousel')->first();
+      $logo= Image::where('folder','logo')->first();
       $carouselImages = Image::where('folder','carousel')->get();
       $YTimage = Image::where('folder','youtube')->get()->first();
       $servicesup = Service::with('icons')->get()->random(2);
@@ -44,7 +44,7 @@ class AdminpageController extends Controller
 
     public function services(){
       $text= Text::find(1);
-      $logo= Image::where('folder','carousel')->first();
+      $logo= Image::where('folder','logo')->first();
       $services = Service::paginate(9);
       $servicesleft = Service::with('icons')->get()->random(3);
       $servicesright = Service::with('icons')->get()->random(3);
@@ -56,7 +56,7 @@ class AdminpageController extends Controller
 
     public function blog(){
       $text = Text::find(1);
-      $logo= Image::where('folder','carousel')->first();
+      $logo= Image::where('folder','logo')->first();
       $articles = Article::with('users','comments','tags','categories')->paginate(3);
       $categories = Category::all();
       $instagrams= Image::where('folder','instagram')->get();
@@ -70,7 +70,7 @@ class AdminpageController extends Controller
 
     public function blogpost($id){
       $text = Text::find(1);
-      $logo= Image::where('folder','carousel')->first();
+      $logo= Image::where('folder','logo')->first();
       $article= Article::with('users', 'comments', 'tags')->find($id);
       $categories = Category::all();
       $instagrams= Image::where('folder','instagram')->get();
@@ -132,7 +132,7 @@ class AdminpageController extends Controller
        $paginatedItems->setPath($request->url());
 
       $text = Text::find(1);
-      $logo= Image::where('folder','carousel')->first();
+      $logo= Image::where('folder','logo')->first();
       $categories = Category::all();
       $instagrams= Image::where('folder','instagram')->get();
       $tags = Tag::all();
@@ -144,7 +144,7 @@ class AdminpageController extends Controller
 
     public function contact(){
       $text = Text::find(1); 
-      $logo= Image::where('folder','carousel')->first();
+      $logo= Image::where('folder','logo')->first();
       return view ('admin/pages/contact', compact('text','logo'));
     }
 }

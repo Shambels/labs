@@ -9,11 +9,14 @@ use App\Project;
 use App\Article;
 use App\Icon;
 
+
 class ListController extends Controller
 {
     public function users(){
+      $admin = User::with('articles','comments')->where('roles_id',1)->first(); 
+      $team = User::where('roles_id',2)->get(); 
       $users = User::all();
-      return view('admin.lists.users', compact('users'));
+      return view('admin.lists.users', compact('admin','team','users'));
     }
 
     public function services () {

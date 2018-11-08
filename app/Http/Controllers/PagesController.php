@@ -22,7 +22,7 @@ class PagesController extends Controller
 
     public function home(){
       $text= Text::find(1);
-      $logo= Image::where('folder','carousel')->first();
+      $logo= Image::where('folder','logo')->first();
       $carouselImages = Image::where('folder','carousel')->get();
       $YTimage = Image::where('folder','youtube')->first();
       $servicesup = Service::with('icons')->get()->random(2);
@@ -36,7 +36,7 @@ class PagesController extends Controller
 
     public function services(){
       $text= Text::find(1);
-      $logo= Image::where('folder','carousel')->first();
+      $logo= Image::where('folder','logo')->first();
       $services = Service::paginate(9);
       $servicesleft = Service::with('icons')->get()->random(3);
       $servicesright = Service::with('icons')->get()->random(3);
@@ -47,7 +47,7 @@ class PagesController extends Controller
 
     public function blog(){
       $text = Text::find(1);
-      $logo= Image::where('folder','carousel')->first();
+      $logo= Image::where('folder','logo')->first();
       $articles = Article::with('users','comments','tags')->paginate(3);
       $categories = Category::all();
       $instagrams= Image::where('folder','instagram')->get();
@@ -108,7 +108,7 @@ class PagesController extends Controller
        $paginatedItems->setPath($request->url());
 
       $text = Text::find(1);
-      $logo= Image::where('folder','carousel')->first();
+      $logo= Image::where('folder','logo')->first();
       $categories = Category::all();
       $instagrams= Image::where('folder','instagram')->get();
       $tags = Tag::all();
@@ -120,7 +120,7 @@ class PagesController extends Controller
 
     public function blogpost($id){
       $text = Text::find(1);
-      $logo= Image::where('folder','carousel')->first();
+      $logo= Image::where('folder','logo')->first();
       $article= Article::with('users', 'comments', 'tags')->find($id);
       $categories = Category::all();
       $instagrams= Image::where('folder','instagram')->get();
@@ -136,7 +136,7 @@ class PagesController extends Controller
     
     public function contact(){
       $text = Text::find(1); 
-      $logo= Image::where('folder','carousel')->first();
+      $logo= Image::where('folder','logo')->first();
       return view ('contact', compact('text','logo'));
     }
 }
