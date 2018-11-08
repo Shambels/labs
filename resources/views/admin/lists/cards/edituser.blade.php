@@ -1,5 +1,17 @@
+@extends('adminlte::page')
+
+@section('title', 'AdminLTE')
+
+
+
+@section('content')
+
+@include('admin.alerts.success')
+@include('admin.alerts.error')
+
+
 @can ('is-admin')
-              <div class="card d-none m-3">
+              <div class="card m-3">
                 <div class="card-header bg-purple">
                   <h3 class="card-title">Edit User</h3>
                 </div>
@@ -20,8 +32,8 @@
                       </div>
                       <label for="">Role</label> 
                      <div class="radio">
-                        <label class="radio-inline"><input type="radio" value="3" name="role">Reader</label>
-                        <label class="radio-inline"><input type="radio" value="2" name="role" checked>Editor</label>
+                        <label class="radio-inline"><input type="radio" value="3" name="role" checked>Reader</label>
+                        <label class="radio-inline"><input type="radio" value="2" name="role">Editor</label>
                       </div>                                 
                     <div class="form-group">
                       <label>Title</label>
@@ -50,3 +62,4 @@
 
 
             
+@stop

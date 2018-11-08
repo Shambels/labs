@@ -20,6 +20,16 @@ class ListController extends Controller
       return view('admin.lists.users', compact('admin','team','users'));
     }
 
+    public function userArticles($id){
+      $user= User::find($id);
+      return view('admin.lists.userarticles',compact('user'));
+    }
+
+    public function userComments($id){
+      $user= User::find($id);
+      return view('admin.lists.usercomments',compact('user'));
+    }
+
     public function services () {
       $services = Service::all();
       return view('admin.lists.services', compact('services'));

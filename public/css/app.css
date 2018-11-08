@@ -18358,3 +18358,13 @@ ul {
   }
 }
 
+.user-list-btn {
+  opacity: 0;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.user-list-item:hover .user-list-btn {
+  opacity: 1;
+}
+

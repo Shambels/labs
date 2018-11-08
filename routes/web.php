@@ -134,10 +134,14 @@ Route::middleware('can:is-admin')->group(function() {
   Route::post('/admin/edit/contact/sendbutton', 'ContactController@sendButton');
 
   // USERS
+  Route::get('/admin/edit/user/{id}/edit', 'UserController@edit')->name('edituser');
   Route::post('/admin/edit/user/{id}', 'UserController@update');
   Route::post('/admin/edit/user/{id}/delete', 'UserController@delete');
   Route::post('/admin/edit/adduser', 'UserController@store');
-
+        // User's Articles
+        Route::get('/admin/list/users/{id}/articles', 'ListController@userArticles');
+        // User's Comments
+        Route::get('/admin/list/users/{id}/comments', 'ListController@userComments');
 
   // FOOTER
   Route::post('/admin/edit/footer', 'HomeController@footer');

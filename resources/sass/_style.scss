@@ -1738,3 +1738,13 @@ ul {
 		margin-bottom: 20px;
 	}
 }
+.user-list-btn {
+  opacity: 0;
+  transition: .5s;
+}
+
+.user-list-item:hover {
+  .user-list-btn{
+    opacity: 1;
+  }
+}

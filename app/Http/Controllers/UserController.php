@@ -8,6 +8,8 @@ use App\Http\Requests\StoreUser;
 use App\Http\Requests\UserRequest;
 use Storage;
 use ImgInt;
+use Hash;
+use Route;
 
 class UserController extends Controller
 {
@@ -26,6 +28,10 @@ class UserController extends Controller
     }
 
     public function store(UserRequest $request){
+      $this->validate($request, [
+        'name' => 'bail|required|max:32|unique:users', 
+        'email' => 'bail|required|email|max:75|unique:users'
+      ]);
       $user= new User;
       $users= User::all();
       $user->name = $request->name;      
@@ -50,22 +56,28 @@ class UserController extends Controller
       return redirect()->back();
     }
 
-    public function edit(User $user) {
-
-      return view('admin.users.edit', compact('user'));
+    public function edit($id) {
+      $user = User::find($id);
+      return view('admin.lists.cards.edituser', compact('user'));
     }
 
     public function update(UserRequest $request, $id){
       $user = User::find($id);
       if($request->name!=$user->name){
-        $user->name = $request->name;
-      }
-      $user->title = $request->title;
-      if ($request->email && $request->email!=$user->email){
-        $user->email= $request->email;
-      }
-      if ($request->password){
-        $user->password = bcrypt($request->password);
+        $this->validate($request,[
+          'name' => 'bail|required|max:32|unique:users',           
+          ]);
+          $user->name = $request->name;
+        }
+        if($request->email!=$user->email){
+          $this->validate($request,[            
+            'email' => 'bail|required|email|max:75|unique:users'
+            ]);
+            $user->email = $request->email;
+          }
+      $user->title = $request->title;            
+      if (!($request->password = $user->password) || (!(Hash::check($request->password,$user->password)))) {        
+      $user->password = bcrypt($request->password);
       }
       if ($request->role){
         $user->roles_id = $request->role;
@@ -86,25 +98,28 @@ class UserController extends Controller
       }
       $user->save();
       $request->session()->flash('success', 'User Successfully Updated !');
-      return redirect()->back();
+      return redirect('admin/list/users');
+      
     }
 
     public function delete(Request $request, $id) {
       $user = User::find($id);
       $articles = $user->articles;
-      $comments = $user->comments;
-      dd($comments);
-      
-
+      $comments = $user->comments;      
       if ($id!=\Auth::id()) {
-        Storage::delete(['public/images/users/thumbnails/'.$user->image,'public/images/users/originals/'.$user->image,'public/images/users/mediums/'.$user->image,]);
-        $articles->delete();
-        $comments->delete();
+        Storage::delete(['public/images/users/thumbnails/'.$user->image,'public/images/users/originals/'.$user->image,'public/images/users/mediums/'.$user->image,]);        
+        if ($articles->isNotEmpty()) {          
+          $articles->delete();
+        }
+        if ($comments->isNotEmpty()) {
+          $comments->delete();
+        }
         $user->delete();
         $request->session()->flash('success', 'User Successfully Deleted !');
         return redirect()->back();
       } else {
-          redirect()->back()->withErrors('error', "You Can't Delete Your Own Account");
+          $request->session()->flash('error', "You Can't Delete Your Own Account");
+          return redirect()->back();
         }
     }
 }
