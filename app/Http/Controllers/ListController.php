@@ -15,7 +15,8 @@ class ListController extends Controller
     public function users(){
       $admin = User::with('articles','comments')->where('roles_id',1)->first(); 
       $team = User::where('roles_id',2)->get(); 
-      $users = User::all();
+      $users = User::where('roles_id',3)->orderBy('created_at','desc')->get();
+      // dd($users);
       return view('admin.lists.users', compact('admin','team','users'));
     }
 

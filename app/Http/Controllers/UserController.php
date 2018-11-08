@@ -25,21 +25,29 @@ class UserController extends Controller
 
     }
 
-    public function store(Request $request){
-
+    public function store(UserRequest $request){
       $user= new User;
-      $user->name = $request->name;
-      $user->email = $request->email;
-      $user->password = $request->password;
+      $users= User::all();
+      $user->name = $request->name;      
+      $user->email = $request->email;                
+      $user->password = bcrypt($request->password);
       $user->roles_id = $request->role;
-      if ($request->image) {
-        // $user->image = ImgInt::make('resize')->imageStore($request->image, 'thumbnail', 100,100);
+      if ($request->bio) {
+        $user->bio = $request->bio;
+      }
+      if ($request->file('image')) {
+        $image = $request->file('image');
+        $imagename = time().$image->hashname();
+        $image->storeAs('public/images/users/originals/', $imagename);
+        $resized = ImgInt::make($image)->resize(350,436)->save();
+        Storage::put('public/images/users/mediums/'.$imagename, $resized);
+        $thumbnail = ImgInt::make($image)->resize(100,100)->save();
+        Storage::put('public/images/users/thumbnails/'.$imagename, $thumbnail);
+        $user->image = $imagename;
       }
       $user->save();
-      return redirect()->route('users.index')->with([
-        'status' => 'success',
-        'message' => 'User created successfully'
-      ]);
+      $request->session()->flash('success', 'User Successfully Created !');
+      return redirect()->back();
     }
 
     public function edit(User $user) {
@@ -49,19 +57,20 @@ class UserController extends Controller
 
     public function update(UserRequest $request, $id){
       $user = User::find($id);
-      $user->name = $request->name;
+      if($request->name!=$user->name){
+        $user->name = $request->name;
+      }
       $user->title = $request->title;
-      if ($request->email){
+      if ($request->email && $request->email!=$user->email){
         $user->email= $request->email;
       }
       if ($request->password){
-        $user->password = $request->password;
+        $user->password = bcrypt($request->password);
       }
       if ($request->role){
         $user->roles_id = $request->role;
       }
       if ($request->file('image')) {
-
         $image = $request->file('image');
         $imagename = time().$image->hashname();
         Storage::delete(['public/images/users/thumbnails/'.$user->image,'public/images/users/originals/'.$user->image,'public/images/users/mediums/'.$user->image,]);
@@ -82,8 +91,15 @@ class UserController extends Controller
 
     public function delete(Request $request, $id) {
       $user = User::find($id);
+      $articles = $user->articles;
+      $comments = $user->comments;
+      dd($comments);
+      
+
       if ($id!=\Auth::id()) {
         Storage::delete(['public/images/users/thumbnails/'.$user->image,'public/images/users/originals/'.$user->image,'public/images/users/mediums/'.$user->image,]);
+        $articles->delete();
+        $comments->delete();
         $user->delete();
         $request->session()->flash('success', 'User Successfully Deleted !');
         return redirect()->back();

@@ -27,6 +27,9 @@ Route::post('/search', 'PagesController@search')->name('search');
 Route::post('/newsletter', 'ContactController@subscribe')->name('newsletter');
 Route::post('/blogpost/{id}/comments/add', 'CommentController@store');
 
+// Route::middleware('can:is-author')->group(function()){
+// }
+
 Route::middleware('can:is-editor')->group(function() {
   // Route::get('', '')->name('editorhome');
 });
@@ -133,9 +136,11 @@ Route::middleware('can:is-admin')->group(function() {
   // USERS
   Route::post('/admin/edit/user/{id}', 'UserController@update');
   Route::post('/admin/edit/user/{id}/delete', 'UserController@delete');
+  Route::post('/admin/edit/adduser', 'UserController@store');
 
+
+  // FOOTER
   Route::post('/admin/edit/footer', 'HomeController@footer');
-
 
   // LISTS
   Route::get('admin/list/users', 'ListController@users')->name('userslist');

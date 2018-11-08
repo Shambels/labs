@@ -24,13 +24,13 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'bail|required|max:25',
-            'email' => 'email',
+            'name' => 'bail|required|max:25|unique:users',
+            'email' => 'bail|email|unique:users',
             'password' => 'max:32',
-            'roles_id' => 'integer|mte:1',
+            'roles_id' => 'integer|mt:1',
             'image' => 'image',
             'title' => 'bail|required|max: 75',
-            'bio' => 'max:500'
+            'bio' => 'nullable|max:500'
         ];
     }
 }
