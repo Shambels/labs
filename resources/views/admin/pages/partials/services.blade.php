@@ -24,6 +24,10 @@
     <div class="text-center">
       @if (Route::currentRouteName()=='editservices')
         {{$services->links()}}
+        <div class="togglable" class="btn btn-light" style="font-size: 1.8rem;">
+            <i class="fas fa-plus"></i>
+        </div>
+          @include('admin.lists.cards.store.service')
       @else
     <div class="site-btn editable">{!!$text->browseservices!!}</div>
     @include('admin.pages.cards.buttons.browseservices')
