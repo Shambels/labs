@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Tag;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
+use Auth;
 
 class TagController extends Controller
 {
@@ -36,8 +37,11 @@ class TagController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-      $tag= new Category;
+      $tag= new Tag;
       $tag->name = $request->name;
+      if(Auth::user()->id==1){
+        $tag->valid=true;
+      }
       $tag->save();
       $request->session()->flash('success', 'Category Successfully Created !');
       return redirect()->back(); 
@@ -76,6 +80,11 @@ class TagController extends Controller
     {
       $tag= Tag::find($id);
       $tag->name = $request->name;
+      if($request->valid==1){
+        $tag->valid=true;
+      } else {
+        $tag->valid=false;
+      }
       $tag->save();
       $request->session()->flash('success', 'Tag Successfully Updated !');
       return redirect()->back();

@@ -4,7 +4,7 @@
       <h3 class="card-title">Add Project</h3>
     </div>
     <div class="card-body">
-      <form action="/admin/edit/addservice" method="POST">
+      <form action="/admin/edit/addproject" method="POST" enctype="multipart/form-data">
         @csrf                   
         <div class="form-group">
           <label>Name</label>
@@ -16,7 +16,7 @@
         </div>
         <div class="form-group">
           <label>Image</label>
-          <input type="file" name="image">
+          <input type="file" name="image" value={{old('image')}}>
         </div>
         <button class="btn btn-success" type="submit"><i class="fas fa-check"></i></button>
       </form>

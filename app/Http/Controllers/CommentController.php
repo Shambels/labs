@@ -44,7 +44,7 @@ class CommentController extends Controller
           $comment->name = Auth::user()->name;
           $comment->email = Auth::user()->email;
           $comment->users_id= Auth::user()->id;
-          if(Auth::user()->roles_id=1){
+          if(Auth::user()->roles_id==1){
             $comment->valid = true;
           }
         } else {
@@ -104,12 +104,10 @@ class CommentController extends Controller
         $comment = Comment::find($id);
         if ($request->valid == 1){
           $comment->valid = true;
-        } else if ($request->valid==0) {
+        } else if ($request->valid == 0) {
           $comment->valid = false;
-          // dd($comment->valid);
-        } 
-
-        // dd($comment->valid);
+          
+        }       
         $comment->subject = $request->subject;
         $comment->message = $request->message;
         $comment->save();

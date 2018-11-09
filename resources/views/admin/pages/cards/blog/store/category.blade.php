@@ -1,4 +1,4 @@
-@can('is-admin')
+@can('is-editor')
 <div class="card d-none">
   <div class="card-header">
     <h3 class="card-title">Add New Category</h3>

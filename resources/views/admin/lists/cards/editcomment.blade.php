@@ -24,6 +24,7 @@
       <form action="/admin/edit/comment/{{$comment->id}}/update" method="POST" enctype="multipart/form-data">
         @csrf                   
           <h5>Valid</h5>
+          @can('is-admin')
           <div class="radio">
           @if ($comment->valid==true)
             <label class="radio-inline"><input type="radio" value="1" name="valid" checked>Yes</label>
@@ -35,7 +36,8 @@
               <label class="radio-inline"><input type="radio" value="1" name="valid">Yes</label>
               <label class="radio-inline"><input type="radio" value="0" name="valid">No</label>
           @endif
-          </div>                                 
+          </div>
+          @endcan                                 
         <div class="form-group">
           <h5>Subject</h5>
           <input name="subject" value="{{old('subject',$comment->subject)}}" placeholder="Comment Title. Optional." type="text" class="form-control">

@@ -91,7 +91,7 @@ class PagesController extends Controller
         // CATEGORY Search
         if($categorymatch){
           foreach ($article->categories as $category) {
-            if($category->name=$categorymatch->name) {
+            if($category->name==$categorymatch->name) {
               if(!$results->contains($article)) {
                 $results->push($article);          
               }

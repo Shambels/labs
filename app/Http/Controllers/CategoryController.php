@@ -38,6 +38,9 @@ class CategoryController extends Controller
     {
       $category= new Category;
       $category->name = $request->name;
+      if(Auth::user()->id==1){
+        $category->valid=true;
+      }      
       $category->save();
       $request->session()->flash('success', 'Category Successfully Created !');
       return redirect()->back(); 
@@ -55,7 +58,12 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, $id)
     {
         $category= Category::find($id);
-        $category->name = $request->name;
+        $category->name = $request->name;      
+        if ($request->valid == 1 ){
+          $category->valid=true;
+        } else if ($request->valid == 0 ) {
+          $category->valid=false;
+        }
         $category->save();
         $request->session()->flash('success', 'Category Successfully Updated !');
         return redirect()->back();

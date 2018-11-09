@@ -38,10 +38,33 @@ Route::middleware('can:is-editor')->group(function() {
   // LISTS
   Route::get('admin/list/users', 'ListController@users')->name('userslist');
   Route::get('admin/list/articles', 'ListController@articles')->name('articleslist');
+      // Searches
+      Route::post('/admin/list/articles/search', 'ListController@search')->name('search');
+      Route::get('/admin/list/articles/results/{search}','ListController@results');
+
+
   // User's Articles
   Route::get('/admin/list/users/{id}/articles', 'ListController@userArticles');        
   // User's Comments
   Route::get('/admin/list/users/{id}/comments', 'ListController@userComments');
+
+  // ARTICLES
+  Route::post('admin/edit/article/{id}', 'ArticleController@update');
+  Route::post('admin/edit/article/{id}/delete', 'ArticleController@delete');
+
+  // Comments
+    Route::get('/admin/edit/comment/{id}/edit', 'CommentController@edit');
+    Route::post('/admin/edit/comment/{id}/update', 'CommentController@update');
+    Route::post('/admin/edit/comment/{id}/delete', 'CommentController@delete');
+  // Categories
+  Route::post('/admin/edit/category/store', 'CategoryController@store');
+  Route::post('/admin/edit/category/{id}', 'CategoryController@update');
+  Route::post('/admin/edit/category/{id}/delete', 'CategoryController@delete');
+  // Tags
+  Route::post('/admin/edit/tag/store', 'TagController@store');
+  Route::post('/admin/edit/tag/{id}', 'TagController@update');
+  Route::post('/admin/edit/tag/{id}/delete', 'TagController@delete');
+
 });
 
 
@@ -98,17 +121,11 @@ Route::middleware('can:is-admin')->group(function() {
   Route::post('/admin/edit/service/{id}', 'ServiceController@update');
   Route::post('/admin/edit/service/{id}/delete', 'ServiceController@delete');
   // PROJECTS
+  Route::post('admin/edit/addproject', 'ProjectController@store');
   Route::post('admin/edit/project/{id}', 'ProjectController@update');
   Route::post('admin/edit/project/{id}/delete', 'ProjectController@delete');
 
   // BLOG PAGE
-  Route::post('admin/edit/article/{id}', 'ArticleController@update');
-  Route::post('admin/edit/article/{id}/delete', 'ArticleController@delete');
-
-  // Comments
-    Route::get('/admin/edit/comment/{id}/edit', 'CommentController@edit');
-    Route::post('/admin/edit/comment/{id}/update', 'CommentController@update');
-    Route::post('/admin/edit/comment/{id}/delete', 'CommentController@delete');
     // Sidebar
       // Titles
       Route::post('/admin/edit/blogpage/titles/categories', 'BlogController@categoriesTitle');
@@ -117,17 +134,9 @@ Route::middleware('can:is-admin')->group(function() {
       Route::post('/admin/edit/blogpage/titles/quote', 'BlogController@quoteTitle');
       Route::post('/admin/edit/blogpage/titles/ad', 'BlogController@adTitle');
       // Content
-      Route::post('/admin/edit/category/store', 'CategoryController@store');
-      Route::post('/admin/edit/category/{id}', 'CategoryController@update');
-      Route::post('/admin/edit/category/{id}/delete', 'CategoryController@delete');
-
       Route::post('/admin/edit/instagram/store', 'InstagramController@store');
       Route::post('/admin/edit/instagram/{id}', 'InstagramController@update');
       Route::post('/admin/edit/instagram/{id}/delete', 'InstagramController@delete');
-
-      Route::post('/admin/edit/tag/store', 'TagController@store');
-      Route::post('/admin/edit/tag/{id}', 'TagController@update');
-      Route::post('/admin/edit/tag/{id}/delete', 'TagController@delete');
 
       Route::post('/admin/edit/quote/{id}', 'BlogController@quote');
       Route::post('/admin/edit/quote/{id}/delete', 'BlogController@quoteDelete');

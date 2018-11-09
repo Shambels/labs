@@ -104,7 +104,11 @@ class ArticleController extends Controller
      $article->name= $request->name;
      $article->preview= $request->preview;
      $article->content= $request->content;
-
+     if($request->valid==1){       
+       $article->valid = true;
+     } else if( $request->valid==0){
+       $article->valid = false;
+     }
 
     // ********  TAGS ********
 
