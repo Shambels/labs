@@ -76,8 +76,8 @@ class UserController extends Controller
             $user->email = $request->email;
           }
       $user->title = $request->title;            
-      if (!($request->password = $user->password) || (!(Hash::check($request->password,$user->password)))) {        
-      $user->password = bcrypt($request->password);
+      if (($request->password != $user->password) && (!(Hash::check($request->password,$user->password)))) {        
+        $user->password = bcrypt($request->password);
       }
       if ($request->role){
         $user->roles_id = $request->role;

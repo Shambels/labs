@@ -27,11 +27,21 @@ Route::post('/search', 'PagesController@search')->name('search');
 Route::post('/newsletter', 'ContactController@subscribe')->name('newsletter');
 Route::post('/blogpost/{id}/comments/add', 'CommentController@store');
 
+Route::get('/admin/home', 'AdminpageController@index')->name('adminhome')->middleware('auth');
+
+
 // Route::middleware('can:is-author')->group(function()){
 // }
 
 Route::middleware('can:is-editor')->group(function() {
   // Route::get('', '')->name('editorhome');
+  // LISTS
+  Route::get('admin/list/users', 'ListController@users')->name('userslist');
+  Route::get('admin/list/articles', 'ListController@articles')->name('articleslist');
+  // User's Articles
+  Route::get('/admin/list/users/{id}/articles', 'ListController@userArticles');        
+  // User's Comments
+  Route::get('/admin/list/users/{id}/comments', 'ListController@userComments');
 });
 
 
@@ -39,7 +49,6 @@ Route::middleware('can:is-editor')->group(function() {
 // EDITS
 Route::middleware('can:is-admin')->group(function() {
 
-  Route::get('/admin/home', 'AdminpageController@index')->name('adminhome');
 
   // PAGES
   Route::get('/admin/edit/homepage', 'AdminpageController@home')->name('edithome');
@@ -85,9 +94,9 @@ Route::middleware('can:is-admin')->group(function() {
   Route::post('/admin/edit/servicespage/title2', 'ServiceController@title2');
   Route::post('admin/edit/servicespage/phone', 'ServiceController@phone');
   
+  Route::post('/admin/edit/addservice', 'ServiceController@store');
   Route::post('/admin/edit/service/{id}', 'ServiceController@update');
   Route::post('/admin/edit/service/{id}/delete', 'ServiceController@delete');
-
   // PROJECTS
   Route::post('admin/edit/project/{id}', 'ProjectController@update');
   Route::post('admin/edit/project/{id}/delete', 'ProjectController@delete');
@@ -142,19 +151,13 @@ Route::middleware('can:is-admin')->group(function() {
   Route::get('/admin/edit/user/{id}/edit', 'UserController@edit')->name('edituser');
   Route::post('/admin/edit/user/{id}', 'UserController@update');
   Route::post('/admin/edit/user/{id}/delete', 'UserController@delete');
-  Route::post('/admin/edit/adduser', 'UserController@store');
-        // User's Articles
-        Route::get('/admin/list/users/{id}/articles', 'ListController@userArticles');        
-        // User's Comments
-        Route::get('/admin/list/users/{id}/comments', 'ListController@userComments');
+  Route::post('/admin/edit/adduser', 'UserController@store');        
   // FOOTER
   Route::post('/admin/edit/footer', 'HomeController@footer');
 
   // LISTS
-  Route::get('admin/list/users', 'ListController@users')->name('userslist');
   Route::get('admin/list/services', 'ListController@services')->name('serviceslist');
   Route::get('admin/list/projects', 'ListController@projects')->name('projectslist');
-  Route::get('admin/list/articles', 'ListController@articles')->name('articleslist');
   Route::get('admin/list/icons', 'ListController@icons')->name('iconslist');
       
       // TRASH CAN

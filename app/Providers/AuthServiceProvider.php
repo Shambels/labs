@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Auth;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -39,8 +40,8 @@ class AuthServiceProvider extends ServiceProvider
             return false;
           }
         });
-        Gate::define('is-author', function ($post) {
-          if(Auth::user()->id == $post->user->id) {
+        Gate::define('is-author', function ($article) {
+          if(Auth::user()->id == $article->users) {
             return true;
           } else {
             return false;

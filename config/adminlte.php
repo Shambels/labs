@@ -1,5 +1,5 @@
 <?php
-
+use App\Text;
 return [
 
     /*
@@ -118,34 +118,40 @@ return [
             
             'text' => 'Summary',
             'icon' => 'eye',
-            'url'  => 'admin/home',
+            'url'  => 'admin/home',            
         ],
         [
             'text'        => 'Pages',
             'icon'        => 'file',
             'label'       => 4,
             'label_color' => 'success',
+            'can'         => 'is-admin',
             'submenu'     => [
             [
+              // 'text' => Text::find(1)->homesection,
               'text' => 'Home',
               'url' => 'admin/edit/homepage',
               'icon' => 'home',
+              'can'  => 'is-admin',
               
             ],
             [
               'text' => 'Services',
               'url' => 'admin/edit/servicespage',
-              'icon' => 'flask'
+              'icon' => 'flask',
+              'can'  => 'is-admin',
             ], 
             [
               'text' => 'Blog',
               'url' => 'admin/edit/blogpage',
-              'icon' => 'rss'
+              'icon' => 'rss',
+              'can'  => 'is-admin',
             ], 
             [
               'text' => 'Contact',
               'url' => 'admin/edit/contactpage',
-              'icon' => 'envelope'
+              'icon' => 'envelope',
+              'can'  => 'is-admin',
             ], 
             ]         
         ],
@@ -155,11 +161,13 @@ return [
             'text' => 'Inbox',
             'url'  => 'admin/inbox',
             'icon' => 'envelope',
+            'can'  => 'is-admin',
         ],
         [
             'text' => 'Newsletter',
             'url'  => 'admin/settings',
             'icon' => 'envelope-square',
+            'can'  => 'is-admin',
         ],
 
         'LISTS',
@@ -167,33 +175,40 @@ return [
             'text' => 'Users',
             'url'  => 'admin/list/users',
             'icon' => 'user',
+            'can'  => 'is-editor',
         ],
         [
           'text' => 'Services',
           'url' => 'admin/list/services',
-          'icon' => 'taxi',          
+          'icon' => 'taxi',
+          'can'  => 'is-admin',      
         ],[
           'text' => 'Projects',
           'url' => 'admin/list/projects',
-          'icon' => 'umbrella',          
+          'icon' => 'umbrella', 
+          'can'  => 'is-admin',         
         ],[
           'text' => 'Articles',
           'url' => 'admin/list/articles',
-          'icon' => 'newspaper',          
+          'icon' => 'newspaper', 
+          'can'  => 'is-editor',         
         ],[
           'text' => 'Categories',
           'url' => 'admin/list/categories',
-          'icon' => 'sort',          
+          'icon' => 'sort',
+          'can'  => 'is-editor',          
         ],
         [
           'text' => 'Tags',
           'url' => 'admin/list/tags',
-          'icon' => 'tags',          
+          'icon' => 'tags', 
+          'can'  => 'is-editor',         
         ],
         [
           'text' => 'Images',
           'url' => 'admin/list/images',
-          'icon' => 'image',          
+          'icon' => 'image',
+          'can'  => 'is-admin',          
         ],
         [
           'text' => 'Trash Can',
@@ -203,33 +218,40 @@ return [
               'text' => 'Users',
               'url'  => 'admin/trash/users',
               'icon' => 'user',
+              'can'  => 'is-admin',
           ],
           [
             'text' => 'Services',
             'url' => 'admin/trash/services',
-            'icon' => 'taxi',          
+            'icon' => 'taxi',  
+            'can'  => 'is-admin',        
           ],[
             'text' => 'Projects',
             'url' => 'admin/trash/projects',
-            'icon' => 'umbrella',          
+            'icon' => 'umbrella', 
+            'can'  => 'is-admin',         
           ],[
             'text' => 'Articles',
             'url' => 'admin/trash/articles',
-            'icon' => 'newspaper',          
+            'icon' => 'newspaper',
+            'can'  => 'is-admin',          
           ],[
             'text' => 'Categories',
             'url' => 'admin/trash/categories',
-            'icon' => 'sort',          
+            'icon' => 'sort',   
+            'can'  => 'is-admin',       
           ],
           [
             'text' => 'Tags',
             'url' => 'admin/trash/tags',
-            'icon' => 'tags',          
+            'icon' => 'tags',
+            'can'  => 'is-admin',          
           ],          
           [
             'text' => 'Images',
             'url' => 'admin/trash/images',
-            'icon' => 'image',          
+            'icon' => 'image', 
+            'can'  => 'is-admin',         
           ],
           ]
         ],

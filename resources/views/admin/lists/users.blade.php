@@ -7,56 +7,53 @@
 
 @include('admin.alerts.success')
 @include('admin.alerts.error')
-
+@can('is-admin')
 <h1 class="mb-3">Admin</h1>
-  <div class="box box-widget widget-user">
-    <!-- Add the bg color to the header using any of the bg-* classes -->
-    <div class="widget-user-header bg-purple">
-      <h2 class="widget-user-username text-orange ">{{$admin->name}}</h2>
-      <h5 class="widget-user-desc">{{$admin->title}}</h5>
-      <h6 class="widget-user-desc font-italic">{{$admin->email}}</h5>
-    </div>
-    <div class="widget-user-image">
-      <img class="rounded-circle" src="{{Storage::url('public/images/users/mediums/'.$admin->image)}}" alt="User Avatar">
-    </div>
-    <div class="box-footer">
-      <div class="row">
-        <div class="col-sm-6">
-          <a href="/admin/list/users/{{$admin->id}}/articles">
-            <div class="description-block">
-              <h5 class="description-header">{{count($admin->articles)}}</h5>
-              <span class="description-text">
-                @if (count($admin->articles)<2) 
-                Article
-                @else
-                Articles
-                @endif
-              </span>
-            </div>
-          </a>
-          <!-- /.description-block -->
-        </div>
-        <!-- /.col -->
-        <div class="col-sm-6">
-          <a href="/admin/list/users/{{$admin->id}}/comments">
-            <div class="description-block">
-              <h5 class="description-header">{{count($admin->comments)}}</h5>
-              <span class="description-text">
-                @if (count($admin->comments)<2)
-                Comment
-                @else
-                Comments
-                @endif
-              </span>
-            </div>
-          </a>
-          <!-- /.description-block -->
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
+<div class="box box-widget widget-user editable">
+  <!-- Add the bg color to the header using any of the bg-* classes -->
+  <div class="widget-user-header bg-purple">
+    <h2 class="widget-user-username text-orange ">{{$admin->name}}</h2>
+    <h5 class="widget-user-desc">{{$admin->title}}</h5>
+    <h6 class="widget-user-desc font-italic">{{$admin->email}}</h5>
+  </div>
+  <div class="widget-user-image">
+    <img class="rounded-circle" src="{{Storage::url('public/images/users/mediums/'.$admin->image)}}" alt="User Avatar">
+  </div>
+  <div class="box-footer">
+    <div class="row">
+      <div class="col-sm-6">
+        <a href="/admin/list/users/{{$admin->id}}/articles">
+          <div class="description-block">
+            <h5 class="description-header">{{count($admin->articles)}}</h5>
+            <span class="description-text">
+              @if (count($admin->articles)<2) 
+              Article
+              @else
+              Articles
+              @endif
+            </span>
+          </div>
+        </a>
+      </div>      
+      <div class="col-sm-6">
+        <a href="/admin/list/users/{{$admin->id}}/comments">
+          <div class="description-block">
+            <h5 class="description-header">{{count($admin->comments)}}</h5>
+            <span class="description-text">
+              @if (count($admin->comments)<2)
+              Comment
+              @else
+              Comments
+              @endif
+            </span>
+          </div>
+        </a>
+      </div>      
     </div>
   </div>
+</div>
+@include('admin.lists.cards.edit.admin')
+
 {{-- TEAM --}}
 <h1 class="mb-3">Team Members</h1>
   @foreach ($team->chunk(3) as $chunk)
@@ -99,9 +96,11 @@
 {{--  --}}
 <h1 >Users</h1>
 <div class="togglable" class="btn btn-light" style="font-size: 1.8rem;">
-    <i class="fas fa-plus"></i>
+  <i class="fas fa-plus"></i>
 </div>
-  @include('admin.lists.cards.store.user')
+@include('admin.lists.cards.store.user')
+@endcan
+
 <div class="row">
     <div class="box ">
       <div class="box-header bg-purple">
@@ -125,11 +124,12 @@
               <th>#</th>
               <th>Name</th>            
               <th>Creation Date</th>
-              <th>Email</th>
-              <th>Articles</th>
+              <th>Email</th>              
               <th>Comments</th>
               <th>Bio</th>
+              @can('is-admin')
               <th></th>
+              @endcan
             
             </tr>
           </thead>
@@ -139,17 +139,23 @@
                 <td>{{$key+1}}</td>
                 <td>{{$user->name}}</td>
                 <td>{{$user->created_at}}</td>
-                <td>{{$user->email}}</td>
-                <td><a href="/admin/list/users/{{$user->id}}/articles">{{count($user->articles->where('valid',true))}}</a></td>
-                <td><a href="/admin/list/users/{{$user->id}}/comments">{{count($user->comments->where('valid',true))}}</a></td>
-                <td class="font-italic">{{substr($user->bio, 0,55)}}...</td>
-                <td class="user-list-btn d-flex">
-                  <a href="/admin/edit/user/{{$user->id}}/edit" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
-                  <form action="/admin/edit/user/{{$user->id}}/delete" method="POST">
-                    @csrf
-                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                </form>
+                <td>{{$user->email}}</td>              
+                <td>
+                  <a href="/admin/list/users/{{$user->id}}/comments">
+                    <span class="text-purple">{{count($user->comments->where('valid',true))}}</span>
+                    <span >({{count($user->comments->where('valid',false))}})</span>
+                  </a>
                 </td>
+                <td class="font-italic">{{substr($user->bio, 0,55)}}...</td>
+                @can('is-admin')
+                  <td class="user-list-btn d-flex">
+                    <a href="/admin/edit/user/{{$user->id}}/edit" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
+                    <form action="/admin/edit/user/{{$user->id}}/delete" method="POST">
+                      @csrf
+                      <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                  </form>
+                  </td>
+                @endcan
               </tr>              
             @endforeach
           </tbody>

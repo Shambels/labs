@@ -32,10 +32,14 @@
             <tr class="bg-gray">
               <th>#</th>                         
               <th>Validated</th>            
-              <th>Creation Date</th>
+              <th>Creation Date</th>              
+              <th>Go To Article</th>
               <th>Title</th>
               <th>N° of Comments</th>
+              @if(Gate::check('is-admin') || Gate::check('is-author'))
               <th></th>
+              @endif
+
             
             </tr>
           </thead>
@@ -74,15 +78,20 @@
                   @endif
                 </td>
                 <td>{{$article->created_at->format('d M Y')}}</td>
+                <td><a href="/blogpost/{{$article->id}}"><i class="fas fa-eye"></i></a></td>
                 <td>{{$article->name}}</td>                
-                <td>{{count($article->comments->where('valid',true))}}</td>
-                <td class="user-list-btn d-flex">
-                  <a href="/admin/edit/blogpost/{{$article->id}}" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
-                  <form action="/admin/edit/article/{{$article->id}}/delete" method="POST">
-                    @csrf
-                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                  </form>
-                </td>
+                <td>{{count($article->comments->where('valid',true))}}</td>    
+                @if(Gate::check('is-admin') || Gate::check('is-author'))
+          
+                  <td class="user-list-btn d-flex">
+
+                    <a href="/admin/edit/blogpost/{{$article->id}}" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
+                    <form action="/admin/edit/article/{{$article->id}}/delete" method="POST">
+                      @csrf
+                      <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                    </form>
+                  </td>
+                @endif
               </tr>              
             @endforeach
           </tbody>

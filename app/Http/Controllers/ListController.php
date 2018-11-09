@@ -8,10 +8,15 @@ use App\Service;
 use App\Project;
 use App\Article;
 use App\Icon;
+use App\Text;
+use App\Image;
+use Auth;
 
 
 class ListController extends Controller
 {
+
+  // USERS
     public function users(){
       $admin = User::with('articles','comments')->where('roles_id',1)->first(); 
       $team = User::where('roles_id',2)->get(); 
@@ -30,12 +35,17 @@ class ListController extends Controller
       return view('admin.lists.usercomments',compact('user'));
     }
 
-    public function services () {
-      $services = Service::all();
-      return view('admin.lists.services', compact('services'));
+    // SERVICES
+    public function services () {      
+      // $text= Text::find(1);      
+      $services = Service::paginate(9);      
+      $icons = Icon::all();
+      return view('admin.lists.services', compact('services','icons','text'));
     } 
+
+    // PROJECTS
     public function projects () {
-      $projects = Project::all();
+      $projects = Project::paginate(3);
       return view('admin.lists.projects', compact('projects'));
     }
 

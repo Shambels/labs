@@ -68,6 +68,23 @@ class ServiceController extends Controller
      * @param  \App\Service  $service
      * @return \Illuminate\Http\Response
      */
+
+
+    public function store(Request $request) {
+      $this->validate($request, [
+        'name' => 'bail|required|max:100',
+        'content' => 'bail|required|max:250',
+      ]);
+      $service = new Service;
+      $service->name = $request->name;
+      $service->content = $request->content;
+      $service->icons_id= $request->icon;
+      $service->save();
+      $request->session()->flash('success', 'Service Card Successfully Created !');
+      return redirect()->back();       
+
+
+    }
     public function update(Request $request, $id)
     {
         $this->validate($request, [
