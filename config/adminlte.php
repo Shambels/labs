@@ -205,12 +205,6 @@ return [
           'can'  => 'is-editor',         
         ],
         [
-          'text' => 'Images',
-          'url' => 'admin/list/images',
-          'icon' => 'image',
-          'can'  => 'is-admin',          
-        ],
-        [
           'text' => 'Trash Can',
           'icon' => 'trash-alt',
           'submenu' =>[
@@ -246,14 +240,14 @@ return [
             'url' => 'admin/trash/tags',
             'icon' => 'tags',
             'can'  => 'is-admin',          
-          ],          
+          ],   
           [
-            'text' => 'Images',
-            'url' => 'admin/trash/images',
-            'icon' => 'image', 
-            'can'  => 'is-admin',         
-          ],
-          ]
+            'text' => 'Comments',
+            'url' => 'admin/trash/comments',
+            'icon' => 'tags',
+            'can'  => 'is-admin',          
+          ],                 
+         ]
         ],
         'ACCOUNT SETTINGS',
         [

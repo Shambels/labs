@@ -10,6 +10,8 @@ use Storage;
 use ImgInt;
 use Hash;
 use Route;
+use App\Article;
+use App\Comment;
 
 class UserController extends Controller
 {
@@ -104,21 +106,17 @@ class UserController extends Controller
 
     public function delete(Request $request, $id) {
       $user = User::find($id);
-      $articles = $user->articles;
-      $comments = $user->comments;      
+      // $articles = $user->articles;
+      // $comments = $user->comments;      
       if ($id!=\Auth::id()) {
-        Storage::delete(['public/images/users/thumbnails/'.$user->image,'public/images/users/originals/'.$user->image,'public/images/users/mediums/'.$user->image,]);        
-        if ($articles->isNotEmpty()) {          
-          $articles->delete();
-        }
-        if ($comments->isNotEmpty()) {
-          $comments->delete();
-        }
+        Storage::delete(['public/images/users/thumbnails/'.$user->image,'public/images/users/originals/'.$user->image,'public/images/users/mediums/'.$user->image,]);                  
+        Article::where('users_id',$id)->delete();                
+        Comment::where('users_id',$id)->delete();        
         $user->delete();
         $request->session()->flash('success', 'User Successfully Deleted !');
         return redirect()->back();
       } else {
-          $request->session()->flash('error', "You Can't Delete Your Own Account");
+          $request->session()->flash('success', "You Can't Delete Your Own Account");
           return redirect()->back();
         }
     }

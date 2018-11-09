@@ -13,10 +13,10 @@
       <div class="form-group">
         <label for="">Valid</label>
         <div class="radio">
-          @if ($article->valid==true)
+          @if ($tag->valid==true)
             <label class="radio-inline"><input type="radio" value="1" name="valid" checked>Yes</label>
             <label class="radio-inline"><input type="radio" value="0" name="valid">No</label>
-          @elseif ($article->valid==false)
+          @elseif ($tag->valid==false)
             <label class="radio-inline"><input type="radio" value="1" name="valid">Yes</label>
             <label class="radio-inline"><input type="radio" value="0" name="valid" checked>No</label>
           @else

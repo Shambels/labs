@@ -36,8 +36,10 @@ Route::get('/admin/home', 'AdminpageController@index')->name('adminhome')->middl
 Route::middleware('can:is-editor')->group(function() {
   // Route::get('', '')->name('editorhome');
   // LISTS
-  Route::get('admin/list/users', 'ListController@users')->name('userslist');
-  Route::get('admin/list/articles', 'ListController@articles')->name('articleslist');
+  Route::get('/admin/list/users', 'ListController@users')->name('userslist');
+  Route::get('/admin/list/articles', 'ListController@articles')->name('articleslist');
+  Route::get('/admin/list/categories', 'ListController@categories')->name('categorieslist');
+  Route::get('/admin/list/tags', 'ListController@tags')->name('tagslist');
       // Searches
       Route::post('/admin/list/articles/search', 'ListController@search')->name('search');
       Route::get('/admin/list/articles/results/{search}','ListController@results');
@@ -51,17 +53,19 @@ Route::middleware('can:is-editor')->group(function() {
   // ARTICLES
   Route::post('admin/edit/article/{id}', 'ArticleController@update');
   Route::post('admin/edit/article/{id}/delete', 'ArticleController@delete');
-
+  
   // Comments
-    Route::get('/admin/edit/comment/{id}/edit', 'CommentController@edit');
-    Route::post('/admin/edit/comment/{id}/update', 'CommentController@update');
-    Route::post('/admin/edit/comment/{id}/delete', 'CommentController@delete');
+  Route::get('/admin/edit/comment/{id}/edit', 'CommentController@edit');
+  Route::post('/admin/edit/comment/{id}/update', 'CommentController@update');
+  Route::post('/admin/edit/comment/{id}/delete', 'CommentController@delete');
   // Categories
+  Route::get('admin/edit/category/{id}/edit','CategoryController@edit');
   Route::post('/admin/edit/category/store', 'CategoryController@store');
   Route::post('/admin/edit/category/{id}', 'CategoryController@update');
   Route::post('/admin/edit/category/{id}/delete', 'CategoryController@delete');
   // Tags
   Route::post('/admin/edit/tag/store', 'TagController@store');
+  Route::get('/admin/edit/tag/{id}/edit', 'TagController@edit');
   Route::post('/admin/edit/tag/{id}', 'TagController@update');
   Route::post('/admin/edit/tag/{id}/delete', 'TagController@delete');
 
@@ -80,10 +84,10 @@ Route::middleware('can:is-admin')->group(function() {
   Route::get('/admin/edit/blogpost/{id}','AdminpageController@blogpost')->name('editblogpost');
   Route::get('/admin/edit/contactpage', 'AdminpageController@contact')->name('editcontact');
     // PAGES NAMES
-    Route::post('admin/edit/pagename/home', 'PagenameController@home');
-    Route::post('admin/edit/pagename/services', 'PagenameController@services');
-    Route::post('admin/edit/pagename/blog', 'PagenameController@blog');
-    Route::post('admin/edit/pagename/contact', 'PagenameController@contact');
+    Route::post('/admin/edit/pagename/home', 'PagenameController@home');
+    Route::post('/admin/edit/pagename/services', 'PagenameController@services');
+    Route::post('/admin/edit/pagename/blog', 'PagenameController@blog');
+    Route::post('/admin/edit/pagename/contact', 'PagenameController@contact');
   
 
   // HOME PAGE
@@ -121,9 +125,9 @@ Route::middleware('can:is-admin')->group(function() {
   Route::post('/admin/edit/service/{id}', 'ServiceController@update');
   Route::post('/admin/edit/service/{id}/delete', 'ServiceController@delete');
   // PROJECTS
-  Route::post('admin/edit/addproject', 'ProjectController@store');
-  Route::post('admin/edit/project/{id}', 'ProjectController@update');
-  Route::post('admin/edit/project/{id}/delete', 'ProjectController@delete');
+  Route::post('/admin/edit/addproject', 'ProjectController@store');
+  Route::post('/admin/edit/project/{id}', 'ProjectController@update');
+  Route::post('/admin/edit/project/{id}/delete', 'ProjectController@delete');
 
   // BLOG PAGE
     // Sidebar
@@ -147,7 +151,7 @@ Route::middleware('can:is-admin')->group(function() {
       Route::get('/admin/results/{search}','AdminpageController@results');
       Route::post('/admin/search', 'AdminpageController@search')->name('search');
   // NEWSLETTER
-  Route::post('//admin/edit/newsletter/title', 'ContactController@newsletterTitle');
+  Route::post('/admin/edit/newsletter/title', 'ContactController@newsletterTitle');
   Route::post('/admin/edit/newsletter/button', 'ContactController@newsletterButton');
   
   // CONTACT 
@@ -165,16 +169,22 @@ Route::middleware('can:is-admin')->group(function() {
   Route::post('/admin/edit/footer', 'HomeController@footer');
 
   // LISTS
-  Route::get('admin/list/services', 'ListController@services')->name('serviceslist');
-  Route::get('admin/list/projects', 'ListController@projects')->name('projectslist');
-  Route::get('admin/list/icons', 'ListController@icons')->name('iconslist');
+  Route::get('/admin/list/services', 'ListController@services')->name('serviceslist');
+  Route::get('/admin/list/projects', 'ListController@projects')->name('projectslist');
+  Route::get('/admin/list/icons', 'ListController@icons')->name('iconslist');
       
       // TRASH CAN
-      Route::get('admin/trash/users', 'TrashController@users')->name('trasheduserslist');
-      Route::get('admin/trash/services', 'TrashController@services')->name('trashedserviceslist');
-      Route::get('admin/trash/projects', 'TrashController@projects')->name('trashedprojectslist');
-      Route::get('admin/trash/articles', 'TrashController@articles')->name('trashedarticleslist');
-      Route::get('admin/trash/icons', 'TrashController@icons')->name('trashediconslist');
+      Route::get('/admin/trash/users', 'TrashController@users')->name('trasheduserslist');
+      Route::get('/admin/trash/services', 'TrashController@services')->name('trashedserviceslist');
+      Route::get('/admin/trash/projects', 'TrashController@projects')->name('trashedprojectslist');
+      Route::get('/admin/trash/articles', 'TrashController@articles')->name('trashedarticleslist');
+      Route::get('/admin/trash/icons', 'TrashController@icons')->name('trashediconslist');
      
+      // Trashed Users Articles
+      Route::get('/admin/list/users/trashed/{id}/articles', 'TrashController@trashedUserArticles');   
+      // Trashed Users Comments
+      Route::get('/admin/list/users/trashed/{id}/comments', 'TrashController@trashedUserComments'); 
+      
+      Route::post('/admin/edit/user/{id}/restore', 'TrashController@restoreUser');
 });
 

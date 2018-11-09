@@ -9,7 +9,7 @@
 @include('admin.alerts.success')
 @include('admin.alerts.error')
 
-
+<h1>Services</h1>
 <div class="services-section spad">
   <div class="container">    
     <div class="row">

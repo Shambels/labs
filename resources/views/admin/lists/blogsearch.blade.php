@@ -25,7 +25,13 @@
                 </div>
               </div>
               <div class="post-content">
-              <h2 class="post-title">{{$article->name}}</h2>
+              <h2 class="post-title">{{$article->name}}
+                @if ($article->valid==1)
+                  <i class=" text-success fas fa-check"></i>
+                @elseif ($article->valid==0)
+                  <i class=" text-danger fas fa-times"></i>          
+                @endif
+              </h2>
                 <div class="post-meta">
                   <a href="/blogpost/{{$article->id}}">{{$article->users->name}}</a>
                   <a href="">

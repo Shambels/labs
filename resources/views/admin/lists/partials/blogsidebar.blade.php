@@ -28,11 +28,12 @@
             @include('admin.pages.cards.blog.category')
           </li>
           @endforeach
+          <li><a href="/admin/list/categories">...</a></li>
           <div class="togglable" class="btn btn-light">
             <i class="fas fa-plus"></i>
           </div>
           @include('admin.pages.cards.blog.store.category')
-          {{-- {{$categories->links()}} --}}
+          
       
         </ul>
       </div>
@@ -56,7 +57,8 @@
                 @endif</a>
               @include('admin.pages.cards.blog.tag')
             </li>
-          @endforeach   
+          @endforeach 
+          <li><a href="/admin/list/tags">...</a></li>  
         </ul>
       </div>
       {{-- {{$tags->links()}}          --}}

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryRequest;
+use Route;
 
 class CategoryController extends Controller
 {
@@ -28,6 +29,10 @@ class CategoryController extends Controller
         //
     }
 
+    public function edit($id) {
+      $category = Category::find($id);
+      return view ('admin.lists.cards.editcategory', compact('category'));
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -57,6 +62,7 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, $id)
     {
+
         $category= Category::find($id);
         $category->name = $request->name;      
         if ($request->valid == 1 ){
@@ -66,7 +72,11 @@ class CategoryController extends Controller
         }
         $category->save();
         $request->session()->flash('success', 'Category Successfully Updated !');
-        return redirect()->back();
+        if (\Request::is('admin/edit/category/*')) {           
+          return redirect('/admin/list/categories');
+          } else {
+            return redirect()->back();
+          }
     }
 
     /**

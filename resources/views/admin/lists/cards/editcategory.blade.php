@@ -1,5 +1,17 @@
+@extends('adminlte::page')
+
+@section('title', 'AdminLTE')
+
+
+
+@section('content')
+
+@include('admin.alerts.success')
+@include('admin.alerts.error')
+
+
 @can ('is-editor')
-<div class="card d-none">
+<div class="card">
   <div class="card-header">
     <h3 class="card-title">Edit Category</h3>
   </div>
@@ -24,6 +36,7 @@
         </div>
         @endcan
       <div class="form-group">
+        <label>Name</label>
         <input name="name" value="{{old('name', $category->name)}}" placeholder="Type here" type="text" class="form-control">
       </div>
       <button class="btn btn-success" type="submit">OK</button>
@@ -35,3 +48,11 @@
   </div>
 </div>
 @endcan
+
+
+
+
+
+
+
+@stop

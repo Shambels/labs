@@ -9,6 +9,8 @@
 @include('admin.alerts.success')
 @include('admin.alerts.error')
 
+
+<h1>Articles</h1>
 <!-- page section -->
 <div class="page-section spad">
   <div class="container">
@@ -29,10 +31,9 @@
             <h5 class="">
               {{$article->name}}
               @if ($article->valid==1)
-              <i class=" text-success fas fa-check"></i>
-            @elseif ($article->valid==0)
-              <i class=" text-danger fas fa-times"></i>
-            </span>
+                <i class=" text-success fas fa-check"></i>
+              @elseif ($article->valid==0)
+                <i class=" text-danger fas fa-times"></i>          
             @endif
             </h5>
               <div class="post-meta mb-0">

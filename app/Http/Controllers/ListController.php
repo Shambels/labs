@@ -24,7 +24,7 @@ class ListController extends Controller
     public function users(){
       $admin = User::with('articles','comments')->where('roles_id',1)->first(); 
       $team = User::where('roles_id',2)->get(); 
-      $users = User::where('roles_id',3)->orderBy('created_at','desc')->get();
+      $users = User::where('roles_id',3)->orderBy('created_at','desc')->paginate(15);
       // dd($users);
       return view('admin.lists.users', compact('admin','team','users'));
     }
@@ -53,11 +53,21 @@ class ListController extends Controller
       return view('admin.lists.projects', compact('projects'));
     }
 
+    public function categories() {
+      $categories = Category::orderBy('valid','asc')->paginate(20);      
+      return view ('admin.lists.categories', compact('categories'));
+    }
+    public function tags() {
+      $tags = Tag::paginate(25);
+      return view ('admin.lists.tags', compact('tags'));
+    }
+
+
     public function articles () {
       $text= Text::find(1);
       $articles = Article::paginate(5);
-      $categories = Category::paginate(7);      
-      $tags= Tag::paginate(12);            
+      $categories = Category::take(7)->get();      
+      $tags= Tag::take(12)->get();            
       return view('admin.lists.articles', compact('articles','text','categories','tags'));
     }
     public function icons () {
@@ -121,4 +131,5 @@ class ListController extends Controller
       // Article::orderBy('created_at');
       return view ('admin/lists/blogsearch',['results' => $paginatedItems], compact('text','articles','categories','tags','tagmatch'));
     }
+
 }

@@ -64,9 +64,10 @@ class TagController extends Controller
      * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tag $tag)
+    public function edit($id)
     {
-        //
+        $tag = Tag::find($id);
+        return view ('admin.lists.cards.edittag', compact('tag'));
     }
 
     /**
@@ -87,7 +88,11 @@ class TagController extends Controller
       }
       $tag->save();
       $request->session()->flash('success', 'Tag Successfully Updated !');
-      return redirect()->back();
+      if (\Request::is('admin/edit/tag/*')) {           
+        return redirect('/admin/list/tags');
+        } else {
+          return redirect()->back();
+        }
     }
 
     /**
