@@ -178,13 +178,15 @@ Route::middleware('can:is-admin')->group(function() {
       Route::get('/admin/trash/services', 'TrashController@services')->name('trashedserviceslist');
       Route::get('/admin/trash/projects', 'TrashController@projects')->name('trashedprojectslist');
       Route::get('/admin/trash/articles', 'TrashController@articles')->name('trashedarticleslist');
-      Route::get('/admin/trash/icons', 'TrashController@icons')->name('trashediconslist');
-     
+      Route::get('/admin/trash/comments', 'TrashController@comments')->name('trashedcommentslist');
+
       // Trashed Users Articles
       Route::get('/admin/list/users/trashed/{id}/articles', 'TrashController@trashedUserArticles');   
       // Trashed Users Comments
       Route::get('/admin/list/users/trashed/{id}/comments', 'TrashController@trashedUserComments'); 
-      
+            
+      // Restore
       Route::post('/admin/edit/user/{id}/restore', 'TrashController@restoreUser');
+      Route::post('/admin/edit/article/{id}/restore', 'TrashController@restoreArticle');
 });
 

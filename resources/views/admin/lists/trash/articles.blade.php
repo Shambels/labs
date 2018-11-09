@@ -49,11 +49,17 @@
                 <td>{{$article->name}}</td>             
                 <td>{{$article->preview}}</td>                                
                 @can('is-admin')
-                  <td class="user-list-btn d-flex">                    
-                    <form action="/admin/edit/article/{{$article->id}}/restore" method="POST">
-                      @csrf
-                      <button type="submit" class="btn bg-purple">Restore</button>
-                    </form>
+                  <td class="user-list-btn d-flex">
+                    @if (App\User::withTrashed()->find($article->users_id)->trashed())
+                      <a class="btn btn-gray" href="/admin/trash/users">
+                        See Author
+                      </a>
+                    @else                    
+                      <form action="/admin/edit/article/{{$article->id}}/restore" method="POST">
+                        @csrf
+                        <button type="submit" class="btn bg-purple">Restore</button>
+                      </form>
+                    @endif                                          
                   </td>
                 @endcan
               </tr>              

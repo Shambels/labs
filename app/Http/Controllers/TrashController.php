@@ -19,17 +19,17 @@ class TrashController extends Controller
   }
   
   public function restoreUser(Request $request, $id) {
-    $user = User::withTrashed()->find($id);
+    $user = User::onlyTrashed()->find($id);
     $user->restore();
-    $comments = Comment::withTrashed()->where('users_id',$id)->get();
+    $comments = Comment::onlyTrashed()->where('users_id',$id)->get();
     foreach ($comments as $comment){      
       $comment->restore();
     }
-    $articles = Article::withTrashed()->where('users_id',$id)->get();
+    $articles = Article::onlyTrashed()->where('users_id',$id)->get();
     foreach ($articles as $article){      
       $article->restore();
     }
-    $request->session()->flash('success', 'Successfully Restored !');
+    $request->session()->flash('success', 'User Successfully Restored !');
     return redirect()->back();        
   }
 
@@ -41,8 +41,8 @@ class TrashController extends Controller
   public function restoreService(Request $request, $id) {
     $service = Service::find($id);
     $service->restore();    
-    $request->session()->flash('success', 'Successfully Restored !');
-    return redirect();      
+    $request->session()->flash('success', 'Restore Successfully Restored !');
+    return redirect()->back();      
   }
   public function projects () {
     $projects = Project::onlyTrashed()->paginate(20);
@@ -52,8 +52,8 @@ class TrashController extends Controller
   public function restoreProject(Request $request, $id) {
     $project = Project::find($id);
     $project->restore();
-    $request->session()->flash('success', 'Successfully Restored !');
-    return redirect();      
+    $request->session()->flash('success', 'Project Successfully Restored !');
+    return redirect()->back();      
   }
 
   public function articles () {
@@ -62,25 +62,25 @@ class TrashController extends Controller
   }
   
   public function trashedUserArticles($id){
-    $articles = Article::withTrashed()->where('users_id',$id)->paginate(20);    
+    $articles = Article::onlyTrashed()->where('users_id',$id)->paginate(20);    
     return view('admin.lists.trash.articles', compact('articles'));
   }
 
   public function restoreArticle(Request $request, $id) {
-    $article = Article::find($id);
+    $article = Article::onlyTrashed()->find($id);
     $article->restore();
-    $request->session()->flash('success', 'Successfully Restored !');
-    return redirect();      
+    $request->session()->flash('success', 'Article Successfully Restored !');
+    return redirect()->back();      
   }
-  public function icons () {
-    $icons = Icon::onlyTrashed()->paginate(20);
-    return view('admin.lists.trash.icons', compact('icons'));
+  public function comments () {
+    $comments = Icon::onlyTrashed()->paginate(20);
+    return view('admin.lists.trash.comments', compact('comments'));
   }
   
-  public function restoreIcon(Request $request, $id) {
-    $icon = Icon::find($id);
-    $icon->restore();
-    $request->session()->flash('success', 'Successfully Restored !');
-    return redirect();      
+  public function restoreComment(Request $request, $id) {
+    $comment = Comment::find($id);
+    $comment->restore();
+    $request->session()->flash('success', 'Comment Successfully Restored !');
+    return redirect()->back();      
   }
 }
