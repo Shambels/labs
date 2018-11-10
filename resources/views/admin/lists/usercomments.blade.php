@@ -68,17 +68,28 @@
                 </td> --}}
                 <td>
                   @if ($comment->valid==true)
-                  <span class="text-success">OK</span>
+                    <span class="text-success"><i class="fas fa-check"></i></span>
                   @elseif ($comment->valid==false)
-                    <span class="text-danger">DENIED </span>
+                    <span class="text-danger"><i class="fas fa-times"></i></span>
                   @elseif ($comment->valid==null)
-                  <span class="">TBD</span>
+                    <span class=""><i class="fas fa-bell"></i></span>
                   @endif
                 </td>
                 <td>{{$comment->created_at->format('d M Y')}}</td>
                 <td>{{substr($comment->subject,0,30)}}...</td>
                 <td>{{substr($comment->message,0,30)}}...</td>                
-                <td>{{substr($comment->articles->name,0,30)}}...</td>
+                <td>
+                  @if ($comment->articles)
+                    @if (Auth::user()->id==1)
+                    <a href="/admin/edit/blogpost/{{$comment->articles->id}}"><i class="fas fa-search text-purple"></i></a>
+                    @else
+                    <a href="/blogpost/{{$comment->articles->id}}"><i class="fas fa-search text-purple"></i></a>
+                    @endif
+                  @else
+                    <span class="text-gray">Deleted</span>
+                  @endif
+
+                </td>
                 <td class="user-list-btn d-flex">
                   <a href="/admin/edit/comment/{{$comment->id}}/edit" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
                   <form action="/admin/edit/comment/{{$comment->id}}/delete" method="POST">

@@ -34,11 +34,11 @@ class ContactController extends Controller
 
   public function info(Request $request) {
     $this->validate($request, [
-      'office' => 'bail|required|max:35',
-      'address' => 'bail|required|max:35',
-      'town' => 'bail|required|max:35',
-      'phone' => 'bail|required|max:35',
-      'email' => 'bail|required|max:35'
+      'office' => 'bail|required|max: 50',
+      'address' => 'bail|required|max: 50',
+      'town' => 'bail|required|max: 50',
+      'phone' => 'bail|required|max: 50',
+      'email' => 'bail|required|max: 50'
     ]);
     $text = Text::find(1);
     $text->contactoffice = $request->office;
@@ -46,7 +46,7 @@ class ContactController extends Controller
     $text->contacttown = $request->town;
     $text->contactphone = $request->phone;
     $text->contactemail = $request->email;
-    
+    $text->save();
     // $mapCoord = Mapcoord::find(1);
     // $fullAddress = $text->contactaddress.','.$text->contacttown;
     // $mapCoord->fulladdress=$fullAddress;

@@ -64,7 +64,7 @@
 							<ul class="comment-list">
                 @foreach ($comments->where('valid',true) as $comment)
                 @if ($comment->users)
-								<li>
+								<li class="editable">
 									<div class="avatar">
                     {{-- <img src="{{Storage::url($comment->users->image)}}" alt=""> --}}
                     <img src="{{Storage::url('public/images/users/mediums/'.$comment->users->image)}}" alt="comment_author_avatar">
@@ -74,8 +74,9 @@
 										<p>{{$comment->message}}</p>
 									</div>
                 </li>
+                @include('admin.pages.cards.blog.comment')
                 @else
-                <li>
+                <li class="editable">
                   <div class="avatar">                         
                     <img src="{{Storage::url('public/img/avatar/0'.rand(1,3).'.jpg')}}" alt="guest_avatar">                                                         
                   </div>
