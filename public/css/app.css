@@ -18368,7 +18368,9 @@ ul {
   opacity: 1;
 }
 
-.fa-arrow-down {
+.fa-arrow-down,
+.fa-arrow-up,
+.fa-plus {
   -webkit-transition: 0.6s !important;
   transition: 0.6s !important;
 }

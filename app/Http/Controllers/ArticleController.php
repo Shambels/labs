@@ -44,9 +44,124 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function store(Request $request)
     {
-        //
+      $this->validate($request, [
+        'name' =>  'bail|required|max:150',        
+        'image' => 'image',
+        'preview' => 'bail|required|max:350',
+        'content' => 'bail|required|max:999'
+      ]);
+      $article = new Article;
+      if ($request->file('image')) {
+        $image = $request->file('image');
+        $imagename = time().$image->hashname();
+        Storage::delete(['public/images/articles/originals/'.$article->image,'public/images/articles/'.$article->image]);
+        $image->storeAs('public/images/articles/originals', $imagename);
+        $resized = ImgInt::make($image)->resize(730,262)->save();
+        Storage::put('public/images/articles/'.$imagename, $resized);
+        $article->image = $imagename;
+      } else {
+        $article->image = 'blog-1.jpg';
+      }
+      $article->name= $request->name;
+      $article->users_id = Auth::user()->id;
+      $article->preview= $request->preview;
+      $article->content= $request->content;
+
+      if (Auth::user()->roles_id == 1) {
+        $article->valid = true;
+      }
+ 
+     // ********  TAGS ********
+ 
+      // $tags = Tag::all();
+ 
+     // *** New Tags ***
+     
+    //   for ($i=0; $i<10;$i++) {
+ 
+    //   $NTI='newtag'.$i;
+    //  // if "New Tag" Input has a value
+    //   if ($request->$NTI) {
+    //      $match=false;
+    //      // check if that tag already exists
+    //      foreach ($tags as $tag) {
+    //        if ($tag->name == $request->$NTI) {
+    //          $match= true;
+    //          $newtag= $tag;
+    //          $newtag->save();
+    //        }
+    //       }
+
+    //        // If it doesn't, create new one
+    //        if ($match==false) { 
+    //        $newtag= new Tag;
+    //        $newtag->name = $request->$NTI; 
+    //        if (Auth::user()->roles_id==1) {         
+    //          $newtag->valid=true;
+    //         }
+    //         $newtag->save();
+    //       }
+    //       // Link the new Tag to the Article.
+    //       $article->tags()->attach($newtag);           
+    //       $article->save();
+    //   }
+    // }
+  
+ 
+     // ******** CATEGORIES ********
+ 
+  //    $categories= Category::all();
+ 
+  //    //  *** New Categories ***
+ 
+  //    for ($i=0;$i<10;$i++) {
+       
+  //      $NCI = 'newcategory'.$i;
+     
+  //    // if "New Category" Input has a value
+  //    if ($request->$NCI) {
+  //      $match=false;
+  //      // check if that category already exists
+  //      foreach ($categories as $category) {
+  //        if ($category->name == $request->$NCI) {
+  //          $match = true;
+  //          $newcat = $category;
+  //          $newcat->save();
+  //        }
+  //      }
+ 
+  //      // If it doesn't exist,
+  //      if ($match==false) { 
+  //        // create new category
+  //        $newcat= new Category;
+  //        $newcat->name = $request->$NCI;
+  //        if (Auth::user()->roles_id==1) {
+  //          $newcat->valid=true;
+  //        }
+  //        $newcat->save();
+  //      }
+ 
+  //      $linked=false;
+  //      // Check if tag isn't already linked to Article
+  //      foreach ($article->categories as $category) {
+  //        if ($category->name == $newcat->name) {
+  //          $linked = true;
+  //        }
+  //      }
+  //      // If it isn't
+  //      if ($linked==false) {
+  //        //  attach new category to the article
+  //      $article->categories()->attach($newcat);
+  //      $article->save();
+  //      }  
+  //    }
+  //  }
+   
+      $article->save();
+      $request->session()->flash('success','Article Successfully Updated ! ');
+      return redirect()->back();  
     }
 
     /**
@@ -55,10 +170,7 @@ class ArticleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+
 
     /**
      * Display the specified resource.
@@ -92,10 +204,12 @@ class ArticleController extends Controller
     public function update(ArticleRequest $request, $id)
     {
      $article = Article::find($id);
-     if ($request->file('image')) {
+     if ($request->file('image')) {       
        $image = $request->file('image');
        $imagename = time().$image->hashname();
-       Storage::delete(['public/images/articles/originals/'.$article->image,'public/images/articles/'.$article->image]);
+       if($article->image!='blog-1.jpg'){
+         Storage::delete(['public/images/articles/originals/'.$article->image,'public/images/articles/'.$article->image]);
+        }
        $image->storeAs('public/images/articles/originals', $imagename);
        $resized = ImgInt::make($image)->resize(730,262)->save();
        Storage::put('public/images/articles/'.$imagename, $resized);

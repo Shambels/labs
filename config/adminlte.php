@@ -234,18 +234,7 @@ return [
             'url' => 'admin/trash/comments',
             'icon' => 'comments',
             'can'  => 'is-admin',          
-          ],[
-            'text' => 'Categories',
-            'url' => 'admin/trash/categories',
-            'icon' => 'sort',   
-            'can'  => 'is-admin',       
-          ],
-          [
-            'text' => 'Tags',
-            'url' => 'admin/trash/tags',
-            'icon' => 'tags',
-            'can'  => 'is-admin',          
-          ],                   
+          ]                 
          ]
         ],
         'ACCOUNT SETTINGS',

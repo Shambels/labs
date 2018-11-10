@@ -19,8 +19,8 @@
               @include('admin.pages.cards.blog.category')
             </li>
             @endforeach
-            <div class="togglable" class="btn btn-light">
-              <i class="fas fa-plus"></i>
+            <div class="togglable arrowable" class="btn btn-light">
+              <i class="fas fa-plus demitour"></i>
             </div>
             @include('admin.pages.cards.blog.store.category')
         
@@ -43,8 +43,8 @@
         <div class="widget-item">          
           <h2 class="widget-title editable">{!!$text->tags!!}</h2>
           @include('admin.pages.cards.titles.blog.tags')
-          <div class="togglable" class="btn btn-light">
-              <i class="fas fa-plus"></i>
+          <div class="togglable arrowable" class="btn btn-light">
+              <i class="fas fa-plus demitour"></i>
             </div>
             @include('admin.pages.cards.blog.store.tag')
           <ul class="tag">

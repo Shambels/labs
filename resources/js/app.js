@@ -5,7 +5,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap.');
+require('./bootstrap');
 require('../../node_modules/magnific-popup/dist/jquery.magnific-popup');
 require('./owlcarousel.min');
 require('./circleprogress.min');

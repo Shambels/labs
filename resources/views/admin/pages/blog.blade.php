@@ -57,14 +57,16 @@
 					<!-- Pagination -->
 					<div class="page-pagination">
 						{{$articles->links()}}
-					</div>
-        </div>
-        
-
-		@include('admin.pages.partials.blogsidebar')
-			</div>
+          </div>
+          <div class="togglable mt-5 arrowable" class="btn btn-light">
+            <i style="font-size: 3rem;" class="fas fa-plus demitour"></i>
+          </div>
+          @include('admin.pages.cards.storearticle')         
+        </div>      
+	  	@include('admin.pages.partials.blogsidebar')
 		</div>
 	</div>
+</div>
 
 
 @include('admin.pages.partials.newsletter')

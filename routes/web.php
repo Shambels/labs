@@ -51,6 +51,7 @@ Route::middleware('can:is-editor')->group(function() {
   Route::get('/admin/list/users/{id}/comments', 'ListController@userComments');
 
   // ARTICLES
+  Route::post('admin/edit/article/add', 'ArticleController@store');
   Route::post('admin/edit/article/{id}', 'ArticleController@update');
   Route::post('admin/edit/article/{id}/delete', 'ArticleController@delete');
   
