@@ -1,5 +1,4 @@
 <?php
-use App\Text;
 return [
 
     /*
@@ -108,27 +107,23 @@ return [
     */
 
     'menu' => [
-        'WEBSITE',
-        [
-            'text' => 'Blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
-            
+        
+            'WEBSITE',
+          
+            [ 
             'text' => 'Summary',
             'icon' => 'eye',
-            'url'  => 'admin/home',            
-        ],
-        [
+            'url'  => 'admin/home',
+            'can'  => 'is-editor'            
+            ],
+            [
             'text'        => 'Pages',
             'icon'        => 'file',
             'label'       => 4,
             'label_color' => 'success',
             'can'         => 'is-admin',
             'submenu'     => [
-            [
-              // 'text' => Text::find(1)->homesection,
+            [              
               'text' => 'Home',
               'url' => 'admin/edit/homepage',
               'icon' => 'home',
@@ -156,7 +151,8 @@ return [
             ]         
         ],
        
-        'CONTACT',
+       'CONTACT',
+      
         [
             'text' => 'Inbox',
             'url'  => 'admin/inbox',
@@ -170,12 +166,13 @@ return [
             'can'  => 'is-admin',
         ],
 
-        'LISTS',
+       'LISTS',
+           
         [
-            'text' => 'Users',
-            'url'  => 'admin/list/users',
-            'icon' => 'user',
-            'can'  => 'is-editor',
+          'text' => 'Users',
+          'url'  => 'admin/list/users',
+          'icon' => 'user',
+          'can'  => 'is-editor',
         ],
         [
           'text' => 'Services',
@@ -203,6 +200,12 @@ return [
           'url' => 'admin/list/tags',
           'icon' => 'tags', 
           'can'  => 'is-editor',         
+        ],
+        [
+          'text' => 'Comments',
+          'url' => 'admin/list/comments',
+          'icon' => 'comments',
+          'can'  => 'is-editor',          
         ],
         [
           'text' => 'Trash Can',

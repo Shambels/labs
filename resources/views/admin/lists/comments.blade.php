@@ -10,11 +10,10 @@
 @include('admin.alerts.error')
 
 
-@if ($user->roles_id!=1 || Gate::check('is-admin'))
 <div class="row">
   <div class="box ">
     <div class="box-header bg-purple">
-      <h3 class="box-title my-2 ">{{$user->name}}'s Comments</h3>      
+      <h3 class="box-title my-2 ">Comments Trash Can</h3>     
     </div>
     <!-- /.box-header -->
     <div class="box-body table-responsive no-padding">
@@ -24,6 +23,7 @@
             <th>#</th>                         
             <th>Validated</th>            
             <th>Creation Date</th>
+            <th>Author</th>
             <th>Subject</th>
             <th>Message</th>
             <th>Article</th>
@@ -32,7 +32,7 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($user->comments as  $key=>$comment)                
+          @foreach ($comments as  $key=>$comment)                
             <tr class="user-list-item">          
               <td>{{$key+1}}</td>               
               <td>
@@ -45,6 +45,7 @@
                 @endif
               </td>
               <td>{{$comment->created_at->format('d M Y')}}</td>
+            <td>{{$comment->users->name}}</td>
               <td>{{substr($comment->subject,0,30)}}...</td>
               <td>{{substr($comment->message,0,30)}}...</td>                
               <td>
@@ -60,11 +61,13 @@
 
               </td>
               <td class="user-list-btn d-flex">
-                <a href="/admin/edit/comment/{{$comment->id}}/edit" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
-                <form action="/admin/edit/comment/{{$comment->id}}/delete" method="POST">
-                  @csrf
-                  <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                </form>
+                @if ($comment->users->roles_id!=1 || Gate::check('is-admin'))
+                  <a href="/admin/edit/comment/{{$comment->id}}/edit" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
+                  <form action="/admin/edit/comment/{{$comment->id}}/delete" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+                  </form>
+                @endif
               </td>
             </tr>              
           @endforeach
@@ -75,5 +78,6 @@
   </div>
   <!-- /.box -->
 </div>
-@endif
+
 @stop
+

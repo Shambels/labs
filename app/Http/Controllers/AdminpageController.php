@@ -21,7 +21,11 @@ class AdminpageController extends Controller
 
   public function index()
   {
-      return view('admin/adminhome');
+      $articles = Article::where('valid',null)->get();
+      $comments = Comment::where('valid',null)->get();
+      $categories= Category::where('valid',null)->get();
+      $tags = Tag::where('valid',null)->get();
+      return view('admin/adminhome',compact('articles','comments','categories','tags'));
   }
   
     public function home(){
@@ -57,7 +61,7 @@ class AdminpageController extends Controller
     public function blog(){
       $text = Text::find(1);
       $logo= Image::where('folder','logo')->first();
-      $articles = Article::with('users','comments','tags','categories')->paginate(3);
+      $articles = Article::with('users','comments','tags','categories')->orderBy('created_at','desc')->paginate(3);
       $categories = Category::all();
       $instagrams= Image::where('folder','instagram')->get();
       $tags = Tag::all();
@@ -124,6 +128,7 @@ class AdminpageController extends Controller
           }
         }
       }
+      $results->sortByDesc('created_at');
       // Collection Pagination Fix
        $currentPage = LengthAwarePaginator::resolveCurrentPage();
        $perPage = 3;

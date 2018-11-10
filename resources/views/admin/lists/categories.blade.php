@@ -14,7 +14,7 @@
   <div class="box ">
     <div class="box-header bg-purple">
       <h3 class="box-title my-2 ">Categories</h3>
-       <div class="togglable">
+       <div class="togglable arrowable">
           <i class="fas fa-plus"></i>
        </div>
       @can('is-editor')

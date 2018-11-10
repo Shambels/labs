@@ -13,6 +13,7 @@ use App\Image;
 use App\Category;
 use App\Tag;
 use App\Testimonial;
+use App\Comment;
 use Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -65,10 +66,15 @@ class ListController extends Controller
 
     public function articles () {
       $text= Text::find(1);
-      $articles = Article::paginate(5);
+      $articles = Article::orderBy('created_at','desc')->paginate(5);
       $categories = Category::take(7)->get();      
       $tags= Tag::take(12)->get();            
       return view('admin.lists.articles', compact('articles','text','categories','tags'));
+    }
+
+    public function comments() {
+      $comments = Comment::paginate(25);
+      return view('admin.lists.comments', compact('comments'));
     }
     public function icons () {
       $icons = Icon::all();
@@ -81,7 +87,7 @@ class ListController extends Controller
     }
 
     public  function results($search,Request $request){
-      $allarticles = Article::with('users','comments','tags')->get();
+      $allarticles = Article::with('users','comments','tags')->orderBy('created_at','desc')->get();
     
       $tagmatch = Tag::where('name',$search)->first();
       $categorymatch = Category::where('name',$search)->first();
@@ -124,7 +130,7 @@ class ListController extends Controller
        $currentPageItems = $results->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
        $paginatedItems= new LengthAwarePaginator($currentPageItems , count($results), $perPage);
        $paginatedItems->setPath($request->url());
-
+      $results->sortByDesc('created_at');
       $text = Text::find(1);
       $categories = Category::all();
       $tags = Tag::all();          

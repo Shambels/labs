@@ -41,7 +41,7 @@ class AuthServiceProvider extends ServiceProvider
           }
         });
         Gate::define('is-author', function ($article) {
-          if(Auth::user()->id == $article->users) {
+          if(Auth::user()->id == $article->users->id) {
             return true;
           } else {
             return false;

@@ -48,7 +48,7 @@ class PagesController extends Controller
     public function blog(){
       $text = Text::find(1);
       $logo= Image::where('folder','logo')->first();
-      $articles = Article::with('users','comments','tags')->paginate(3);
+      $articles = Article::with('users','comments','tags')->orderBy('created_at','desc')->paginate(3);
       $categories = Category::all();
       $instagrams= Image::where('folder','instagram')->get();
       $tags = Tag::all();
@@ -99,14 +99,14 @@ class PagesController extends Controller
           }
         }
       }
-      // dd($results);
+   
+      $results->sortByDesc('created_at');
       // Collection Pagination Fix
        $currentPage = LengthAwarePaginator::resolveCurrentPage();
        $perPage = 3;
        $currentPageItems = $results->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
        $paginatedItems= new LengthAwarePaginator($currentPageItems , count($results), $perPage);
        $paginatedItems->setPath($request->url());
-
       $text = Text::find(1);
       $logo= Image::where('folder','logo')->first();
       $categories = Category::all();

@@ -116,7 +116,18 @@ class CommentController extends Controller
         // if (Route::curentRouteName()=='editblogpost'){
           // return redirect()->back();
         // } else {
-          return redirect('/admin/list/users/'.$comment->users->id.'/comments');
+
+
+      $url = url()->previous();
+      $regID = '/([^.\D]*)(.edit)$/m';
+      preg_match($regID,$url,$ids);     
+      $regRoot = '/(.*)\b.(admin)/';
+      preg_match($regRoot,$url,$root);      
+      if (url()->previous()==$root[1]."/admin/edit/comment/".$ids[0]) {
+        return redirect('/admin/list/users/'.$comment->users->id.'/comments');
+      } else {
+        return redirect()->back();
+      }
         // }
     }
 
@@ -126,8 +137,26 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function delete(Request $request, $id)
     {
-        //
+        $comment = Comment::find($id);
+        $userID = $comment->users->id;
+                
+        $url = url()->previous();                 
+        $regID = '/([^.\D]*)(.edit)$/m';
+        preg_match($regID,$url,$ids);          
+        $regRoot = '/(.*)\b.(admin)/';
+        preg_match($regRoot,$url,$root);                   
+
+        $comment->delete();       
+        $request->session()->flash('success','Comment Successfully Deleted !');         
+
+        if($ids) {          
+          if (url()->previous()==$root[1].'/admin/edit/comment/'.$ids[0]) {          
+            return redirect('/admin/list/users/'.$userID.'/comments');
+          }
+        } else {                 
+          return redirect()->back();
+      }
     }
 }

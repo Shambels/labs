@@ -13,17 +13,7 @@
 <div class="row">
     <div class="box ">
       <div class="box-header bg-purple">
-        <h3 class="box-title my-2 ">{{$user->name}}'s Articles</h3>
-
-        <form class="box-tools">
-          @csrf
-          <div class="input-group input-group-sm p-2" style="">
-            <input type="text" name="table_search" class="form-control pull-right mr-2 rounded" placeholder="Search">
-            {{-- <div class="input-group-btn"> --}}
-              <button type="submit" class="btn bg-purple"><i class="fa fa-search"></i></button>
-            {{-- </div> --}}
-          </div>
-        </form>
+        <h3 class="box-title my-2 ">{{$user->name}}'s Articles</h3>        
       </div>
       <!-- /.box-header -->
       <div class="box-body table-responsive no-padding">
@@ -46,28 +36,7 @@
           <tbody>
             @foreach ($user->articles as  $key=>$article)                
               <tr class="user-list-item">          
-                <td>{{$key+1}}</td>
-                {{-- <td>
-                  <div id="container">
-                    <div class="inner-container">
-                      <div class="toggle">
-                        <p>N</p>
-                      </div>
-                      <div class="toggle">
-                        <p>Y</p>
-                      </div>
-                    </div>
-                    <div class="inner-container" id='toggle-container'>
-                      <div class="toggle">
-                        <p>N</p>
-                      </div>
-                      <div class="toggle">
-                        <p>Y</p>
-                      </div>
-                    </div>
-                  </div>
-                  <input id="on-off" name="valid" type="hidden" value="">
-                </td> --}}
+                <td>{{$key+1}}</td>              
                 <td>
                   @if ($article->valid==true)
                   <span class="text-success">OK</span>

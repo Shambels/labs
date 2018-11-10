@@ -9,6 +9,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-sm-7 blog-posts">
+            <h1 class="py-3 pl-1 mb-4 text-light" style="background: #6a5abf;">Results for <span style="color: #2be6ab;" class="font-italic">"{{$search}}"</span><span style="font-size: 1.5rem;">  ({{count($results)}})</span></h1>
           <!-- Post item -->
           @foreach ($results as $article)
           {{-- {{dd($article)}} --}}

@@ -13,11 +13,11 @@
         <li class="{{Route::currentRouteName()=='contact'?'active':''}}"><a href="{{route('contact')}}">{{$text->contactsection}}</a></li>
         @auth
           @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))
-          <li><a href="{{ url(config('adminlte.logout_url', 'auth/logout')) }}">{{ trans('adminlte::adminlte.log_out') }}</a></li>
+            <li><a href="{{ url(config('adminlte.logout_url', 'auth/logout')) }}">{{ trans('adminlte::adminlte.log_out') }}</a></li>
           @else
-            @can('is-editor')
-              <li><a href="{{route('adminhome')}}">Editing Section</a></li>
-            @endcan
+          @can('is-editor')
+            <li><a href="{{route('adminhome')}}">Editing Section</a></li>
+          @endcan
             <li><a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a></li>
               <form id="logout-form" action="{{ url(config('adminlte.logout_url', 'auth/logout')) }}" method="POST" style="display: none;">
                 @if(config('adminlte.logout_method'))

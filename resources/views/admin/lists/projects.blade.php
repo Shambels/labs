@@ -32,7 +32,7 @@
       </div>
       <div class="text-center">
         {{$projects->links()}}
-        <div class="togglable" class="btn btn-light" style="font-size: 1.8rem;">
+        <div class="togglable arrowable" class="btn btn-light" style="font-size: 1.8rem;">
             <i class="fas fa-plus"></i>
         </div>
           @include('admin.pages.cards.storeproject')

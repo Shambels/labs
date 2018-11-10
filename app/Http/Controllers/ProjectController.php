@@ -122,8 +122,7 @@ class ProjectController extends Controller
      */
     public function delete(Request $request, $id)
     {
-        $project = Project::find($id);
-        Storage::delete(['public/images/projects/thumbnails/'.$project->image,'public/images/projects/originals/'.$project->image,'public/images/projects/mediums/'.$project->image,]);
+        $project = Project::find($id);        
         $project->delete();
         $request->session()->flash('success', 'Project Successfully Deleted !');
         return redirect()->back();

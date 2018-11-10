@@ -39,6 +39,7 @@ Route::middleware('can:is-editor')->group(function() {
   Route::get('/admin/list/articles', 'ListController@articles')->name('articleslist');
   Route::get('/admin/list/categories', 'ListController@categories')->name('categorieslist');
   Route::get('/admin/list/tags', 'ListController@tags')->name('tagslist');
+  Route::get('/admin/list/comments', 'ListController@comments')->name('commentslist');
       // Searches
       Route::post('/admin/list/articles/search', 'ListController@search')->name('search');
       Route::get('/admin/list/articles/results/{search}','ListController@results');
@@ -188,5 +189,8 @@ Route::middleware('can:is-admin')->group(function() {
       // Restore
       Route::post('/admin/edit/user/{id}/restore', 'TrashController@restoreUser');
       Route::post('/admin/edit/article/{id}/restore', 'TrashController@restoreArticle');
+      Route::post('/admin/edit/service/{id}/restore', 'TrashController@restoreService');
+      Route::post('/admin/edit/project/{id}/restore', 'TrashController@restoreProject');
+      Route::post('/admin/edit/comment/{id}/restore', 'TrashController@restoreComment');
 });
 

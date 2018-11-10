@@ -14,7 +14,7 @@
   <div class="box ">
     <div class="box-header bg-purple">
       <h3 class="box-title my-2 ">Tags</h3>
-      <div class="togglable" class="btn btn-light">
+      <div class="togglable arrowable" class="btn btn-light">
           <i class="fas fa-plus"></i>
         </div>
         @can('is-editor')

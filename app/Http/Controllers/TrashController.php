@@ -39,7 +39,7 @@ class TrashController extends Controller
   } 
   
   public function restoreService(Request $request, $id) {
-    $service = Service::find($id);
+    $service = Service::onlyTrashed()->find($id);
     $service->restore();    
     $request->session()->flash('success', 'Restore Successfully Restored !');
     return redirect()->back();      
@@ -50,8 +50,9 @@ class TrashController extends Controller
   }
   
   public function restoreProject(Request $request, $id) {
-    $project = Project::find($id);
+    $project = Project::onlyTrashed()->find($id);
     $project->restore();
+    $project->save();
     $request->session()->flash('success', 'Project Successfully Restored !');
     return redirect()->back();      
   }
@@ -69,17 +70,21 @@ class TrashController extends Controller
   public function restoreArticle(Request $request, $id) {
     $article = Article::onlyTrashed()->find($id);
     $article->restore();
+    $article->valid=true;
+    $article->save();
     $request->session()->flash('success', 'Article Successfully Restored !');
     return redirect()->back();      
   }
   public function comments () {
-    $comments = Icon::onlyTrashed()->paginate(20);
+    $comments = Comment::onlyTrashed()->paginate(20);
     return view('admin.lists.trash.comments', compact('comments'));
   }
   
   public function restoreComment(Request $request, $id) {
-    $comment = Comment::find($id);
+    $comment = Comment::onlyTrashed()->find($id);
     $comment->restore();
+    $comment->valid=true;
+    $comment->save();
     $request->session()->flash('success', 'Comment Successfully Restored !');
     return redirect()->back();      
   }
