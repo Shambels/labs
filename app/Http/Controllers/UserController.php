@@ -99,9 +99,18 @@ class UserController extends Controller
         $user->bio = $request->bio;
       }
       $user->save();
-      $request->session()->flash('success', 'User Successfully Updated !');
-      return redirect('admin/list/users');
-      
+      $request->session()->flash('success', 'User Successfully Updated !');    
+
+      $url = url()->previous();
+      $regID = '/([^.\D]*$)/m';
+      preg_match($regID,$url,$ids);     
+      $regRoot = '/(.*)\b.(admin)/';
+      preg_match($regRoot,$url,$root);      
+      if (url()->previous()==$root[1]."/admin/edit/blogpost/".$ids[0]) {
+        return redirect()->back();
+      } else {          
+        return redirect('/admin/list/users');
+      }                 
     }
 
     public function delete(Request $request, $id) {

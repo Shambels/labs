@@ -49,7 +49,7 @@
             </div>
             @include('admin.pages.cards.article')
 						<!-- Post Author -->
-						<div class="author">
+						<div class="author editable">
 							<div class="avatar">
 								<img src="{{Storage::url('public/images/users/thumbnails/'.$article->users->image)}}" alt="article_author_avatar">
 							</div>
@@ -57,7 +57,8 @@
 								<h2>{{$article->users->name}}, <span>{{$article->users->title}}</span></h2>
 								<p>{{$article->users->bio}}</p>
 							</div>
-						</div>
+            </div>
+            @include('admin.pages.cards.blog.author')
 						<!-- Post Comments -->
 						<div class="comments">
 							<h2>Comments ( {{count($comments->where('valid',true))}} )</h2>
