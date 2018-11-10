@@ -207,6 +207,7 @@ return [
         [
           'text' => 'Trash Can',
           'icon' => 'trash-alt',
+          'can'  => 'is-admin',
           'submenu' =>[
             [
               'text' => 'Users',

@@ -9,8 +9,8 @@
 @include('admin.alerts.success')
 @include('admin.alerts.error')
 
+@include('admin.lists.partials.blogheader')    
 
-<h1>Articles</h1>
 <!-- page section -->
 <div class="page-section spad">
   <div class="container">

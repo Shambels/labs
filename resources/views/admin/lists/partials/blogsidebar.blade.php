@@ -29,7 +29,7 @@
           </li>
           @endforeach
           <li><a href="/admin/list/categories">...</a></li>
-          <div class="togglable" class="btn btn-light">
+          <div class="togglable arrowable" class="btn btn-light">
             <i class="fas fa-plus"></i>
           </div>
           @include('admin.pages.cards.blog.store.category')
@@ -41,7 +41,7 @@
       <div class="widget-item">          
         <h2 class="widget-title @can('is-admin') editable @endcan">{!!$text->tags!!}</h2>
         @include('admin.pages.cards.titles.blog.tags')
-        <div class="togglable" class="btn btn-light">
+        <div class="togglable arrowable" class="btn btn-light">
             <i class="fas fa-plus"></i>
           </div>
           @include('admin.pages.cards.blog.store.tag')

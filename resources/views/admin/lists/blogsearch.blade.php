@@ -8,11 +8,14 @@
 @include('admin.alerts.success')
 @include('admin.alerts.error')
 
+@include('admin.lists.partials.blogheader') 
+
 <!-- page section -->
 <div class="page-section spad">
 		<div class="container">
-			<div class="row">
-				<div class="col-md-8 col-sm-7 blog-posts">
+      <div class="row">
+        <div class="col-md-8 col-sm-7 blog-posts">
+            <h1 class="bg-purple p-3">Results for <span class="font-italic">"{{$search}}"</span> ({{count($results)}})</h1>
           <!-- Post item -->
           @foreach ($results as $article)
           {{-- {{dd($article)}} --}}

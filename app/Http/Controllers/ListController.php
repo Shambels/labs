@@ -129,7 +129,7 @@ class ListController extends Controller
       $categories = Category::all();
       $tags = Tag::all();          
       // Article::orderBy('created_at');
-      return view ('admin/lists/blogsearch',['results' => $paginatedItems], compact('text','articles','categories','tags','tagmatch'));
+      return view ('admin/lists/blogsearch',['results' => $paginatedItems], compact('text','articles','categories','tags','tagmatch','search'));
     }
 
 }

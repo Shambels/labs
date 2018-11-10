@@ -115,7 +115,7 @@ class PagesController extends Controller
       $ad= Image::where('folder','ad')->first();
       $quote = Testimonial::get()->random(1)->first();
       // Article::orderBy('created_at');
-      return view ('blogsearch',['results' => $paginatedItems], compact('text','logo','articles','categories','instagrams','tags','ad','quote','tagmatch'));
+      return view ('blogsearch',['results' => $paginatedItems], compact('text','logo','articles','categories','instagrams','tags','ad','quote','tagmatch','search'));
     }
 
     public function blogpost($id){
