@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\TitleRequest;
 use App\Http\Requests\ButtonRequest;
 use App\Text;
+use App\Newsmail;
 use App\Mapcoord;
 use Geocoder;
 use GuzzleHttp;
@@ -100,6 +101,17 @@ class ContactController extends Controller
     $text->newsbtn = $request->buttontext;
     $text->save();
     $request->session()->flash('success', 'Button Text Successfully Updated !');
+    return redirect()->back();
+  }
+
+  public function subscribe (Request $request) {
+    $this->validate($request,[
+      'email' => 'bail|required|email'
+    ]);
+    $newsmail = new Newsmail;
+    $newsmail->email = $request->email;
+    $newsmail->save();
+    $request->session()->flash('success', 'Successfully Subscribed !');
     return redirect()->back();
   }
   

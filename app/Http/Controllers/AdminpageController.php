@@ -14,6 +14,7 @@ use App\Category;
 use App\Tag;
 use App\Comment;
 use App\Icon;
+use App\Newsmail;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class AdminpageController extends Controller
@@ -25,7 +26,8 @@ class AdminpageController extends Controller
       $comments = Comment::where('valid',null)->get();
       $categories= Category::where('valid',null)->get();
       $tags = Tag::where('valid',null)->get();
-      return view('admin/adminhome',compact('articles','comments','categories','tags'));
+      $newsmails = Newsmail::where('old',null)->get();
+      return view('admin/adminhome',compact('articles','comments','categories','tags','newsmails'));
   }
   
     public function home(){

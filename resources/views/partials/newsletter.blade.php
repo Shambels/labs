@@ -1,5 +1,23 @@
 <!-- newsletter section -->
 <div class="newsletter-section spad" id="newsletter">
+    @if(session('success'))
+    <div class="alert alert-success alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+      <h4>
+        <i class="icon fa fa-check"></i> 
+        {{session('success')}}
+      </h4>
+      {{session('message')}}
+    </div>
+    @endif
+    @if($errors->any())
+    <div class="alert alert-danger alert-dismissible text-center">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+      <h4>
+        {{$errors->first()}}
+      </h4>
+    </div>
+    @endif
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -9,17 +27,8 @@
                 <!-- newsletter form -->
                 <form class="nl-form" action="{{route('newsletter')}}" method="POST">
                     @csrf
-                    @method('POST')
-                    @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    @endif  
-                    <input type="text" placeholder="{!!$text->newsplaceholder!!}" name="newsemail">
+                    @method('POST')                                      
+                  <input type="text" value="{{old('email')}}" placeholder="{!!$text->newsplaceholder!!}" name="email" required>
                     <button type="submit" class="site-btn btn-2">{!!$text->newsbtn!!}</button>
                 </form>
             </div>

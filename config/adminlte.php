@@ -111,8 +111,8 @@ return [
             'WEBSITE',
           
             [ 
-            'text' => 'Summary',
-            'icon' => 'eye',
+            'text' => 'Welcome',
+            'icon' => 'bell',
             'url'  => 'admin/home',
             'can'  => 'is-editor'            
             ],
@@ -155,13 +155,13 @@ return [
       
         [
             'text' => 'Inbox',
-            'url'  => 'admin/inbox',
+            'url'  => 'admin/list/inbox',
             'icon' => 'envelope',
             'can'  => 'is-admin',
         ],
         [
             'text' => 'Newsletter',
-            'url'  => 'admin/settings',
+            'url'  => 'admin/list/newsletter',
             'icon' => 'envelope-square',
             'can'  => 'is-admin',
         ],
@@ -206,6 +206,18 @@ return [
           'url' => 'admin/list/comments',
           'icon' => 'comments',
           'can'  => 'is-editor',          
+        ],
+        [
+          'text' => 'Testimonials',
+          'url'  => 'admin/list/testimonials',
+          'icon' => 'comment-alt',
+          'can'  => 'is-admin'
+        ],
+        [
+          'text' => 'Clients',
+          'url'  => 'admin/list/clients',
+          'icon' => 'suitcase',
+          'can'  => 'is-admin'
         ],
         [
           'text' => 'Trash Can',

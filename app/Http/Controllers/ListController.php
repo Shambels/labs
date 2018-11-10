@@ -13,7 +13,9 @@ use App\Image;
 use App\Category;
 use App\Tag;
 use App\Testimonial;
+use App\Client;
 use App\Comment;
+use App\Newsmail;
 use Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -38,6 +40,28 @@ class ListController extends Controller
     public function userComments($id){
       $user= User::find($id);
       return view('admin.lists.usercomments',compact('user'));
+    }
+
+    public function newsletter() {
+      $newsmails = Newsmail::orderBy('created_at','desc')->paginate(20);
+      return view('admin.lists.mails.newsletter',compact('newsmails'));
+    }
+
+    public function inbox() {
+      $emails = Email::orderBy('created_at','desc')->paginate(20);
+      return view ('admin.lists.mails.inbox',compact('emails'));
+    }
+
+
+    public function testimonials() {
+      $testimonials = Testimonial::with('clients')->orderBy('created_at','desc')->paginate(20);
+      // dd($testimonials);
+      return view('admin.lists.testimonials',compact('testimonials'));
+    }
+    
+    public function clients() {
+      $clients = Client::orderBy('created_at','desc')->paginate(10);
+      return view('admin.lists.clients',compact('clients'));
     }
 
     // SERVICES

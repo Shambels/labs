@@ -28,10 +28,29 @@ class TestimonialController extends Controller
       return redirect()->back();
     }
 
+    public function store(Request $request)
+    {
+      $this->validate($request, [
+        'message' => 'bail|required|max:300',
+      ]);
+      $testimonial = new Testimonial;
+      $testimonial->message = $request->message;
+      $testimonial->valid = true;
+      $testimonial->save();
+      $request->session()->flash('success', 'Testimonial Successfully Added !');
+      return redirect()->back(); 
+    }
+
+    public function edit(Request $request, $id) {
+      $testimonial = Testimonial::find($id);
+      return view('admin/lists/cards/edittestimonial',compact('testimonial'));
+
+    }
+    
     public function update(Request $request, $id)
     {
       $this->validate($request, [
-        'message' => 'bail|required|max:250',
+        'message' => 'bail|required|max:300',
       ]);
       $testimonial = Testimonial::find($id);
       $testimonial->message = $request->message;

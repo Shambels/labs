@@ -99,6 +99,14 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
+
+    public function confirm (Request $request, $id) {
+      $comment = Comment::find($id);
+      $comment->valid = true;
+      $comment->save();
+      $request->session()->flash('success','Comment Successfully Validated !');        
+      return redirect()->back();
+    }
     public function update(Request $request, $id)
     {
         $comment = Comment::find($id);
@@ -124,7 +132,7 @@ class CommentController extends Controller
       $regRoot = '/(.*)\b.(admin)/';
       preg_match($regRoot,$url,$root);      
       if (url()->previous()==$root[1]."/admin/edit/comment/".$ids[0]) {
-        return redirect('/admin/list/users/'.$comment->users->id.'/comments');
+        return redirect('/admin/list/comments');
       } else {
         return redirect()->back();
       }
@@ -153,7 +161,7 @@ class CommentController extends Controller
 
         if($ids) {          
           if (url()->previous()==$root[1].'/admin/edit/comment/'.$ids[0]) {          
-            return redirect('/admin/list/users/'.$userID.'/comments');
+            return redirect('/admin/list/comments');
           }
         } else {                 
           return redirect()->back();

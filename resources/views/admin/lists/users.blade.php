@@ -95,7 +95,7 @@
   @endforeach
 {{--  --}}
 <h1 >Users</h1>
-<div class="togglable" class="btn btn-light" style="font-size: 1.8rem;">
+<div class="togglable arrowable" class="btn btn-light" style="font-size: 1.8rem;">
   <i class="fas fa-plus"></i>
 </div>
 @include('admin.lists.cards.store.user')

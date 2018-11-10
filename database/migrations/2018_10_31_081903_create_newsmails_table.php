@@ -16,6 +16,7 @@ class CreateNewsmailsTable extends Migration
         Schema::create('newsmails', function (Blueprint $table) {
             $table->increments('id');
             $table->string('email');
+            $table->boolean('old')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

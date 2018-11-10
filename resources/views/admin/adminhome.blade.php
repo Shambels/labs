@@ -15,9 +15,12 @@
 
 
 @if (Gate::check('is-editor'))
-
-
+@if( (count($articles)>0) || (count($comments)>0) || (count($categories)>0) || (count($tags)>0) )
+<h1 class="my-2">Blog</h1>
+@endif
 <div class="row">
+  {{-- NEW ARTICLES --}}
+  @if (count($articles) >0 )
     <div class="col-lg-3 col-6">
       <!-- small box -->
       <div class="small-box bg-info">
@@ -31,7 +34,10 @@
         <a href="/admin/list/articles" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div>
-    <!-- ./col -->
+  @endif
+  @if( count($comments) >0 )
+  
+    {{-- NEW COMMENTS --}}
     <div class="col-lg-3 col-6">
       <!-- small box -->
       <div class="small-box bg-success">
@@ -46,7 +52,9 @@
         <a href="/admin/list/comments" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div>
-    <!-- ./col -->
+  @endif
+  @if( count($categories)>0 )
+    {{-- NEW CATEGORIES --}}
     <div class="col-lg-3 col-6">
       <!-- small box -->
       <div class="small-box bg-warning">
@@ -61,7 +69,9 @@
         <a href="/admin/list/categories" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div>
-    <!-- ./col -->
+  @endif
+  @if( count($tags)>0 )
+    {{-- NEW TAGS --}}
     <div class="col-lg-3 col-6">
       <!-- small box -->
       <div class="small-box bg-danger">
@@ -76,7 +86,44 @@
         <a href="/admin/list/tags" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div>
-    <!-- ./col -->
+    @endif
   </div>
-  @endif
+
+{{-- @if( (count($newsmails) >0) || (count($inbox) >0) )
+  <h1 class="my-2">Mail</h1>
+@endif
+<div class="row">
+@if( count($inbox) >0 )
+  <!-- NEWSLETTER E-Mails -->
+  <div class="col-sm-6 col-12">
+    <a href="/admin/list/inbox">
+      <div class="info-box">
+        <span class="info-box-icon bg-info"><i class="fas fa-envelope"></i></span>        
+        <div class="info-box-content">
+          <span class="info-box-text">New Mails</span>
+          <span class="info-box-number">{{count($inbox)}}</span>
+        </div>
+      </div>
+    </a>
+  </div>
+ @endif  --}}
+
+
+@if( count($newsmails) >0 )
+  {{-- INBOX --}}
+  <div class="col-sm-6 col-12">
+    <a href="/admin/list/newsletter">
+      <div class="info-box">
+        <span class="info-box-icon bg-teal"><i class="fas fa-user"></i></span>        
+        <div class="info-box-content">
+          <span class="info-box-text">New Subscribers</span>
+          <span class="info-box-number">{{count($newsmails)}}</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+    </a>
+  </div>
+@endif
+</div>
+@endif
 @stop

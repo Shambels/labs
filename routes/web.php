@@ -56,6 +56,7 @@ Route::middleware('can:is-editor')->group(function() {
   Route::post('admin/edit/article/{id}/delete', 'ArticleController@delete');
   
   // Comments
+  Route::post('/admin/edit/comment/{id}/confirm', 'CommentController@confirm');
   Route::get('/admin/edit/comment/{id}/edit', 'CommentController@edit');
   Route::post('/admin/edit/comment/{id}/update', 'CommentController@update');
   Route::post('/admin/edit/comment/{id}/delete', 'CommentController@delete');
@@ -166,6 +167,18 @@ Route::middleware('can:is-admin')->group(function() {
   Route::post('/admin/edit/user/{id}', 'UserController@update');
   Route::post('/admin/edit/user/{id}/delete', 'UserController@delete');
   Route::post('/admin/edit/adduser', 'UserController@store');        
+  
+  // TESTIMONIALS
+  Route::post('/admin/edit/testimonial/add', 'TestimonialController@store' );
+  Route::get('/admin/edit/testimonial/{id}/edit', 'TestimonialController@edit' );
+  Route::post('/admin/edit/testimonial/{id}/update', 'TestimonialController@update' );
+  
+  // CLIENTS
+  Route::post('/admin/edit/client/add', 'ClientController@store' );
+  Route::get('/admin/edit/client/{id}/edit', 'ClientController@edit' );
+  Route::post('/admin/edit/client/{id}/update', 'ClientController@update' );
+  Route::post('/admin/edit/client/{id}/delete', 'ClientController@delete' );
+  
   // FOOTER
   Route::post('/admin/edit/footer', 'HomeController@footer');
 
@@ -173,6 +186,12 @@ Route::middleware('can:is-admin')->group(function() {
   Route::get('/admin/list/services', 'ListController@services')->name('serviceslist');
   Route::get('/admin/list/projects', 'ListController@projects')->name('projectslist');
   Route::get('/admin/list/icons', 'ListController@icons')->name('iconslist');
+  Route::get('/admin/list/testimonials', 'ListController@testimonials');
+  Route::get('/admin/list/clients', 'ListController@clients');
+  Route::get('/admin/list/newsletter', 'ListController@newsletter');
+  Route::get('/admin/list/inbox','ListController@inbox');
+  Route::post('/admin/edit/newsletter/{id}/confirm', 'NewsmailController@confirm');
+  Route::post('/admin/edit/newsletter/{id}/delete', 'NewsmailController@delete');  
       
       // TRASH CAN
       Route::get('/admin/trash/users', 'TrashController@users')->name('trasheduserslist');
