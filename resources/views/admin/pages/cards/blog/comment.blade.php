@@ -1,6 +1,6 @@
 @can ('is-editor')
   <div class="card m-3 d-none">
-    <div class="card-header bg-purple">
+    <div class="card-header bg-purple-gradient">
       <h3 class="card-title">Edit {{$comment->users->name}}'s Comment</h3>
     </div>
     <div class="card-body">

@@ -1,6 +1,6 @@
 @can ('is-admin')
 <div class="card col-md-8 offset-2 d-none">
-  <div class="card-header">
+  <div class="card-header bg-purple-gradient">
     <h3 class="card-title">Edit Video URL</h3>
   </div>
   <div class="card-body">

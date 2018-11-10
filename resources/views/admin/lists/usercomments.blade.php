@@ -13,7 +13,7 @@
 @if ($user->roles_id!=1 || Gate::check('is-admin'))
 <div class="row">
   <div class="box ">
-    <div class="box-header bg-purple">
+    <div class="box-header bg-purple-gradient">
       <h3 class="box-title my-2 ">{{$user->name}}'s Comments</h3>      
     </div>
     <!-- /.box-header -->

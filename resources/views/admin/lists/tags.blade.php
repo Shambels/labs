@@ -12,7 +12,7 @@
 
 <div class="row">
   <div class="box ">
-    <div class="box-header bg-purple">
+    <div class="box-header bg-purple-gradient">
       <h3 class="box-title my-2 ">Tags</h3>
       <div class="togglable arrowable" class="btn btn-light">
           <i class="fas fa-plus"></i>

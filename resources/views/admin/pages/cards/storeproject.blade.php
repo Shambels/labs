@@ -1,6 +1,6 @@
 @can ('is-admin')
   <div class="card d-none text-left ">
-    <div class="card-header bg-purple">
+    <div class="card-header bg-purple-gradient">
       <h3 class="card-title">Add Project</h3>
     </div>
     <div class="card-body">

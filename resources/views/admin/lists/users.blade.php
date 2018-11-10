@@ -11,7 +11,7 @@
 <h1 class="mb-3">Admin</h1>
 <div class="box box-widget widget-user editable">
   <!-- Add the bg color to the header using any of the bg-* classes -->
-  <div class="widget-user-header bg-purple">
+  <div class="widget-user-header bg-purple-gradient">
     <h2 class="widget-user-username text-orange ">{{$admin->name}}</h2>
     <h5 class="widget-user-desc">{{$admin->title}}</h5>
     <h6 class="widget-user-desc font-italic">{{$admin->email}}</h5>
@@ -103,7 +103,7 @@
 
 <div class="row">
     <div class="box ">
-      <div class="box-header bg-purple">
+      <div class="box-header bg-purple-gradient">
         <h3 class="box-title my-2 ">User List</h3>
 
         <form class="box-tools">

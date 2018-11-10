@@ -1,6 +1,6 @@
 @can('is-admin')
 <div class="card d-none">
-  <div class="card-header">
+  <div class="card-header bg-purple-gradient">
     <h4 class="card-title">Edit Button Text</h4>
     <div class="card-body">
       <form action="/admin/edit/servicespage/browseservices2" method="post">

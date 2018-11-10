@@ -12,7 +12,7 @@
 
 @can ('is-admin')
               <div class="card m-3">
-                <div class="card-header bg-purple">
+                <div class="card-header bg-purple-gradient">
                   <h3 class="card-title">Edit User</h3>
                 </div>
                 <div class="card-body">
