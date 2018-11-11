@@ -98,7 +98,9 @@ class ProjectController extends Controller
       if ($request->file('image')) {
         $image = $request->file('image');
         $imagename = time().$image->hashname();
+        if ($project->image!='card-1.jpg' && $project->image!='card-2.jpg' && $project->image!='card-3.jpg'){
         Storage::delete(['public/images/projects/thumbnails/'.$project->image,'public/images/projects/originals/'.$project->image,'public/images/projects/mediums/'.$project->image,]);
+        }
         $image->storeAs('public/images/projects/originals/', $imagename);
         $resized = ImgInt::make($image)->resize(350,253)->save();
         Storage::put('public/images/projects/mediums/'.$imagename, $resized);
@@ -124,7 +126,10 @@ class ProjectController extends Controller
      */
     public function delete(Request $request, $id)
     {
-        $project = Project::find($id);        
+        $project = Project::find($id);
+        if ($project->image!='card-1.jpg' && $project->image!='card-2.jpg' && $project->image!='card-3.jpg'){
+          Storage::delete(['public/images/projects/thumbnails/'.$project->image,'public/images/projects/originals/'.$project->image,'public/images/projects/mediums/'.$project->image,]);
+          }        
         $project->delete();
         $request->session()->flash('success', 'Project Successfully Deleted !');
         return redirect()->back();

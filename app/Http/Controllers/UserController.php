@@ -120,7 +120,9 @@ class UserController extends Controller
       // $articles = $user->articles;
       // $comments = $user->comments;      
       if ($id!=\Auth::id()) {
-        Storage::delete(['public/images/users/thumbnails/'.$user->image,'public/images/users/originals/'.$user->image,'public/images/users/mediums/'.$user->image,]);                  
+        if($user->image!='default-avatar.jpg'){
+        Storage::delete(['public/images/users/thumbnails/'.$user->image,'public/images/users/originals/'.$user->image,'public/images/users/mediums/'.$user->image,]); 
+        }                 
         Article::where('users_id',$id)->delete();                
         Comment::where('users_id',$id)->delete();        
         $user->delete();

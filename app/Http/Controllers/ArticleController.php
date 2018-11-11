@@ -405,7 +405,9 @@ class ArticleController extends Controller
     public function delete(Request $request, $id)
     {
         $article= Article::find($id);
+        if($article->image!='blog-1.jpg' && $article->image!='blog-2.jpg' && $article->image!='blog-3.jpg'){
         Storage::delete(['public/images/articles/originals/'.$article->image,'public/images/articles/'.$article->image]);
+        }
         $article->delete();
         $request->session()->flash('success','Article Successfully Deleted ! ');
         return redirect()->back();
