@@ -88,9 +88,9 @@
     </div>
     @endif
   </div>
-
-{{-- @if( (count($newsmails) >0) || (count($inbox) >0) )
-  <h1 class="my-2">Mail</h1>
+@can ('is-admin')
+@if( (count($newsmails) >0) || (count($inbox) >0) )
+  <h1 class="my-2">Contact</h1>
 @endif
 <div class="row">
 @if( count($inbox) >0 )
@@ -106,7 +106,7 @@
       </div>
     </a>
   </div>
- @endif  --}}
+ @endif 
 
 
 @if( count($newsmails) >0 )
@@ -125,5 +125,6 @@
   </div>
 @endif
 </div>
+@endcan
 @endif
 @stop

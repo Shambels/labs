@@ -91,7 +91,9 @@ class HomeController extends Controller
       if ($request->file('image')) {
         $image = $request->file('image');
         $imagename = time().$image->hashname();
-        Storage::delete(['public/images/carousel/originals/'.$item->name,'public/images/carousel/'.$item->name,'public/images/carousel/previews/'.$item->name]);
+        if ($item->name!='01.jpg' && $item->name!='02.jpg'){
+          Storage::delete(['public/images/carousel/originals/'.$item->name,'public/images/carousel/'.$item->name,'public/images/carousel/previews/'.$item->name]);
+        }
         $image->storeAs('public/images/carousel/originals/', $imagename);
         $resized = ImgInt::make($image)->resize(1628,796)->save();
         Storage::put('public/images/carousel/'.$imagename, $resized);

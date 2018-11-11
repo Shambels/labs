@@ -94,6 +94,9 @@ class ClientController extends Controller
       if ($request->file('image')) {
         $image = $request->file('image');
         $imagename = time().$image->hashname();
+        if($client->image!='01.jpg' && $client->image!='02.jpg' && $client->image!='03.jpg'){
+          Storage::delete(['public/images/clients/thumbnails/'.$client->image,'public/images/clients/originals/'.$client->image]);
+        }
         $image->storeAs('public/images/clients/originals/', $imagename);
         $thumbnail = ImgInt::make($image)->resize(100,100)->save();
         Storage::put('public/images/clients/thumbnails/'.$imagename, $thumbnail);

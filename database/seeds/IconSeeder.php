@@ -14,203 +14,203 @@ class IconSeeder extends Seeder
       DB::table('icons')->insert([
         [
             'class' => 'flaticon-001-picture',
-            'name'=> 'picture'
+            'name'=> 'Picture'
         ],
         [
             'class' => 'flaticon-002-caliper',
-            'name'=> 'caliper'
+            'name'=> 'Caliper'
         ],
         [
             'class' => 'flaticon-003-energy-drink',
-            'name'=> 'energy-drink'
+            'name'=> 'Energy Drink'
         ],
         [
             'class' => 'flaticon-004-build',
-            'name'=> 'build'
+            'name'=> 'Build'
         ],
         [
             'class' => 'flaticon-005-thinking-1',
-            'name'=> 'thinking'
+            'name'=> 'Thinking'
         ],
         [
             'class' => 'flaticon-006-prism',
-            'name'=> 'prism'
+            'name'=> 'Prism'
         ],
         [
             'class' => 'flaticon-007-paint',
-            'name'=> 'paint'
+            'name'=> 'Paint'
         ],
         [
             'class' => 'flaticon-008-team',
-            'name'=> 'team'
+            'name'=> 'Team'
         ],
         [
             'class' => 'flaticon-009-idea-3',
-            'name'=> 'idea'
+            'name'=> 'Idea'
         ],
         [
             'class' => 'flaticon-010-diamond',
-            'name'=> 'diamond'
+            'name'=> 'Diamond'
         ],
         [
             'class' => 'flaticon-011-compass',
-            'name'=> 'compass'
+            'name'=> 'Compass'
         ],
         [
             'class' => 'flaticon-012-cube',
-            'name'=> 'cube'
+            'name'=> 'Cube'
         ],
         [
             'class' => 'flaticon-013-puzzle',
-            'name'=> 'puzzle'
+            'name'=> 'Puzzle'
         ],
         [
             'class' => 'flaticon-014-magic-wand',
-            'name'=> 'magic-wand'
+            'name'=> 'Magic Wand'
         ],
         [
             'class' => 'flaticon-015-book',
-            'name'=> 'book'
+            'name'=> 'Book'
         ],
         [
             'class' => 'flaticon-016-vision',
-            'name'=> 'vision'
+            'name'=> 'Vision'
         ],
         [
             'class' => 'flaticon-017-notebook',
-            'name'=> 'notebook'
+            'name'=> 'Notebook'
         ],
         [
             'class' => 'flaticon-018-laptop-1',
-            'name'=> 'laptop'
+            'name'=> 'Laptop'
         ],
         [
             'class' => 'flaticon-019-coffee-cup',
-            'name'=> 'coffee-cup'
+            'name'=> 'Coffee Cup'
         ],
         [
             'class' => 'flaticon-020-creativity',
-            'name'=> 'creativity'
+            'name'=> 'Creativity'
         ],
         [
             'class' => 'flaticon-021-thinking',
-            'name'=> 'thinking'
+            'name'=> 'Thinking'
         ],
         [
             'class' => 'flaticon-022-branding',
-            'name'=> 'branding'
+            'name'=> 'Branding'
         ],
         [
             'class' => 'flaticon-023-flask',
-            'name'=> 'flask'
-        ],
-        [
-            'class' => 'flaticon-024-idea-2',
-            'name'=> 'idea-2'
-        ],
-        [
-            'class' => 'flaticon-025-imagination',
-            'name'=> 'imagination'
-        ],
-        [
-            'class' => 'flaticon-026-search',
-            'name'=> 'search'
-        ],
-        [
-            'class' => 'flaticon-027-monitor',
-            'name'=> 'monitor'
-        ],
-        [
-            'class' => 'flaticon-028-idea-1',
-            'name'=> 'idea-1'
-        ],
-        [
-            'class' => 'flaticon-029-sketchbook',
-            'name'=> 'sketchbook'
-        ],
-        [
-            'class' => 'flaticon-030-computer',
-            'name'=> 'computer'
-        ],
-        [
-            'class' => 'flaticon-031-scheme',
-            'name'=> 'scheme'
-        ],
-        [
-            'class' => 'flaticon-032-explorer',
-            'name'=> 'explorer'
-        ],
-        [
-            'class' => 'flaticon-033-museum',
-            'name'=> 'museum'
-        ],
-        [
-            'class' => 'flaticon-034-cactus',
-            'name'=> 'cactus'
-        ],
-        [
-            'class' => 'flaticon-035-smartphone',
-            'name'=> 'smartphone'
-        ],
-        [
-            'class' => 'flaticon-036-brainstorming',
-            'name'=> 'brainstorming'
+            'name'=> 'Flask'
         ],
         [
             'class' => 'flaticon-037-idea',
-            'name'=> 'idea'
+            'name'=> 'Idea'
         ],
         [
-            'class' => 'flaticon-038-graphic-tool-1',
-            'name'=> 'graphic-tool-1'
+            'class' => 'flaticon-028-idea-1',
+            'name'=> 'Idea 2'
         ],
         [
-            'class' => 'flaticon-039-vector',
-            'name'=> 'vector'
+            'class' => 'flaticon-024-idea-2',
+            'name'=> 'Idea 3'
         ],
         [
-            'class' => 'flaticon-040-rgb',
-            'name'=> 'rgb'
+            'class' => 'flaticon-025-imagination',
+            'name'=> 'Imagination'
+        ],
+        [
+            'class' => 'flaticon-026-search',
+            'name'=> 'Search'
+        ],
+        [
+            'class' => 'flaticon-027-monitor',
+            'name'=> 'Monitor'
+        ],
+        [
+            'class' => 'flaticon-029-sketchbook',
+            'name'=> 'Sketchbook'
+        ],
+        [
+            'class' => 'flaticon-030-computer',
+            'name'=> 'Computer'
+        ],
+        [
+            'class' => 'flaticon-031-scheme',
+            'name'=> 'Scheme'
+        ],
+        [
+            'class' => 'flaticon-032-explorer',
+            'name'=> 'Explorer'
+        ],
+        [
+            'class' => 'flaticon-033-museum',
+            'name'=> 'Museum'
+        ],
+        [
+            'class' => 'flaticon-034-cactus',
+            'name'=> 'Cactus'
+        ],
+        [
+            'class' => 'flaticon-035-smartphone',
+            'name'=> 'Smartphone'
+        ],
+        [
+            'class' => 'flaticon-036-brainstorming',
+            'name'=> 'Brainstorming'
         ],
         [
             'class' => 'flaticon-041-graphic-tool',
-            'name'=> 'graphic-tool'
+            'name'=> 'Graphic Tool'
+        ],
+        [
+            'class' => 'flaticon-038-graphic-tool-1',
+            'name'=> 'Graphic Tool 2'
+        ],
+        [
+            'class' => 'flaticon-039-vector',
+            'name'=> 'Vector'
+        ],
+        [
+            'class' => 'flaticon-040-rgb',
+            'name'=> 'Rgb'
         ],
         [
             'class' => 'flaticon-042-typography',
-            'name'=> 'typography'
+            'name'=> 'Typography'
         ],
         [
             'class' => 'flaticon-043-sketch',
-            'name'=> 'sketch'
+            'name'=> 'Sketch'
         ],
         [
             'class' => 'flaticon-044-paint-bucket',
-            'name'=> 'paint-bucket'
+            'name'=> 'Paint-bucket'
         ],
         [
             'class' => 'flaticon-045-video-player',
-            'name'=> 'vodep-player'
+            'name'=> 'Video Player'
         ],
         [
             'class' => 'flaticon-046-laptop',
-            'name'=> 'laptop'
+            'name'=> 'Laptop'
         ],
         [
             'class' => 'flaticon-047-artificial-intelligence',
-            'name'=> 'artificial-intelligence'
+            'name'=> 'Artificial Intelligence'
         ],
         [
             'class' => 'flaticon-048-abstract',
-            'name'=> 'abstract'
+            'name'=> 'Abstract'
         ],
         [
             'class' => 'flaticon-049-projector',
-            'name'=> 'projector'
+            'name'=> 'Projector'
         ],
         [
             'class' => 'flaticon-050-satellite',
-            'name'=> 'satellite'
+            'name'=> 'Satellite'
         ]
     ]);
     }

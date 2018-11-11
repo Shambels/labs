@@ -14,18 +14,36 @@
         </div>
         <!-- contact form -->
         <div class="col-md-6 col-pull">
-          <form action="/sendmail"  method="POST" class="form-class" id="con_form" novalidate>
+            @if(session('mailsuccess'))
+            <div class="alert alert-success alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <h4>
+                <i class="icon fa fa-check"></i> 
+                {{session('mailsuccess')}}
+              </h4>
+              {{session('message')}}
+            </div>
+            @endif
+            @if($errors->any())
+            <div class="alert alert-danger alert-dismissible text-center">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <h4>
+                {{$errors->first()}}
+              </h4>
+            </div>
+            @endif
+          <form action="/sendmail"  method="POST" class="form-class" id="con_form">
             @csrf
             <div class="row">
               <div class="col-sm-6">
                 <input type="text" name="name" value="{{old('name')}}" placeholder="Your name">
               </div>
               <div class="col-sm-6">
-                <input type="text" name="email" value="{{old('email')}}" placeholder="Your email">
+                <input type="text" name="email" required value="{{old('email')}}" placeholder="Your email">
               </div>
               <div class="col-sm-12">
                 <input type="text" name="subject"  value="{{old('subject')}}" placeholder="Subject">
-              <textarea name="message" placeholder="Message">{{old('message')}}</textarea>
+              <textarea name="message" required placeholder="Message">{{old('message')}}</textarea>
                 <button class="site-btn" type="submit">{!!$text->contactformbtn!!}</button>
               </div>
             </div>

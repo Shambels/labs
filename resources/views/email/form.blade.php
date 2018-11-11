@@ -1,11 +1,11 @@
 <h5>
-  From : {{$name}} {{($email)}}
+  From: {{$name}} ( {{$email}} )
 </h5>
 <h5>
-  Subject : {{$subject}}
+  Subject: {{$subject}}
 </h5>
 <h5>
-  Message :
+  Message:
 </h5>
 <p>
   {{$msg}}

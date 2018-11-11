@@ -25,7 +25,7 @@ Route::get('/results/{search}','PagesController@results');
 Route::post('/search', 'PagesController@search')->name('search');
 Route::post('/newsletter', 'ContactController@subscribe')->name('newsletter');
 Route::post('/blogpost/{id}/comments/add', 'CommentController@store');
-Route::post('/sendmail', 'MailController@store');
+Route::post('/sendmail', 'ContactController@store');
 
 Route::get('/admin/home', 'AdminpageController@index')->name('adminhome')->middleware('auth');
 
@@ -190,9 +190,13 @@ Route::middleware('can:is-admin')->group(function() {
   Route::get('/admin/list/testimonials', 'ListController@testimonials');
   Route::get('/admin/list/clients', 'ListController@clients');
   Route::get('/admin/list/newsletter', 'ListController@newsletter');
+    Route::post('/admin/edit/newsletter/{id}/confirm', 'NewsmailController@confirm');
+    Route::post('/admin/edit/newsletter/{id}/delete', 'NewsmailController@delete');  
   Route::get('/admin/list/inbox','ListController@inbox');
-  Route::post('/admin/edit/newsletter/{id}/confirm', 'NewsmailController@confirm');
-  Route::post('/admin/edit/newsletter/{id}/delete', 'NewsmailController@delete');  
+    Route::post('admin/edit/mail/{id}/read', 'ContactController@readMail');
+    Route::post('admin/edit/mail/{id}/delete', 'ContactController@deleteMail');
+    Route::post('admin/edit/mail/{id}/reply', 'ContactController@reply');    
+    Route::post('admin/edit/mail/{id}/forward', 'ContactController@forward');
       
       // TRASH CAN
       Route::get('/admin/trash/users', 'TrashController@users')->name('trasheduserslist');

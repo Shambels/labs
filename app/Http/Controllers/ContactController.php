@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Mail\MailSent;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\MailRequest;
 use App\Http\Requests\TitleRequest;
 use App\Http\Requests\ButtonRequest;
+use App\Contact;
+use App\User;
 use App\Text;
 use App\Newsmail;
 use App\Mapcoord;
@@ -13,6 +18,51 @@ use GuzzleHttp;
 
 class ContactController extends Controller
 {
+  public function store(MailRequest $request)
+  {
+      $mail = new Contact;
+      if (!$request->name) {
+        $mail->name = 'Unknown';
+      } else {
+        $mail->name = $request->name;
+      }
+      if (!$request->subject) {
+        $mail->subject = 'None';
+      } else {
+        $mail->subject = $request->subject;
+      }
+      $mail->from = $request->email;
+      $mail->message = $request->message;
+      
+      $adminemail = User::where('roles_id',1)->first()->email;
+      $mailable = new MailSent($mail->name, $mail->from, $mail->subject, $mail->message);
+      
+      Mail::to($adminemail)->send($mailable);
+      
+      $mail->save();
+      $request->session()->flash('mailsuccess', 'Mail Successfully Sent ! ');
+      return redirect()->back();
+  }
+
+  public function readMail (Request $request, $id) {    
+    $mail = Contact::find($id); 
+
+    // get previous user id
+    $previous = Contact::where('id', '<', $mail->id)->max('id');
+    // get next user id
+    $next = Contact::where('id', '>', $mail->id)->min('id');       
+
+    $mail->read = true;
+    $mail->save();
+    return view('admin.lists.mails.readmail', compact('mail','previous','next'));
+  }
+
+  public function deleteMail (Request $request, $id) {
+    $mail = Contact::find($id);
+    $mail->delete();
+    $request->session()->flash('success', 'E-mail Successfully Deleted ! ');
+    return redirect('/admin/list/inbox');
+  }
 
   public function title(TitleRequest $request){
     $text = Text::find(1);
@@ -114,5 +164,4 @@ class ContactController extends Controller
     $request->session()->flash('success', 'Successfully Subscribed !');
     return redirect()->back();
   }
-  
 }

@@ -35,10 +35,6 @@ class MailSent extends Mailable
      */
     public function build()
     {
-        return $this->view('email.form')
-                    // ->with([
-                      // 'name'
-                    // ])
-                    ;
+        return $this->view('email.form');
     }
 }

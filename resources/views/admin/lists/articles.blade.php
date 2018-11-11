@@ -38,13 +38,8 @@
             </h5>
               <div class="post-meta mb-0">
                 <a href="/admin/edit/blogpost/{{$article->id}}">{{$article->users->name}}</a>
-                <a href="">
-                  @foreach ($article->tags as $tag)
-                    <span>
-                        {{$tag->name}}
-                    </span>
-                    @if (!$loop->last) , @endif
-                  @endforeach
+                <a>
+                  @include('partials.tags')
                 </a>
                 <a href="/admin/edit/blogpost/{{$article->id}}">
                   {{count($article->comments->where('valid',true))}}

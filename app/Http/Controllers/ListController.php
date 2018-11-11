@@ -16,6 +16,7 @@ use App\Testimonial;
 use App\Client;
 use App\Comment;
 use App\Newsmail;
+use App\Contact;
 use Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -48,7 +49,7 @@ class ListController extends Controller
     }
 
     public function inbox() {
-      $emails = Email::orderBy('created_at','desc')->paginate(20);
+      $emails = Contact::orderBy('created_at','desc')->paginate(20);
       return view ('admin.lists.mails.inbox',compact('emails'));
     }
 
@@ -111,8 +112,7 @@ class ListController extends Controller
     }
 
     public  function results($search,Request $request){
-      $allarticles = Article::with('users','comments','tags')->orderBy('created_at','desc')->get();
-    
+      $allarticles = Article::with('users','comments','tags')->orderBy('created_at','desc')->get();    
       $tagmatch = Tag::where('name',$search)->first();
       $categorymatch = Category::where('name',$search)->first();
       $results= collect([]);

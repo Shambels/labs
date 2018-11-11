@@ -19,16 +19,11 @@
 						<div class="post-content">
             <h2 class="post-title">{{$article->name}}</h2>
 							<div class="post-meta">
-								<a href="">{{$article->users->name}}</a>
-								<a href="">
-                    @foreach ($article->tags as $tag)
-                    <span>
-                        {{$tag->name}}
-                    </span>
-                    @if (!$loop->last) , @endif
-                  @endforeach
+								<a>{{$article->users->name}}</a>
+								<a>
+                  @include('partials.tags')
                 </a>
-								<a href="">
+								<a>
                   {{count($article->comments->where('valid',true))}}
                   @if ((count($article->comments->where('valid',true))) < 2 ) 
                     Comment
