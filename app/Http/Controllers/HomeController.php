@@ -36,19 +36,15 @@ class HomeController extends Controller
       $this->validate($request, [
         'image' => 'nullable|image'
       ]);
-
       $logo = Image::where('folder','logo')->first();
       if ($request->file('image')) {
-        $image = $request->file('image');
-        $imagename = time().$image->hashname();
-        Storage::delete(['public/images/logo/original/'.$logo->name,'public/images/logo/'.$logo->name,'public/images/logo/mini/'.$logo->name]);
-        $image->storeAs('public/images/logo/original/', $imagename);
+        $image = $request->file('image');            
+        $image->storeAs('public/images/logo/original/','logo');
         $resized = ImgInt::make($image)->resize(504,148)->save();
-        Storage::put('public/images/logo/'.$imagename, $resized);
+        Storage::put('public/images/logo/logo', $resized);
         $mini= ImgInt::make($image)->resize(111,32)->save();
-        Storage::put('public/images/logo/mini/'.$imagename,$mini);
-        $logo->name= $imagename;
-        
+        Storage::put('public/images/logo/mini/logo',$mini);
+        $logo->name= 'logo';        
       }
       $logo->save();
       // dd($logo);

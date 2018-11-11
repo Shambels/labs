@@ -87,13 +87,15 @@ class UserController extends Controller
       if ($request->file('image')) {
         $image = $request->file('image');
         $imagename = time().$image->hashname();
-        Storage::delete(['public/images/users/thumbnails/'.$user->image,'public/images/users/originals/'.$user->image,'public/images/users/mediums/'.$user->image,]);
-        $image->storeAs('public/images/users/originals/', $imagename);
-        $resized = ImgInt::make($image)->resize(350,436)->save();
-        Storage::put('public/images/users/mediums/'.$imagename, $resized);
-        $thumbnail = ImgInt::make($image)->resize(100,100)->save();
-        Storage::put('public/images/users/thumbnails/'.$imagename, $thumbnail);
-        $user->image = $imagename; 
+          if($user->image!='default-avatar.jpg'){
+          Storage::delete(['public/images/users/thumbnails/'.$user->image,'public/images/users/originals/'.$user->image,'public/images/users/mediums/'.$user->image,]);
+        }
+          $image->storeAs('public/images/users/originals/', $imagename);
+          $resized = ImgInt::make($image)->resize(350,436)->save();
+          Storage::put('public/images/users/mediums/'.$imagename, $resized);
+          $thumbnail = ImgInt::make($image)->resize(100,100)->save();
+          Storage::put('public/images/users/thumbnails/'.$imagename, $thumbnail);
+          $user->image = $imagename; 
       }
       if ($request->bio) {
         $user->bio = $request->bio;

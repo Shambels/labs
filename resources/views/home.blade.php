@@ -108,7 +108,7 @@
               <p>{{$testimonial->message}}</p>
                 <div class="client-info">
                   <div class="avatar">
-                    <img src="{{$testimonial->clients->image}}" alt="">
+                    <img src="{{Storage::url('public/images/clients/thumbnails/'.$testimonial->clients->image)}}" alt="">
                   </div>
                   <div class="client-name">
                     <h2>{{$testimonial->clients->name}}</h2>

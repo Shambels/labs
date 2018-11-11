@@ -25,6 +25,7 @@ Route::get('/results/{search}','PagesController@results');
 Route::post('/search', 'PagesController@search')->name('search');
 Route::post('/newsletter', 'ContactController@subscribe')->name('newsletter');
 Route::post('/blogpost/{id}/comments/add', 'CommentController@store');
+Route::post('/sendmail', 'MailController@store');
 
 Route::get('/admin/home', 'AdminpageController@index')->name('adminhome')->middleware('auth');
 
@@ -156,7 +157,7 @@ Route::middleware('can:is-admin')->group(function() {
   Route::post('/admin/edit/newsletter/title', 'ContactController@newsletterTitle');
   Route::post('/admin/edit/newsletter/button', 'ContactController@newsletterButton');
   
-  // CONTACT 
+  // CONTACT FORM
   Route::post('/admin/edit/contact/title', 'ContactController@title');
   Route::post('/admin/edit/contact/text', 'ContactController@text');
   Route::post('/admin/edit/contact/info', 'ContactController@info');

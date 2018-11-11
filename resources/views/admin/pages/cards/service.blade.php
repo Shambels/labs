@@ -22,13 +22,18 @@
        <div class="form-group">
          <label>Select Icon</label>
          <select name="icon" id="">
-           <option value="{{$service->icons->id}}">
-               <i class="{{$service->icons->class}}"></i>
+           <option value="{{$service->icons->id}}">                       
+              <label for="icon">
+                <i class="{!!$service->icons->class!!}"></i>
+                {!!$service->icons->name!!}
+              </label>
              </option>
              @foreach ($icons as $icon)
              @if ($service->icons->id != $icon->id)
              <option value="{{$icon->id}}">
+              <label for="icon"></label>
                  <i class="{!!$icon->class!!}"></i>
+                 {!!$icon->name!!}
                </option>
                @endif
                @endforeach
