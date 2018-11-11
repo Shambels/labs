@@ -60,6 +60,12 @@
 
               </td>
               <td class="user-list-btn d-flex">
+                @can('is-admin')
+                <form action="/admin/edit/comment/{{$comment->id}}/confirm" method="post">
+                  @csrf
+                  <button class="btn btn-success"><i class="fas fa-check"></i></button>
+                </form>
+                @endcan
                 <a href="/admin/edit/comment/{{$comment->id}}/edit" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
                 <form action="/admin/edit/comment/{{$comment->id}}/delete" method="POST">
                   @csrf

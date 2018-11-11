@@ -69,6 +69,15 @@ class CommentController extends Controller
         return redirect()->back();
     }
 
+
+    public function confirm(Request $request, $id) {
+      $comment = Comment::find($id);
+      $comment->valid=true;
+      $comment->save();
+      $request->session()->flash('success', 'Comment Successfully Validated !');
+      return redirect()->back();
+
+    }
     /**
      * Display the specified resource.
      *
@@ -99,14 +108,7 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-
-    public function confirm (Request $request, $id) {
-      $comment = Comment::find($id);
-      $comment->valid = true;
-      $comment->save();
-      $request->session()->flash('success','Comment Successfully Validated !');        
-      return redirect()->back();
-    }
+ 
     public function update(Request $request, $id)
     {
         $comment = Comment::find($id);

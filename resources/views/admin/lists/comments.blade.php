@@ -82,6 +82,7 @@
     </div>
     <!-- /.box-body -->
   </div>
+  {{$comments->links()}}
   <!-- /.box -->
 </div>
 

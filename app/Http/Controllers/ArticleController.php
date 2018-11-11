@@ -55,8 +55,7 @@ class ArticleController extends Controller
       $article = new Article;
       if ($request->file('image')) {
         $image = $request->file('image');
-        $imagename = time().$image->hashname();
-        Storage::delete(['public/images/articles/originals/'.$article->image,'public/images/articles/'.$article->image]);
+        $imagename = time().$image->hashname();        
         $image->storeAs('public/images/articles/originals', $imagename);
         $resized = ImgInt::make($image)->resize(730,262)->save();
         Storage::put('public/images/articles/'.$imagename, $resized);
@@ -207,7 +206,7 @@ class ArticleController extends Controller
      if ($request->file('image')) {       
        $image = $request->file('image');
        $imagename = time().$image->hashname();
-       if($article->image!='blog-1.jpg'){
+       if($article->image!='blog-1.jpg' && $article->image!='blog-2.jpg' && $article->image!='blog-3.jpg'){
          Storage::delete(['public/images/articles/originals/'.$article->image,'public/images/articles/'.$article->image]);
         }
        $image->storeAs('public/images/articles/originals', $imagename);
