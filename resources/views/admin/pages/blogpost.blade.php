@@ -26,7 +26,7 @@
 						  	<div class="post-meta">
 						  	  <a>{{$article->users->name}}</a>
 						  		<a>
-                    @include('partials.tags')
+                      @include('admin.pages.partials.tags')
                   </a>
 						  		<a>
                     {{count($article->comments->where('valid',true))}}

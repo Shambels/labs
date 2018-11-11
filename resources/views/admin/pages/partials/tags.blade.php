@@ -1,5 +1,5 @@
 @foreach ($article->tags->take(3) as $tag)
-<form class="d-inline" action="/search" method="post">
+<form class="d-inline" action="/admin/search" method="post">
   @csrf
   <input type="hidden" name="search" value="{{$tag->name}}">
   <span onclick="event.target.parentElement.submit()" style="cursor: pointer">

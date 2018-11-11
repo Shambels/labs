@@ -31,7 +31,7 @@
                 <div class="post-meta">
                   <a href="/admin/edit/blogpost/{{$article->id}}">{{$article->users->name}}</a>
                   <a>
-                   @include('partials.tags')
+                   @include('admin.pages.partials.tags')
                   </a>
                   <a href="/admin/edit/blogpost/{{$article->id}}">
                     {{count($article->comments->where('valid',true))}}

@@ -14,7 +14,7 @@
 Auth::routes();
 
 
-
+Route::get('', 'PagesController@home');
 Route::get('/', 'PagesController@home')->name('home');
 Route::get('/home', 'PagesController@home')->name('home');
 Route::get('/services','PagesController@services')->name('services');
