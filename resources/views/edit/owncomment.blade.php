@@ -30,7 +30,7 @@
   </div>
   @else
 
-  <h1>Sorry You are not on the right page
-    <a href="/">Go Back Home</a>
+  <h1>Sorry You are allowed to access this page  :(
+    <a href="/">Go Home !</a>
   </h1>
   @endif
