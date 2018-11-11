@@ -10,7 +10,7 @@
 @include('admin.alerts.error')
 
 
-@can ('is-admin')
+@can ('is-editor')
   <div class="card m-3">
     <div class="card-header bg-purple-gradient">
       <h3 class="card-title">Edit Comment</h3>
@@ -44,9 +44,7 @@
         </div>
         <div class="form-group">
           <h5>Message</h5>
-          <textarea name="message"  rows="3" placeholder="Comment Message. Max 500 Characters." type="text" class="form-control">
-            {{old('message',$comment->message)}}
-          </textarea>
+          <textarea name="message"  rows="3" placeholder="Comment Message. Max 500 Characters." type="text" class="form-control">{{old('message',$comment->message)}}</textarea>
           
         </div>               
         <h4 class="mb-2"><a href="/admin/edit/blogpost/{{$comment->articles->id}}">Go To Article</a></h4>

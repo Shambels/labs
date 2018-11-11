@@ -98,7 +98,7 @@ class ListController extends Controller
     }
 
     public function comments() {
-      $comments = Comment::paginate(25);
+      $comments = Comment::orderBy('created_at','desc')->paginate(25);
       return view('admin.lists.comments', compact('comments'));
     }
     public function icons () {

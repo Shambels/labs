@@ -7,9 +7,7 @@
     <form action="/admin/edit/homepage/discoverleft" method="POST">
       @csrf
       <div class="form-group">
-        <textarea name="paragraph" rows="6" placeholder="Type Here" type="text" class="form-control">
-            {{old('paragraph', $text->discoverleft)}}
-        </textarea>
+        <textarea name="paragraph" rows="6" placeholder="Type Here" type="text" class="form-control">{{old('paragraph', $text->discoverleft)}}</textarea>
       </div>
       <button class="btn btn-success" type="submit">OK</button>
     </form>

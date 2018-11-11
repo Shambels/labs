@@ -161,7 +161,7 @@ class ContactController extends Controller
     $newsmail = new Newsmail;
     $newsmail->email = $request->email;
     $newsmail->save();
-    $request->session()->flash('success', 'Successfully Subscribed !');
+    $request->session()->flash('newslettersuccess', 'Successfully Subscribed !');
     return redirect()->back();
   }
 }

@@ -6,7 +6,7 @@
 @if (Gate::check('is-editor')) 
   <h1 class="m-3 text-center">What's New</h1>
 @else
-  <h1>Welcome, {{Auth::user()->name}}</h1>
+  <h1>Welcome {{Auth::user()->name}} !</h1>
 @endif
 @stop
 

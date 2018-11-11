@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Comment;
 use Illuminate\Http\Request;
 use App\Http\Requests\CommentRequest;
+use App\Text;
+use App\Image;
 use Auth;
 use Route;
 class CommentController extends Controller
@@ -168,5 +170,31 @@ class CommentController extends Controller
         } else {                 
           return redirect()->back();
       }
+    }
+
+    public function editOwn ($id) {
+      $comment = Comment::find($id);
+      $text = Text::find(1);
+      $logo= Image::where('folder','logo')->first();
+      return view('edit.owncomment', compact('comment','text','logo'));
+    }
+
+    public function updateOwn (Request $request, $id) {
+      $comment = Comment::find($id);
+      $blogID = $comment->articles->id;
+      $comment->subject = $request->subject;
+      $comment->message = $request->message;
+      $comment->valid = false;
+      $comment->save();
+      $request->session()->flash('success', 'Comment Successfully Updated !');
+      return redirect('/blogpost/'.$blogID);
+    }
+
+    public function deleteOwn (Request $request, $id) {
+      $comment = Comment::find($id);
+      $blogID = $comment->articles->id;
+      $comment->delete();
+      $request->session()->flash('success', 'Comment Successfully Deleted !');
+      return redirect('/blogpost/'.$blogID);
     }
 }

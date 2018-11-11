@@ -32,9 +32,7 @@
           </div>
           <div class="form-group">
             <h5>Message</h5>
-            <textarea name="message"  rows="3" placeholder="Comment Message. Max 500 Characters." type="text" class="form-control">
-              {{old('message',$comment->message)}}
-            </textarea>            
+            <textarea name="message"  rows="3" placeholder="Comment Message. Max 500 Characters." type="text" class="form-control">{{old('message',$comment->message)}}</textarea>            
           </div>               
         <button class="btn btn-success" type="submit"><i class="fas fa-check"></i></button>
       </form> 

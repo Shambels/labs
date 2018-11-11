@@ -57,7 +57,14 @@
                     <img src="{{Storage::url('public/images/users/mediums/'.$comment->users->image)}}" alt="comment_author_avatar">                                                           
 									</div>
 									<div class="comment-text">                  
-										<h3>{{$comment->users->name}} | {{$comment->created_at->format('d M, Y')}} | <a href="#sendCommentForm">Reply</a></h3>
+										<h3 class="d-flex">
+                      {{$comment->users->name}} | {{$comment->created_at->format('d M, Y')}}
+                      @if ($comment->users->id == Auth::user()->id)
+                      | <a class="btn" href="/personal/comment/edit/{{$comment->id}}"> <i class="fas fa-edit"></i></a>                    
+                      @else 
+                      | <a href="#sendCommentForm">Reply</a>
+                      @endif
+                    </h3>
 										<p>{{$comment->message}}</p>
 									</div>
                 </li>

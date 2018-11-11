@@ -29,9 +29,7 @@
                     </div>
                     <div class="form-group">
                         <label>Bio</label>
-                        <textarea name="bio" placeholder="Small Description of the User. Optional." type="text" class="form-control">
-                            {{old('bio')}}
-                        </textarea>
+                        <textarea name="bio" placeholder="Small Description of the User. Optional." type="text" class="form-control">{{old('bio')}}</textarea>
                       </div>
                            
                     <div class="form-group">

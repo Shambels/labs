@@ -27,6 +27,13 @@ Route::post('/newsletter', 'ContactController@subscribe')->name('newsletter');
 Route::post('/blogpost/{id}/comments/add', 'CommentController@store');
 Route::post('/sendmail', 'ContactController@store');
 
+Route::get('/personal/comment/edit/{id}', 'CommentController@editOwn');
+Route::post('/personal/comment/update/{id}', 'CommentController@updateOwn');
+Route::post('/personal/comment/delete/{id}', 'CommentController@updateOwn');
+
+
+
+
 Route::get('/admin/home', 'AdminpageController@index')->name('adminhome')->middleware('auth');
 
 
