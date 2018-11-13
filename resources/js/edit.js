@@ -27,6 +27,8 @@ function demiTour(x) {
   x.classList.toggle('demitour');
 }
 
+
+
 editables.forEach(element => {
   element.addEventListener('dblclick',() =>{
     edit(element, element.nextElementSibling);
@@ -51,3 +53,5 @@ arrowables.forEach(element => {
     demiTour(element.firstElementChild);
   })
 });
+//  INTELLECTUAL PROPERTY OF SEBASTIEN PINCHETTI
+//  Nov.13 2018
