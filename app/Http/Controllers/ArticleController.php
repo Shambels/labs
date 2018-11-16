@@ -19,7 +19,6 @@ class ArticleController extends Controller
   public function search(Request $request){
     
     $tagmatch = Tag::where('name',$request->search)->get()->first()->id;
-    dd($tagmatch);
     $results = Article::where('tags_id',$tagmatch)->get();
     $results->save();
     return redirect('/search/result');
@@ -268,7 +267,6 @@ class ArticleController extends Controller
     //  ET ALORS ON VIENT CHERCHER DE L'INSPIRATION CHEZ LES AUTRES ?
     //  c'EST QUI LE PATRON ?
      for ($i=0; $i<10;$i++){
-
      $NTI='newtag'.$i;
     // if "New Tag" Input has a value
      if ($request->$NTI) {

@@ -17,6 +17,6 @@ class Tag extends Model
  protected $dates = ['deleted_at'];
 
  public function articles(){
-   return $this->belongsToMany('App\Article','tags_has_articles','tags_id','articles_id');
+   return $this->belongsToMany('App\Article','tags_has_articles8','tags_id','articles_id');
  }
 }

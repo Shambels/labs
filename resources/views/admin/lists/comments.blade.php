@@ -45,7 +45,9 @@
                 @endif
               </td>
               <td>{{$comment->created_at->format('d M Y')}}</td>
-            <td>{{$comment->users->name}}</td>
+              @if($comment->users)
+              <td>{{$comment->users->name}}</td>
+              @endif
               <td>{{substr($comment->subject,0,30)}}...</td>
               <td>{{substr($comment->message,0,30)}}...</td>                
               <td>
