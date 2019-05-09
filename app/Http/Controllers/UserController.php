@@ -71,7 +71,7 @@ class UserController extends Controller
           ]);
           $user->name = $request->name;
         }
-        if($request->email!=$user->email){
+        if ($request->email!=$user->email && !empty($request->email)) {
           $this->validate($request,[            
             'email' => 'bail|required|email|max:75|unique:users'
             ]);

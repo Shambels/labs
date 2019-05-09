@@ -15,7 +15,7 @@
     <!-- Carousel -->
 
   <h2>Logo</h2>
-  <div class="editable">            
+  <div class="editable">           
     <img src="{{Storage::url('public/images/logo/'.$logo->name)}}" class="p-2 mt-1" style="border: solid 3px #6d4bb5" alt="logo">
   </div>
   @include('admin.pages.cards.logo')

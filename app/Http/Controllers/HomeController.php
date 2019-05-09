@@ -152,7 +152,7 @@ class HomeController extends Controller
 
     public function discoverLeft(ParagraphRequest $request){
       $text= Text::find(1);
-      $text->discoverleft = $request->discoverleft;
+      $text->discoverleft = $request->paragraph;
       $text->save();
       $request->session()->flash('success', 'Paragraph Successfully Updated !');
       return redirect()->back();
@@ -160,7 +160,7 @@ class HomeController extends Controller
     
     public function discoverRight(ParagraphRequest $request){
       $text= Text::find(1);
-      $text->discoverright = $request->discoverright;
+      $text->discoverright = $request->paragraph;
       $text->save();
       $request->session()->flash('success', 'Paragraph Successfully Updated !');
       return redirect()->back();
