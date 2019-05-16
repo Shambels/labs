@@ -195,7 +195,9 @@ class HomeController extends Controller
         'video' => 'bail|required|url'
       ]);
       $text= Text::find(1);
-      $text->video = $request->video;
+      $reg = "/https?:\/\/(?:.*\.)*(.+\..+?)\watch\?v=/";
+      $text->video = preg_replace($reg, '', $request->video);
+      // $text->video = $request->video;
       $text->save();
       $request->session()->flash('success', 'Video URL Successfully Updated !');
       return redirect()->back();

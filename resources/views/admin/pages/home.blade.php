@@ -107,8 +107,8 @@
           <div class="intro-video">
             <div class="row">
               <div class="col-md-8 offset-2 editable">
-                <img src="{{Storage::url('img/'.$YTimage->name)}}" alt="">
-                <a href="{{$text->video}}" class="video-popup">
+                <img src="https://i.ytimg.com/vi/{{$text->video}}/maxresdefault.jpg" alt="thumbnail">
+                <a href="http://youtube.com/watch?v={!!$text->video!!}" class="video-popup">
                   <i class="fa fa-play"></i>
                 </a>
               </div>
